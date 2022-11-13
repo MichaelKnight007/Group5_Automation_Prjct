@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class Transmuda_Login_Page {
+public class Transmuda_Login_Page extends BasePage{
     public Transmuda_Login_Page() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
