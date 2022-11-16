@@ -16,20 +16,9 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "com/cydeo/step_definitions",
         dryRun = false,
-        tags = "@wip",
-        publish=true
-
-        /**
-         * publish will enable a functionality from cucumber to generate a public link for the report of our final execution of our code
-         *     --> the link will be automatically generated and printed in the console
-         *     --> it will be ready to share with anyone, if we don't want to share, change it to false
-        */
-
+        tags = "@logiin"
         //mvn test -Dcucumber.filter.tags="@smoke" to run from "run anything" option
 )
 
 
-public class CukesRunner {
-
-
-}
+public class CukesRunner { }
