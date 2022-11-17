@@ -173,7 +173,7 @@ Method info:
     }
 
     /**
-     * Hover the mouse to given element
+     *  r the mouse to given element
      * @param element on which to hover
      */
     public static void hover(WebElement element){

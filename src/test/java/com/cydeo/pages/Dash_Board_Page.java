@@ -16,7 +16,7 @@ public class Dash_Board_Page extends BasePage{
     public WebElement dashboardText;
 
     //Locator of "Fleet Dropdown" button
-    @FindBy (xpath = "//i[@class='fa-asterisk menu-icon'][1]")
+    @FindBy (xpath = "//li[@class='dropdown dropdown-level-1'][1]")
     public WebElement fleetDropdownBtn;
 
 
