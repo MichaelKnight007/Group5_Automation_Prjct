@@ -31,6 +31,5 @@ Feature: Login
     # goToModule
   Scenario: Go to "Vehicles" module
     When "Store Manager" logs in
-    Then Verify that the user is on "Dashboard" page
-    And User goes to Vehicles
+    And User goes to "Fleet" module and "Vehicles" sub-module
     Then Verify that the user is on "All Cars" module
