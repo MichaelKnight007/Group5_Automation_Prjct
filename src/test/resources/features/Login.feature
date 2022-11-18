@@ -26,3 +26,11 @@ Feature: Login
       | Driver        | Quick Launchpad |
       | Sales Manager | Dashboard       |
       | Store Manager | Dashboard       |
+
+  @module
+    # goToModule
+  Scenario: Go to "Vehicles" module
+    When "Store Manager" logs in
+    Then Verify that the user is on "Dashboard" page
+    And User goes to Vehicles
+    Then Verify that the user is on "All Cars" module

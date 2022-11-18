@@ -7,7 +7,7 @@ import java.util.Properties;
 public class ConfigurationReader {
 
     //1. Create object from Properties class
-    private static Properties properties = new Properties();
+    private static final Properties properties = new Properties();
 
     static {
 
