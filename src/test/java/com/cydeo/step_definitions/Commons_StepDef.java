@@ -1,17 +1,20 @@
 package com.cydeo.step_definitions;
 
+import com.cydeo.pages.AllCarsPage;
 import com.cydeo.pages.Dash_Board_Page;
 import com.cydeo.pages.Login_Page;
+import com.cydeo.utilities.BrowserUtils;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
-public class Login_StepDef {
+public class Commons_StepDef {
 
     Login_Page loginPage = new Login_Page();
     Dash_Board_Page dashBoardPage = new Dash_Board_Page();
+    AllCarsPage allCarsPage = new AllCarsPage();
 
     @Given("User is on the login page")
     public void userIsOnTheLoginPage() {
@@ -44,6 +47,12 @@ public class Login_StepDef {
     public void verifyThatTheUserIsOnModule(String arg0) {
         loginPage.waitUntilLoaderScreenDisappear();
         Assert.assertEquals(arg0, loginPage.getModuleName());
+    }
+
+    @And("User selects a car")
+    public void userSelectsACar() {
+        BrowserUtils.sleep(5);
+        allCarsPage.clickAnyRow();
     }
 
 }

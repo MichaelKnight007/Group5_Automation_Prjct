@@ -1,7 +1,6 @@
-@logiin
-Feature: Login
+Feature: Common Features
 
-
+  #Login
   Background: User on the login page
     Given User is on the login page
 
@@ -27,9 +26,15 @@ Feature: Login
       | Sales Manager | Dashboard       |
       | Store Manager | Dashboard       |
 
-  @module
-    # goToModule
+  # goToModule
   Scenario: Go to "Vehicles" module
     When "Store Manager" logs in
     And User goes to "Fleet" module and "Vehicles" sub-module
     Then Verify that the user is on "All Cars" module
+
+    # Select Car
+  Scenario: Select a car
+    When "Store Manager" logs in
+    And User goes to "Fleet" module and "Vehicles" sub-module
+    And User selects a car
+    # ToDo : Then Verify that the user select car

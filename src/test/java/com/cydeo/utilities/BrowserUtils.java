@@ -113,7 +113,8 @@ Method info:
         Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains(expectedInUrl));
     }
 
-    /**This method will accept a dropDown as a Web Element ...
+    /**
+     * This method will accept a dropDown as a Web Element ...
      *
      * @param dropdownElement
      * @return
@@ -140,6 +141,7 @@ Method info:
     /**
      * This method will accept a group of radio buttons as a List of WebElements
      * It will loop through the list and click to the radio button with provided attribute value.
+     *
      * @param radioButtons
      * @param attributeValue
      */
@@ -147,7 +149,7 @@ Method info:
 
         for (WebElement eachRadioButton : radioButtons) {
 
-            if (eachRadioButton.getAttribute("value").equalsIgnoreCase(attributeValue)){
+            if (eachRadioButton.getAttribute("value").equalsIgnoreCase(attributeValue)) {
                 eachRadioButton.click();
             }
 
@@ -156,35 +158,40 @@ Method info:
 
     /**
      * Switches to new window by exact title. Returns to original window if target file not found
+     *
      * @param targetTitle
      */
-    public static void switchToWindows(String targetTitle){
+    public static void switchToWindows(String targetTitle) {
 
-        String origin= Driver.getDriver().getWindowHandle();
+        String origin = Driver.getDriver().getWindowHandle();
 
-        for (String handle: Driver.getDriver().getWindowHandles()){
+        for (String handle : Driver.getDriver().getWindowHandles()) {
             Driver.getDriver().switchTo().window(handle);
 
-            if (Driver.getDriver().getTitle().equals(targetTitle)){
+            if (Driver.getDriver().getTitle().equals(targetTitle)) {
                 return;
             }
         }
-    Driver.getDriver().switchTo().window(origin);
+        Driver.getDriver().switchTo().window(origin);
     }
 
     /**
-     *  r the mouse to given element
+     * r the mouse to given element
+     *
      * @param element on which to hover
      */
-    public static void hover(WebElement element){
+    public static void hover(WebElement element) {
 
-        Actions action=new Actions(Driver.getDriver());
+        Actions action = new Actions(Driver.getDriver());
 
         action.moveToElement(element).perform();
 
 
     }
 
-
+    public static void clickWithMouseHoverAction(WebElement element) {
+        Actions actions = new Actions(Driver.getDriver());
+        actions.moveToElement(element).pause(500).click(element).build().perform();
+    }
 
 }

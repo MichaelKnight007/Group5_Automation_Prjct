@@ -1,20 +1,13 @@
 package com.cydeo.pages;
 
-import com.cydeo.utilities.Driver;
+import com.cydeo.utilities.BrowserUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
 
 public class AllCarsPage extends BasePage {
-
-    Login_Page loginPage = new Login_Page();
-
-    public AllCarsPage() {
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
 
     @FindBy(xpath = "//a[@class='action btn mode-icon-only']")
     public WebElement FiltersButton;
@@ -32,9 +25,24 @@ public class AllCarsPage extends BasePage {
     public List<WebElement> AllMethods;
 
 
+    @FindBy(xpath = "//tr[@class='grid-row row-click-action'][5]")
+    public WebElement anyRow;
 
+    public void clickAnyRow() {
+        //click any row with actions class
+        BrowserUtils.clickWithMouseHoverAction(anyRow);
 
-
-
+        //regular click method sometimes doesn't work
+        //it works when we click twice
+		//		for (int i = 0; i < 2; i++) {
+		//			try {
+		//				BrowserUtils.waitClickability(anyRow, 2);
+		//				anyRow.click();
+		//			} catch (Exception e) {
+		//				e.printStackTrace();
+		//			}
+		//		}
     }
+
+}
 
