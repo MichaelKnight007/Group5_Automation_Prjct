@@ -17,12 +17,6 @@ public abstract class BasePage {
     }
 
     // Locators
-    @FindBy(xpath = "//span[text()[normalize-space()='Fleet']]")
-    WebElement fleetModule;
-
-    @FindBy(xpath = "//span[text()[normalize-space()='Vehicles']]")
-    WebElement vehiclesModule;
-
     @FindBy(css = "div[class='loader-mask shown']")
     @CacheLookup
     protected WebElement loaderMask;
@@ -50,12 +44,6 @@ public abstract class BasePage {
     }
     public String getHomePageName() {
         return Driver.getDriver().findElement(By.xpath("(//h1)[2]")).getText();
-    }
-
-    public void goToVehicles() {
-        fleetModule.click();
-        BrowserUtils.sleep(1);
-        vehiclesModule.click();
     }
 
     public String getModuleName() {
