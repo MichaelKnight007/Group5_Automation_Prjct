@@ -10,15 +10,20 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DriverFilter_stepdef {
 Login_Page loginPage=new Login_Page();
 Dash_Board_Page dashBoardPage=new Dash_Board_Page();
 AllCarsPage allCarsPage=new AllCarsPage();
-    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
+    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),60);
 
     @Given("User logs in as a Salesmanager")
     public void user_logs_i_as_a_salesmanager() {
@@ -69,43 +74,31 @@ AllCarsPage allCarsPage=new AllCarsPage();
     }
     @Then("User should see all options under Driver Filter Menu")
     public void user_should_see_all_options_under_driver_filter_menu() {
-        // List<String>ExpectedMethodnames=new ArrayList<>();
-        //ExpectedMethodnames.addAll(Arrays.asList("Contains","Does Not Contain", "Is Equal To","Starts With",
-        //              "Ends With","Is Any Of","Is Not Any Of","Is Empty","Is Not Empty"));
-
+         List<String> ExpectedMethodnames=new ArrayList<>();
+        ExpectedMethodnames.addAll(Arrays.asList("contains","does not contain", "is equal to","starts with",
+                      "ends with","is any of","is not any of","is empty","is not empty"));
+        List<String>ActualMethotnames=new ArrayList<>();
         for (WebElement method : allCarsPage.AllMethods) {
-            System.out.println(method.getText());
-            //Assert.assertArrayEquals(ExpectedMethodnames,allCarsPage.Listofmethodnames());
+            ActualMethotnames.add(method.getAttribute("innerText"));
 
         }
-
-    }
-    @When("User selects {string}")
-    public void userSelects(String method) {
-
+        Assert.assertEquals(ExpectedMethodnames,ActualMethotnames);
     }
 
-    @And("User enters {string}in search box")
-    public void userEntersInSearchBox(String arg0) {
+    @And("User enters {string}")
+    public void userEnters(String arg0) {
+
+    }
+
+    @When("User selects contains method")
+    public void userSelectsContainsMethod() {
     }
 
     @And("User clicks update button")
     public void userClicksUpdateButton() {
     }
 
-
-
-    @And("User enters {string}")
-    public void userEnters(String arg0) {
-    }
-
-
-    @Then("The results should match {string}")
-    public void theResultsShouldMatch(String arg0) {
-    }
-
-
-    @Then("The results should be {string}")
-    public void theResultsShouldBe(String arg0) {
+    @Then("Results should contain keywords")
+    public void resultsShouldContainKeywords() {
     }
 }
