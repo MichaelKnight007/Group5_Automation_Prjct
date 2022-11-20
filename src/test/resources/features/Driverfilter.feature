@@ -1,4 +1,3 @@
-
 Feature: As a user, I should be able to use Driver filter under Fleet-Vehicle page
 
   Background:
@@ -26,34 +25,27 @@ Feature: As a user, I should be able to use Driver filter under Fleet-Vehicle pa
     When User clicks Contains dropdown
     Then User should see all options under Driver Filter Menu
 
-  Scenario Outline: Method actions should provide expected conditions.
-    When User selects "<Method>"
-    And User enters "<Keyword>"in search box
+  Scenario Outline:- When user selects "Contains" method with a keyword,
+  the results should contain the specified keyword
+    When User selects contains method
+    And User enters "<keyword>"
     And User clicks update button
-    Then The results should be "<Expected Condition>"
+    Then Results should contain keywords
     Examples:
-      | Method           | Keyword      | Expected Condition               |
-      | Contains         | Tresa        | Results Contain "Tresa"           |
-      | Does Not Contain | Nick         | Results Does Not Contain "Nick"   |
-      | Starts With      | Phung        | Results start with "Phung"        |
-      | Ends With        | Lemke        | Results end with "Lemke"          |
-      | Is Equal To      | Chi Hartmann | Results match with "Chi Hartmann" |
+      | keyword |
+      | Tresa   |
+      | Lemke   |
+      | Joseph  |
 
-  Scenario Outline: Methods  ("Contains", "Does Not Contains", "Starts With", "Ends With", "Is Equal to")
-  shouldn't accept non-alphabetical characters
-    When User selects "<Method>"
-    And User enters "<Non Alphabetical Characters>"in search box
+  Scenario Outline:  When user selects "Does Not Contain" method with a keyword,
+  the results should not contain the specified keyword
+    When User selects does not contain method
+    And User enters "<keyword>"
     And User clicks update button
-    Then The results should match "No entities were found to match your search. Try modifying your search crite..."
+    Then Results should not contain keywords
     Examples:
-      | Method           | Non Alphabetical Characters |
-      | Contains         | .                           |
-      | Does Not Contain | .                           |
-      | Starts With      | _                           |
-      | Ends With        | _                           |
-      | Is Equal To      | =                           |
-
-
-
-
+      | keyword |
+      |         |
+      |         |
+      |         |
 
