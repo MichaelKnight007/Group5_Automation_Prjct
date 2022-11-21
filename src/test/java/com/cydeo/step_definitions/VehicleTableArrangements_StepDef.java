@@ -9,41 +9,28 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class VehicleTableArrangements_StepDef {
 
-AllCarsPage allCarsPage=new AllCarsPage();
-    @FindBy(xpath = "//a[contains(@data-size,\"50\")=\"50\"]")
-    public WebElement justOneOption;
-
+    AllCarsPage allCarsPage = new AllCarsPage();
     @When("user clicks View Per Page button")
     public void user_clicks_view_per_page_button() {
         allCarsPage.ContainsBtn.click();
-        BrowserUtils.sleep(4);
     }
+    @And("user clicks {string} which are shown")
+    public void userClicksWhichAreShown(String expected) {
 
+        By element = By.xpath("(//ul[@class='dropdown-menu pull-right'])[2]//a[normalize-space(text())='" + expected + "']");
 
-    @When("user clicks {int} which are shown")
-    public void user_clicks_which_are_shown(Integer expected) {
+        Driver.getDriver().findElement(element).click();
 
-
-        for (WebElement webElement : allCarsPage.numbersForFilter) {
-            System.out.println("webElement.getAttribute(\"innerText\") = " + webElement.getAttribute("innerText"));
-            if (Integer.parseInt(webElement.getAttribute("innerText").trim())==expected){
-
-
-                System.out.println("These links are correctly located");
-            }
-            justOneOption.click();
-            BrowserUtils.sleep(4);
-
-
-
-        }
-
+        allCarsPage.waitUntilLoaderScreenDisappear();
+      }
+    @Then("Verify that {int} on the page is same with the number user clicks")
+    public void verifyThatActualNumberOnThePageIsSameWithTheNumberUserClicks(int actual) {
+        Assert.assertEquals("This time worked",allCarsPage.countOfRow.size(),actual);
     }
-
-
 }

@@ -14,15 +14,18 @@ Feature:Vehicle Table Arrangements
 
   Scenario Template:As a user, I should be able to arrange vehicle table display, under Fleet-Vehicle page
     When user clicks View Per Page button
-    And  user clicks <"expectedNumber"> which are shown
-
+    And  user clicks "<expectedNumber>" which are shown
+    Then Verify that <actualNumber> on the page is same with the number user clicks
     Examples:
-      | "expectedNumber" |
+      | expectedNumber | actualNumber |
+      | 10             | 10           |
+      | 25             | 25           |
+      | 50             | 50           |
+      | 100            | 100          |
 
-      | 10               |
-      | 25               |
-      | 50               |
-      | 100              |
+
+
+
 
 
 
