@@ -19,7 +19,7 @@ public class AllCarsPage extends BasePage {
     public WebElement Drivercheckbox;
     @FindBy(xpath = "//div[@class='btn filter-criteria-selector oro-drop-opener oro-dropdown-toggle filter-default-value']")
     public WebElement DriverAllBtn;
-    @FindBy(xpath = "//button[@class='btn dropdown-toggle']")
+    @FindBy(xpath = "//button[@class=\"btn dropdown-toggle \"]")
     public WebElement ContainsBtn;
     @FindBy(xpath = "//a[@class='dropdown-item choice-value']")
     public List<WebElement> AllMethods;
@@ -27,6 +27,12 @@ public class AllCarsPage extends BasePage {
 
     @FindBy(xpath = "//tr[@class='grid-row row-click-action'][5]")
     public WebElement anyRow;
+
+    @FindBy(xpath = "//a[contains(@class,\"dropdown-item\")]")
+    public List<WebElement> numbersForFilter;
+
+    @FindBy(css = "tr.grid-row")
+    public List<WebElement> countOfRow;
 
     public void clickAnyRow() {
         //click any row with actions class
@@ -43,6 +49,8 @@ public class AllCarsPage extends BasePage {
 		//			}
 		//		}
     }
+
+
 
 }
 

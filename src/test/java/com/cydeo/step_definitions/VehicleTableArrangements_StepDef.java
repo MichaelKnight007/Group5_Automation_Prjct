@@ -1,33 +1,36 @@
 package com.cydeo.step_definitions;
 
+import com.cydeo.pages.AllCarsPage;
+import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class VehicleTableArrangements_StepDef {
-    @Given("user is on the vehicles page for arrangement")
-    public void user_is_on_the_vehicles_page_for_arrangement() {
-        Driver.getDriver().get(ConfigurationReader.getProperty("vyTrackUrl"));
 
-    }
+    AllCarsPage allCarsPage = new AllCarsPage();
     @When("user clicks View Per Page button")
     public void user_clicks_view_per_page_button() {
-        Driver.getDriver().get(ConfigurationReader.getProperty("vyTrackUrl"));
+        allCarsPage.ContainsBtn.click();
     }
-    @And("user sees {int}{int}{int}{int} numbers")
-    public void userSeesNumbers(int arg0, int arg1, int arg2, int arg3) {
-    }
+    @And("user clicks {string} which are shown")
+    public void userClicksWhichAreShown(String expected) {
 
-    @When("user clicks any of them")
-    public void user_clicks_any_of_them() {
-        Driver.getDriver().get(ConfigurationReader.getProperty("vyTrackUrl"));
-    }
-    @Then("user should see same number of vehicle on the page with the chosen one")
-    public void user_should_see_same_number_of_vehicle_on_the_page_with_the_chosen_one() {
-        Driver.getDriver().get(ConfigurationReader.getProperty("vyTrackUrl"));
-    }
+        By element = By.xpath("(//ul[@class='dropdown-menu pull-right'])[2]//a[normalize-space(text())='" + expected + "']");
 
+        Driver.getDriver().findElement(element).click();
+
+        allCarsPage.waitUntilLoaderScreenDisappear();
+      }
+    @Then("Verify that {int} on the page is same with the number user clicks")
+    public void verifyThatActualNumberOnThePageIsSameWithTheNumberUserClicks(int actual) {
+        Assert.assertEquals("This time worked",allCarsPage.countOfRow.size(),actual);
+    }
 }
