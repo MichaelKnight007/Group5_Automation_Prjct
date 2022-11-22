@@ -34,9 +34,15 @@ public class AllCarsPage extends BasePage {
     @FindBy(css = "tr.grid-row")
     public List<WebElement> countOfRow;
 
+    //Locator of "Three Dots At The End Of Each Row"
+    @FindBy (xpath = "//*[@id=\"grid-custom-entity-grid-407908455\"]/div[2]/div[2]/div[2]/div/table/tbody/tr[1]/td[21]/div/div/a")
+    public WebElement threeDotsEndOfRow;
+
     public void clickAnyRow() {
         //click any row with actions class
         BrowserUtils.clickWithMouseHoverAction(anyRow);
+
+
 
         //regular click method sometimes doesn't work
         //it works when we click twice
