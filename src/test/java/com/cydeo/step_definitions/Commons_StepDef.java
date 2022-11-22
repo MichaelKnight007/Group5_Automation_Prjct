@@ -21,11 +21,6 @@ public class Commons_StepDef {
         loginPage.goLoginPage();
     }
 
-    @When("{string} logs in")
-    public void logs_in_on(String userType) {
-        loginPage.loginAsUserType(userType);
-    }
-
     @When("User logs in as a {string}")
     public void user_logs_in_as_a(String userType) {
         loginPage.loginAsUserType(userType);
