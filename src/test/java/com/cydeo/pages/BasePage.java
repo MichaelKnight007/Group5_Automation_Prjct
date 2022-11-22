@@ -51,9 +51,11 @@ public abstract class BasePage {
     }
     //navigate to any given module and subModule
     public void navigateToModule(String moduleName, String subModuleName) { //Fleet - Vehicles
+        BrowserUtils.sleep(1);
         WebElement module = Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + moduleName + "']]"));
         module.click();
 
+        BrowserUtils.sleep(1);
         WebElement subModule = Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + subModuleName + "']]"));
         subModule.click();
     }

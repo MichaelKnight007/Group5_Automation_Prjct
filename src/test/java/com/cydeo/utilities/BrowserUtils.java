@@ -184,7 +184,7 @@ Method info:
 
         Actions action = new Actions(Driver.getDriver());
 
-        action.moveToElement(element).perform();
+        action.moveToElement(element).pause(500).build().perform();
 
 
     }

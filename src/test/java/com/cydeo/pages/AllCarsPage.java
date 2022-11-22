@@ -35,8 +35,12 @@ public class AllCarsPage extends BasePage {
     public List<WebElement> countOfRow;
 
     //Locator of "Three Dots At The End Of Each Row"
-    @FindBy (xpath = "//*[@id=\"grid-custom-entity-grid-407908455\"]/div[2]/div[2]/div[2]/div/table/tbody/tr[1]/td[21]/div/div/a")
+    @FindBy (xpath = "(//tr[@class='grid-row row-click-action'][5])/td[20]")
     public WebElement threeDotsEndOfRow;
+
+    //Locator of "Delete" Button
+    @FindBy (css = "body > ul > li > ul > li:nth-child(3) > a")
+    public WebElement deleteButton;
 
     public void clickAnyRow() {
         //click any row with actions class

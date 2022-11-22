@@ -1,12 +1,8 @@
 Feature: Delete Car
-
   US: As a 'Sales Manager' and 'Store Manager', I should be able to delete a car (Veli AYDIN)
-
 
   Background:
     Given User is on the login page
-
-
 
   #AC-1:
 
@@ -18,6 +14,6 @@ Feature: Delete Car
 
     Examples:
       | userType      |
-      | Driver        |
+      | Sales Manager |
       | Store Manager |
-      | Sales Master  |
+      | Driver        |
