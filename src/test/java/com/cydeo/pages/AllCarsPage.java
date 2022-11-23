@@ -35,7 +35,7 @@ public class AllCarsPage extends BasePage {
     public List<WebElement> countOfRow;
 
 @FindBy(xpath = "//a[@title='Create Car']")
-public WebElement createCarBtn;
+public List<WebElement> createCarBtn;
 
     public void clickAnyRow() {
         //click any row with actions class
