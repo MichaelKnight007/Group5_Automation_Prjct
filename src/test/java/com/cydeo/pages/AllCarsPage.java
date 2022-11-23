@@ -37,6 +37,9 @@ public class AllCarsPage extends BasePage {
 @FindBy(xpath = "//a[@title='Create Car']")
 public WebElement createCarBtn;
 
+    @FindBy(xpath = "//a[@title=\"Reset\"]/i")
+    public WebElement refreshButton;
+
     public void clickAnyRow() {
         //click any row with actions class
         BrowserUtils.clickWithMouseHoverAction(anyRow);
