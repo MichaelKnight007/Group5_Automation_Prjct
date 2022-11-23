@@ -34,6 +34,9 @@ public class AllCarsPage extends BasePage {
     @FindBy(css = "tr.grid-row")
     public List<WebElement> countOfRow;
 
+    @FindBy(xpath = "//a[@title=\"Reset\"]/i")
+    public WebElement refreshButton;
+
     public void clickAnyRow() {
         //click any row with actions class
         BrowserUtils.clickWithMouseHoverAction(anyRow);
