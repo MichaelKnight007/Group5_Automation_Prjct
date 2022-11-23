@@ -86,19 +86,83 @@ AllCarsPage allCarsPage=new AllCarsPage();
     }
 
     @And("User enters {string}")
-    public void userEnters(String arg0) {
+    public void userEnters(String keyword) throws InterruptedException {
+        Thread.sleep(2000);
+    allCarsPage.searchBox.sendKeys(keyword);
 
     }
 
     @When("User selects contains method")
-    public void userSelectsContainsMethod() {
+    public void userSelectsContainsMethod() throws InterruptedException {
+
+        BrowserUtils.clickWithJS(allCarsPage.AllMethods.get(0));
+        //  allCarsPage.AllMethods.get(0).click();
     }
 
     @And("User clicks update button")
     public void userClicksUpdateButton() {
+        allCarsPage.updateButton.click();
+    }
+    @Then("Results should contain {string}")
+    public void resultsShouldContain(String keyword) throws InterruptedException {
+        List<String> ExpectedDrivernames = new ArrayList<>(List.of(keyword));
+        System.out.println("ExpectedDrivernames = " + ExpectedDrivernames);
+        List<String>ActualDrivernames=new ArrayList<>();
+        for (WebElement drivername : allCarsPage.DriverNames) {
+           ActualDrivernames.add(drivername.getAttribute("innerText"));
+        }
+        for (String actualDrivername : ActualDrivernames) {
+
+        Assert.assertTrue(actualDrivername.contains(keyword));
+        }
     }
 
-    @Then("Results should contain keywords")
-    public void resultsShouldContainKeywords() {
+
+    @When("User selects does not contain method")
+    public void userSelectsDoesNotContainMethod() {
+        allCarsPage.AllMethods.get(1).click();
+    }
+
+    @Then("Results should not contain {string}")
+    public void resultsShouldNotContain(String keyword) {
+        List<String> ActualDrivernames = new ArrayList<>();
+        for (WebElement drivername : allCarsPage.DriverNames) {
+            ActualDrivernames.add(drivername.getAttribute("innerText"));
+        }
+
+        for (String actualDrivername : ActualDrivernames) {
+            if (actualDrivername.contains(keyword)) {
+                System.out.println("TEST FAİLED");
+            } else {
+                System.out.println("TEST PASSED");
+            }
+        }
+    }
+    @When("User selects Starts with method")
+    public void userSelectsStartsWithMethod() {
+        allCarsPage.AllMethods.get(3).click();
+    }
+    @Then("Results should start with specified {string}")
+    public void resultsShouldStartWithSpecified(String keyword) {
+    }
+
+
+    @When("User selectsEnds with method")
+    public void userSelectsEndsWithMethod() {
+        allCarsPage.AllMethods.get(4).click();
+    }
+    @Then("Results should end with specified {string}")
+    public void resultsShouldEndWithSpecified(String keyword) {
+    }
+
+
+    @When("User selects Is Equal to method")
+    public void userSelectsIsEqualToMethod() {
+        allCarsPage.AllMethods.get(2).click();
+    }
+
+
+    @Then("Results should match specified {string}")
+    public void resultsShouldMatchSpecified(String keyword) {
     }
 }

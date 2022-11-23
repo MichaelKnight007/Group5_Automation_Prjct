@@ -10,7 +10,7 @@ Feature: As a user, I should be able to use Driver filter under Fleet-Vehicle pa
     And User clicks Driver All button
     And User clicks Contains dropdown
 
-  @wip
+
   Scenario: "Driver" filter has the methods below:
   Contains
   Does Not Contain
@@ -21,7 +21,7 @@ Feature: As a user, I should be able to use Driver filter under Fleet-Vehicle pa
   Is Not Any Of
   Is Empty
   Is Not Empty
-  //tbody[@class='grid-body']//td[4]
+
     When User clicks Contains dropdown
     Then User should see all options under Driver Filter Menu
 
@@ -30,22 +30,69 @@ Feature: As a user, I should be able to use Driver filter under Fleet-Vehicle pa
     When User selects contains method
     And User enters "<keyword>"
     And User clicks update button
-    Then Results should contain keywords
+    Then Results should contain "<keyword>"
     Examples:
       | keyword |
       | Tresa   |
       | Lemke   |
       | Joseph  |
-
+  @wip1
   Scenario Outline:  When user selects "Does Not Contain" method with a keyword,
   the results should not contain the specified keyword
     When User selects does not contain method
     And User enters "<keyword>"
     And User clicks update button
-    Then Results should not contain keywords
+    Then Results should not contain "<keyword>"
     Examples:
       | keyword |
-      |         |
-      |         |
-      |         |
+      | Lemke   |
+      | Nona    |
+      | Mrs     |
 
+  Scenario Outline:  When user selects "Starts-with" method with a keyword,
+  the results should start with the specified keyword
+    When User selects Starts with method
+    And User enters "<keyword>"
+    And User clicks update button
+    Then Results should start with specified "<keyword>"
+    Examples:
+      | keyword |
+      | mrs     |
+      | ms      |
+      | Ahmad   |
+
+  Scenario Outline:   When user selects "Ends With" method with a keyword,
+  the results should end with the specified keyword
+    When User selectsEnds with method
+    And User enters "<keyword>"
+    And User clicks update button
+    Then Results should end with specified "<keyword>"
+    Examples:
+      | keyword |
+      | en      |
+      | an      |
+      | hilll   |
+
+  Scenario Outline:When user selects "Is Equal to" method with a keyword,
+  the results should match the specified keyword exactly
+    When User selects Is Equal to method
+    And User enters "<keyword>"
+    And User clicks update button
+    Then Results should match specified "<keyword>"
+    Examples:
+      | keyword         |
+      | Tobie Ziemann   |
+      | Bettye Wisozk   |
+      | Hollis Thompson |
+
+  Scenario Outline: Methods ("Contains", "Does Not Contains", "Starts With", "Ends With", "Is Equal to")
+  shouldn't accept non-alphabetical characters
+    When User selects "<Methodname>"
+    And User enters "<Non Alphabetical Characters>"
+    And User clicks update button
+    Then Message should be "No entities were found to match your search. Try modifying your search criteria..."
+    Examples:
+      | Methodname | Non Alphabetical Characters |
+      |            |                             |
+      |            |                             |
+      |            |                             |
