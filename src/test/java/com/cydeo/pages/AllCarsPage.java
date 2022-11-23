@@ -42,7 +42,7 @@ public class AllCarsPage extends BasePage {
     public List<WebElement> countOfRow;
 
 @FindBy(xpath = "//a[@title='Create Car']")
-public WebElement createCarBtn;
+public List<WebElement> createCarBtn;
 
     @FindBy(xpath = "//a[@title=\"Reset\"]/i")
     public WebElement refreshButton;

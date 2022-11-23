@@ -15,3 +15,8 @@ Feature: Create Car Function
       | Driver        |
       | Sales Manager |
       | Store Manager |
+
+
+  Scenario: Login as a "Sales Manager"
+    When User logs in as a "Sales Manager"
+    Then Verify that the user is on "Dashboard" page
