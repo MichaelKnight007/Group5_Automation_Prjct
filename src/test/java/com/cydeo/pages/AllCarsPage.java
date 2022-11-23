@@ -34,6 +34,9 @@ public class AllCarsPage extends BasePage {
     @FindBy(css = "tr.grid-row")
     public List<WebElement> countOfRow;
 
+@FindBy(xpath = "//a[@title='Create Car']")
+public WebElement createCarBtn;
+
     @FindBy(xpath = "//a[@title=\"Reset\"]/i")
     public WebElement refreshButton;
 
