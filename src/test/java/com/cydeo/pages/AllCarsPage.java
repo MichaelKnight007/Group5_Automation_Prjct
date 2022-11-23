@@ -34,7 +34,11 @@ public class AllCarsPage extends BasePage {
     @FindBy(css = "tr.grid-row")
     public List<WebElement> countOfRow;
 
+@FindBy(xpath = "//a[@title='Create Car']")
+public WebElement createCarBtn;
+
     //Locator of "Three Dots At The End Of Each Row"
+
     @FindBy (xpath = "(//tr[@class='grid-row row-click-action'][5])/td[20]")
     public WebElement threeDotsEndOfRow;
 
