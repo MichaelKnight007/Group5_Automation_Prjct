@@ -12,11 +12,17 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class VehicleTableArrangements_StepDef {
+List<String> expectedList=new ArrayList<>();
+List<String> actualList=new ArrayList<>();
 
     AllCarsPage allCarsPage = new AllCarsPage();
 
@@ -29,9 +35,7 @@ public class VehicleTableArrangements_StepDef {
     public void userClicksWhichAreShown(String expected) {
 
         By element = By.xpath("(//ul[@class='dropdown-menu pull-right'])[2]//a[normalize-space(text())='" + expected + "']");
-
         Driver.getDriver().findElement(element).click();
-
         allCarsPage.waitUntilLoaderScreenDisappear();
     }
 
@@ -60,9 +64,7 @@ public class VehicleTableArrangements_StepDef {
     public void user_filters_the_page_by_clicking(String filter) {
         allCarsPage.ContainsBtn.click();
         By element = By.xpath("(//ul[@class='dropdown-menu pull-right'])[2]//a[normalize-space(text())='" + filter + "']");
-
         Driver.getDriver().findElement(element).click();
-
         allCarsPage.waitUntilLoaderScreenDisappear();
 
     }
@@ -79,4 +81,19 @@ public class VehicleTableArrangements_StepDef {
     }
 
 
+    @When("user clicks any   {string}")
+    public void userClicksAny(String names) {
+        allCarsPage.initialResults(names,expectedList);
+        Collections.sort(expectedList);
+        allCarsPage.lastResults(names,actualList);
+
+    }
+
+    @Then("Verify that user sees columnName as sorted in ascending or descending order")
+    public void verifyThatUserSeesAsSortedInAscendingOrDescendingOrder( ) {
+        System.out.println("expectedList = " + expectedList);
+        System.out.println("actualList = " + actualList);
+        Assert.assertEquals(expectedList,actualList);
+
+    }
 }

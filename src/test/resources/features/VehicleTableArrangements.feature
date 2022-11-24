@@ -35,7 +35,7 @@ Feature:Vehicle Table Arrangements
       | 50  |
       | 100 |
 
-  @wipv
+
   Scenario Outline: User can remove all sorts and filters on the page by using the reset button
     When user filters the page by clicking "<Filter>"
     And  user clicks refresh button
@@ -46,6 +46,66 @@ Feature:Vehicle Table Arrangements
       | 25     |
       | 50     |
       | 100    |
+
+  @wipv
+  Scenario Outline: User can sort a column in ascending or descending order by clicking the column name
+    When user clicks any   "<columName>"
+    Then Verify that user sees columnName as sorted in ascending or descending order
+    Examples:
+      | columName            |
+      | License Plate        |
+      | Tags                 |
+      | Driver               |
+      | Location             |
+      | Chassis Number       |
+      | Last Odometer        |
+      | Immatriculation Date |
+      | First Contract Date  |
+      | CVVI                 |
+      | Seats Number         |
+      | Doors Number         |
+      | Color                |
+      | Fuel Type            |
+      | CO2 Emissions        |
+      | Horsepower           |
+      | Horsepower Taxation  |
+      | Power (kW)           |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
