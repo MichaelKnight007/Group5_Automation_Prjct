@@ -23,12 +23,12 @@ public class AllCarsPage extends BasePage {
     public WebElement ContainsBtn;
     @FindBy(xpath = "//a[@class='dropdown-item choice-value']")
     public List<WebElement> AllMethods;
-    @FindBy(xpath="//input[@name='value']")
+    @FindBy(xpath = "//input[@name='value']")
     public WebElement searchBox;
-    @FindBy(xpath="//button[@class='btn btn-primary filter-update']")
+    @FindBy(xpath = "//button[@class='btn btn-primary filter-update']")
     public WebElement updateButton;
 
-    @FindBy(xpath="//tbody[@class='grid-body']//tr//td[4]")
+    @FindBy(xpath = "//tbody[@class='grid-body']//tr//td[4]")
     public List<WebElement> DriverNames;
 
 
@@ -41,11 +41,14 @@ public class AllCarsPage extends BasePage {
     @FindBy(css = "tr.grid-row")
     public List<WebElement> countOfRow;
 
-@FindBy(xpath = "//a[@title='Create Car']")
-public List<WebElement> createCarBtn;
+    @FindBy(xpath = "//a[@title='Create Car']")
+    public List<WebElement> createCarBtn;
 
     @FindBy(xpath = "//a[@title=\"Reset\"]/i")
     public WebElement refreshButton;
+
+    @FindBy(xpath = "//a[@title='Create Car']")
+    public WebElement createCarLink;
 
     public void clickAnyRow() {
         //click any row with actions class
@@ -53,16 +56,15 @@ public List<WebElement> createCarBtn;
 
         //regular click method sometimes doesn't work
         //it works when we click twice
-		//		for (int i = 0; i < 2; i++) {
-		//			try {
-		//				BrowserUtils.waitClickability(anyRow, 2);
-		//				anyRow.click();
-		//			} catch (Exception e) {
-		//				e.printStackTrace();
-		//			}
-		//		}
+        //		for (int i = 0; i < 2; i++) {
+        //			try {
+        //				BrowserUtils.waitClickability(anyRow, 2);
+        //				anyRow.click();
+        //			} catch (Exception e) {
+        //				e.printStackTrace();
+        //			}
+        //		}
     }
-
 
 
 }
