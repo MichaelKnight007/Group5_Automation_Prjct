@@ -1,6 +1,7 @@
 package com.cydeo.step_definitions;
 
 import com.cydeo.pages.AllCarsPage;
+import com.cydeo.pages.CreateCarBasePage;
 import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.But;
@@ -21,9 +22,9 @@ public class CreateCar_StepDef {
     @Then("Verify driver cannot see the button")
     public void driver_Cannot_See_Button() {
 
-       int size = allCarsPage.createCarBtn.size();
+       int sizeOfBtn = allCarsPage.createCarBtn.size();
 
-        Assert.assertEquals(0,size);
+        Assert.assertEquals(1,sizeOfBtn);
 
 
         /*boolean createCarIsEmpty=Driver.getDriver().findElements(By.xpath("//a[@title='Create Car']")).isEmpty();
@@ -76,5 +77,12 @@ public class CreateCar_StepDef {
 
             }
 
-        }
+
+    @And("User goes to Create Car page and creates a car by filling compulsory fields")
+    public void userGoesToCreateCarPageAndCreatesACarByFillingCompulsoryFields() {
+        CreateCarBasePage.clickCreateCarBtn();
+        CreateCarBasePage.createCar();
+
+    }
+}
 
