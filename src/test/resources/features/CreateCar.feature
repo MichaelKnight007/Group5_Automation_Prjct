@@ -20,7 +20,7 @@ Feature: Create Car Function
   Scenario: Login as a "Sales Manager"
     When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
-    And User goes to Create Car page and creates a car by filling compulsory fields
+    Then User goes to Create Car page and creates a car by filling compulsory fields
 
   Scenario:
     When User logs in as a "Sales Manager"

@@ -80,6 +80,7 @@ public class CreateCar_StepDef {
 
     @And("User goes to Create Car page and creates a car by filling compulsory fields")
     public void userGoesToCreateCarPageAndCreatesACarByFillingCompulsoryFields() {
+        CreateCarBasePage.clickCreateCarBtn();
         CreateCarBasePage.createCar();
 
     }
