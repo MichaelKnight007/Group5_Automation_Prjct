@@ -7,14 +7,10 @@ import io.cucumber.java.en.When;
 public class LastOdometerFilter_StepDef {
 
 
-
-
     // Background:
-
     @Given("user logged in as {string}")
     public void user_logged_in_as_a_salesmanager101(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
     }
     @Given("user is on the dashboard page")
     public void user_is_on_the_dashboard_page() {
