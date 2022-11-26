@@ -47,7 +47,7 @@ public class Commons_StepDef {
     @And("User selects a car")
     public void userSelectsACar() {
         BrowserUtils.sleep(5);
-        allCarsPage.clickAnyRow();
+        allCarsPage.clickFirstRow();
     }
 
 }

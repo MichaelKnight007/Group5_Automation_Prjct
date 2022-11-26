@@ -2,14 +2,12 @@ package com.cydeo.pages;
 
 import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.Driver;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 
 public class AllCarsPage extends BasePage {
@@ -36,8 +34,14 @@ public class AllCarsPage extends BasePage {
     @FindBy(xpath = "//tbody[@class='grid-body']//tr//td[4]")
     public List<WebElement> DriverNames;
 
-    @FindBy(xpath = "//tr[@class='grid-row row-click-action'][5]")
-    public WebElement anyRow;
+    @FindBy(xpath = "//div[@class='dropdown']//*[text()='...']")
+    public WebElement threeDot;
+
+    @FindBy(css = "li.launcher-item a[title='Delete']")
+    public WebElement deleteButton;
+
+    @FindBy(xpath = "//h3[text()='Delete Confirmation']")
+    public WebElement deleteConfirmationText;
 
     @FindBy(xpath = "//a[contains(@class,\"dropdown-item\")]")
     public List<WebElement> numbersForFilter;
@@ -52,17 +56,17 @@ public class AllCarsPage extends BasePage {
     public WebElement refreshButton;
 
 
-    public List<String> lastResults(String name,List<String> actualList) {
+    public List<String> lastResults(String name, List<String> actualList) {
         Driver.getDriver().findElement(By.xpath("//span[.= '" + name + "']")).click();
         BrowserUtils.sleep(1);
-        List<WebElement> elements= Driver.getDriver().findElements((By.xpath("//td[starts-with(@data-column-label,'" + name + "')]")));
+        List<WebElement> elements = Driver.getDriver().findElements((By.xpath("//td[starts-with(@data-column-label,'" + name + "')]")));
         for (WebElement element : elements) {
             actualList.add(element.getAttribute("innerText"));
         }
         return actualList;
     }
-    
-@FindBy(xpath = "//a[@title='Create Car']")
+
+    @FindBy(xpath = "//a[@title='Create Car']")
     public WebElement createCarLink;
 
     public List<String> initialResults(String name, List<String> expectedList) {
@@ -75,9 +79,9 @@ public class AllCarsPage extends BasePage {
     }
 
 
-    public void clickAnyRow() {
+    public void clickFirstRow() {
         //click any row with actions class
-        BrowserUtils.clickWithMouseHoverAction(anyRow);
+        BrowserUtils.clickWithMouseHoverAction(threeDot);
 
         //regular click method sometimes doesn't work
         //it works when we click twice
@@ -91,6 +95,21 @@ public class AllCarsPage extends BasePage {
         //		}
     }
 
+    public void hoveroverthreedots() {
+        BrowserUtils.hoverOverThreeDots(threeDot);
+    }
 
+    public boolean verifyDeleteButton() {
+        BrowserUtils.waitForVisibility(deleteButton, 5);
+        return deleteButton.isDisplayed();
+    }
+
+    public void clickDeleteButton() {
+        deleteButton.click();
+    }
+
+    public void verifyDeleteConfirmationPopUp() {
+        Assert.assertTrue(deleteConfirmationText.isDisplayed());
+    }
 }
 
