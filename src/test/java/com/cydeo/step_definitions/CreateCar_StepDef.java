@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CreateCar_StepDef {
@@ -80,8 +81,13 @@ public class CreateCar_StepDef {
 
     @And("User goes to Create Car page and creates a car by filling compulsory fields")
     public void userGoesToCreateCarPageAndCreatesACarByFillingCompulsoryFields() {
-        CreateCarBasePage.clickCreateCarBtn();
-        CreateCarBasePage.createCar();
+
+
+        List<String> textOfLicencePlateFieldList = CreateCarBasePage.licencePlateFieldCheck();
+
+
+        Assert.assertEquals(textOfLicencePlateFieldList.get(0), textOfLicencePlateFieldList.get(1));
+
 
     }
 }

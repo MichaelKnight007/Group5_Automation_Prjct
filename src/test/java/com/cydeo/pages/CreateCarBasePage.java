@@ -5,6 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CreateCarBasePage {
 
     public CreateCarBasePage() {
@@ -97,6 +100,9 @@ public class CreateCarBasePage {
     @FindBy(xpath = "(//button[@type='button'])[4]")
     public WebElement vehicleMakeAddBtn;
 
+    @FindBy(xpath = "//div[.='Entity saved']")
+    public WebElement entitySavedMessage;
+
 
     public static void clickCreateCarBtn(){
 
@@ -136,12 +142,31 @@ public class CreateCarBasePage {
         createCarBasePage.saveAndCloseBtn.click();
     }
 
+    public  static List<String> licencePlateFieldCheck(){
+        CreateCarBasePage createCarBasePage = new CreateCarBasePage();
+
+        List<String> licencePlateFieldList=new ArrayList<>();
+
+        String text="!!45/*DR 805";
+        createCarBasePage.licencePlateField.sendKeys(text);//(letters and digits)
+        String actualTextOflicencePlateField = createCarBasePage.licencePlateField.getText();
+
+        licencePlateFieldList.add(text);//expected index 0
+        licencePlateFieldList.add(actualTextOflicencePlateField);//actual index 1
+
+        return licencePlateFieldList;
+    }
+
     public static void checkingCompulsoryFieldsConditions() {
 
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
 
-        createCarBasePage.licencePlateField.sendKeys("!!45/*DR 805");//(letters and digits)
+        /*List<String> deneme=new ArrayList<>();
+
+        String text="!!45/*DR 805";
+        createCarBasePage.licencePlateField.sendKeys(text);//(letters and digits)
         String actualTextOflicencePlateField = createCarBasePage.licencePlateField.getText();
+        deneme.add(actualTextOflicencePlateField);*/
 
         createCarBasePage.tags_Employee.click();//Clickable_multiple choices allowed
         boolean tags_EmployeeClicked = createCarBasePage.tags_Employee.isSelected();
