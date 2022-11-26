@@ -90,6 +90,12 @@ public class AllCarsPage extends BasePage {
         //			}
         //		}
     }
+    public void clickFirstCar(){
+        BrowserUtils.sleep(5);
+        countOfRow.get(0).click();
+        BrowserUtils.sleep(3);
+    }
+
 
 
 }
