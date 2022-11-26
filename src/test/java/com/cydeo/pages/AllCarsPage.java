@@ -20,7 +20,7 @@ public class AllCarsPage extends BasePage {
     public WebElement ManageFilterButton;
     @FindBy(xpath = "//select[@data-action='add-filter-select']")
     public WebElement manageFilterDropdown;
-    @FindBy(xpath = "//input[@id=\'ui-multiselect-0-0-option-2\']")
+    @FindBy(xpath = "//input[@id='ui-multiselect-0-0-option-2']")
     public WebElement Drivercheckbox;
     @FindBy(xpath = "//div[@class='btn filter-criteria-selector oro-drop-opener oro-dropdown-toggle filter-default-value']")
     public WebElement DriverAllBtn;
@@ -50,6 +50,22 @@ public class AllCarsPage extends BasePage {
 
     @FindBy(xpath = "//a[@title=\"Reset\"]/i")
     public WebElement refreshButton;
+
+    @FindBy(xpath = "//h1[@class='oro-subtitle']")
+    public WebElement allCarsTitle;
+
+    @FindBy(xpath = "//input[@type='search']")
+    public WebElement manageFiltersSearchInputBox;
+
+    @FindBy(id = "ui-multiselect-0-0-option-6")
+    public WebElement lastOdometerCheckbox;
+
+    @FindBy(xpath = "//span[@class='filter-items']")
+    public WebElement lastOdometerDropdownButton;
+
+    @FindBy(xpath = "//div[@class='btn-group btn-block open']//button")
+    public WebElement lastOdometerFilterDropdownItems;
+
 
 
     public List<String> lastResults(String name,List<String> actualList) {
