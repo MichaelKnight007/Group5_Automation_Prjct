@@ -1,6 +1,9 @@
 package com.cydeo.pages;
 
 import com.cydeo.utilities.BrowserUtils;
+import com.cydeo.utilities.Driver;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -19,14 +22,26 @@ public class AllCarsPage extends BasePage {
     public WebElement Drivercheckbox;
     @FindBy(xpath = "//div[@class='btn filter-criteria-selector oro-drop-opener oro-dropdown-toggle filter-default-value']")
     public WebElement DriverAllBtn;
-    @FindBy(xpath = "//button[@class=\"btn dropdown-toggle \"]")
+    @FindBy(xpath = "//button[@class='btn dropdown-toggle']")
     public WebElement ContainsBtn;
     @FindBy(xpath = "//a[@class='dropdown-item choice-value']")
     public List<WebElement> AllMethods;
+    @FindBy(xpath = "//input[@name='value']")
+    public WebElement searchBox;
+    @FindBy(xpath = "//button[@class='btn btn-primary filter-update']")
+    public WebElement updateButton;
 
+    @FindBy(xpath = "//tbody[@class='grid-body']//tr//td[4]")
+    public List<WebElement> DriverNames;
 
-    @FindBy(xpath = "//tr[@class='grid-row row-click-action'][5]")
-    public WebElement anyRow;
+    @FindBy(xpath = "//div[@class='dropdown']//*[text()='...']")
+    public WebElement threeDot;
+
+    @FindBy(css = "li.launcher-item a[title='Delete']")
+    public WebElement deleteButton;
+
+    @FindBy(xpath = "//h3[text()='Delete Confirmation']")
+    public WebElement deleteConfirmationText;
 
     @FindBy(xpath = "//a[contains(@class,\"dropdown-item\")]")
     public List<WebElement> numbersForFilter;
@@ -34,37 +49,67 @@ public class AllCarsPage extends BasePage {
     @FindBy(css = "tr.grid-row")
     public List<WebElement> countOfRow;
 
-@FindBy(xpath = "//a[@title='Create Car']")
-public WebElement createCarBtn;
+    @FindBy(xpath = "//a[@title='Create Car']")
+    public List<WebElement> createCarBtn;
 
-    //Locator of "Three Dots At The End Of Each Row"
-
-    @FindBy (xpath = "(//tr[@class='grid-row row-click-action'][5])/td[20]")
-    public WebElement threeDotsEndOfRow;
-
-    //Locator of "Delete" Button
-    @FindBy (css = "body > ul > li > ul > li:nth-child(3) > a")
-    public WebElement deleteButton;
-
-    public void clickAnyRow() {
-        //click any row with actions class
-        BrowserUtils.clickWithMouseHoverAction(anyRow);
+    @FindBy(xpath = "//a[@title=\"Reset\"]/i")
+    public WebElement refreshButton;
 
 
+    public List<String> lastResults(String name, List<String> actualList) {
+        Driver.getDriver().findElement(By.xpath("//span[.= '" + name + "']")).click();
+        BrowserUtils.sleep(1);
+        List<WebElement> elements = Driver.getDriver().findElements((By.xpath("//td[starts-with(@data-column-label,'" + name + "')]")));
+        for (WebElement element : elements) {
+            actualList.add(element.getAttribute("innerText"));
+        }
+        return actualList;
+    }
 
-        //regular click method sometimes doesn't work
-        //it works when we click twice
-		//		for (int i = 0; i < 2; i++) {
-		//			try {
-		//				BrowserUtils.waitClickability(anyRow, 2);
-		//				anyRow.click();
-		//			} catch (Exception e) {
-		//				e.printStackTrace();
-		//			}
-		//		}
+    @FindBy(xpath = "//a[@title='Create Car']")
+    public WebElement createCarLink;
+
+    public List<String> initialResults(String name, List<String> expectedList) {
+        List<WebElement> elements = Driver.getDriver().findElements(By.xpath("//td[starts-with(@data-column-label,'" + name + "')]"));
+        for (WebElement element : elements) {
+            expectedList.add(element.getAttribute("innerText"));
+        }
+
+        return expectedList;
     }
 
 
+    public void clickFirstRow() {
+        //click any row with actions class
+        BrowserUtils.clickWithMouseHoverAction(threeDot);
 
+        //regular click method sometimes doesn't work
+        //it works when we click twice
+        //		for (int i = 0; i < 2; i++) {
+        //			try {
+        //				BrowserUtils.waitClickability(anyRow, 2);
+        //				anyRow.click();
+        //			} catch (Exception e) {
+        //				e.printStackTrace();
+        //			}
+        //		}
+    }
+
+    public void hoveroverthreedots() {
+        BrowserUtils.hoverOverThreeDots(threeDot);
+    }
+
+    public boolean verifyDeleteButton() {
+        BrowserUtils.waitForVisibility(deleteButton, 5);
+        return deleteButton.isDisplayed();
+    }
+
+    public void clickDeleteButton() {
+        deleteButton.click();
+    }
+
+    public void verifyDeleteConfirmationPopUp() {
+        Assert.assertTrue(deleteConfirmationText.isDisplayed());
+    }
 }
 

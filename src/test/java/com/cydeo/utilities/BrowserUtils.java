@@ -1,6 +1,7 @@
 package com.cydeo.utilities;
 
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -193,5 +194,30 @@ Method info:
         Actions actions = new Actions(Driver.getDriver());
         actions.moveToElement(element).pause(500).click(element).build().perform();
     }
+    public static void clickWithJS(WebElement element) {
+        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
+        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
+    }
 
+    public static void hoverOverThreeDots(WebElement threeDots) {
+        Actions actions = new Actions(Driver.getDriver());
+
+
+        try {
+            for (int i = 0; i < 2; i++) {
+                actions.moveToElement(threeDots).pause(1000).build().perform();
+                BrowserUtils.sleep(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void waitForVisibility(WebElement element, int timeOut) {
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeOut);
+            wait.until(ExpectedConditions.visibilityOf(element));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -45,5 +45,5 @@ Feature: Common Features
   Scenario: Select a car
     When User logs in as a "Driver"
     And User goes to "Fleet" module and "Vehicles" sub-module
-    And User selects a car
+    # toDo : And User selects a car
     # ToDo : Then Verify that the user select car
