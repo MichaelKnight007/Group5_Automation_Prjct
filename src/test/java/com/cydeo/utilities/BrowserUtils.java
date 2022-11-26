@@ -1,6 +1,7 @@
 package com.cydeo.utilities;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -14,6 +15,48 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class BrowserUtils {
+
+    //wait for an element to be clickable (with web element)
+    public static void waitClickability(WebElement element, int timeOut) {
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeOut);
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //wait for an element to be clickable (with By locator)
+    public static void waitClickability(By locator, int timeOut) {
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeOut);
+            wait.until(ExpectedConditions.elementToBeClickable(Driver.getDriver().findElement(locator)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void clickWithTryCatch(By locator){
+        waitClickability(locator,5);
+        try {
+            Driver.getDriver().findElement(locator).click();
+        } catch (Exception e) {
+            e.printStackTrace();
+            BrowserUtils.sleep(1);
+            Driver.getDriver().findElement(locator).click();
+        }
+    }
+
+    public static void clickWithTryCatch(WebElement element){
+        waitClickability(element,5);
+        try {
+            element.click();
+        } catch (Exception e) {
+            e.printStackTrace();
+            BrowserUtils.sleep(1);
+            element.click();
+        }
+    }
 
     /*
     This method will accept int (in seconds) and executes Thread.sleep for given duration.

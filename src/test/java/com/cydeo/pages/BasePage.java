@@ -48,13 +48,14 @@ public abstract class BasePage {
     public String getModuleName() {
        return Driver.getDriver().findElement(By.className("oro-subtitle")).getText();
     }
+
     //navigate to any given module and subModule
     public void navigateToModule(String moduleName, String subModuleName) { //Fleet - Vehicles
-        WebElement module = Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + moduleName + "']]"));
-        module.click();
+        By moduleLocator = By.xpath("//span[text()[normalize-space() = '" + moduleName + "']]");
+        BrowserUtils.clickWithTryCatch(moduleLocator);
 
-        WebElement subModule = Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + subModuleName + "']]"));
-        subModule.click();
+        By subModuleLocator = By.xpath("//span[text()[normalize-space() = '" + subModuleName + "']]");
+        BrowserUtils.clickWithTryCatch(subModuleLocator);
     }
 
     //navigate to any given module and subModule and subModule of subModule
