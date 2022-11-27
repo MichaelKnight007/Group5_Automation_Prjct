@@ -2,6 +2,7 @@ package com.cydeo.pages;
 
 import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.Driver;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -51,6 +52,11 @@ public class AllCarsPage extends BasePage {
     @FindBy(xpath = "//a[@title=\"Reset\"]/i")
     public WebElement refreshButton;
 
+    @FindBy(xpath = "//a[@title='Grid Settings']")
+    public WebElement gridSettings;
+
+    @FindBy(xpath = "//div[.='Grid Settings']")
+    public WebElement gridSettingsTitle;
 
     public List<String> lastResults(String name,List<String> actualList) {
         Driver.getDriver().findElement(By.xpath("//span[.= '" + name + "']")).click();
@@ -97,6 +103,14 @@ public class AllCarsPage extends BasePage {
     }
 
 
+    public void clickGridSettings() {
+        BrowserUtils.waitClickability(gridSettings, 5);
+        gridSettings.click();
+    }
 
+    public void verifyGridSettingsMenuDisplayed() {
+        BrowserUtils.waitClickability(gridSettingsTitle, 5);
+        Assert.assertTrue(gridSettingsTitle.isDisplayed());
+    }
 }
 

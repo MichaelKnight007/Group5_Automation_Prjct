@@ -241,4 +241,18 @@ Method info:
         ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
         ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
     }
+
+    public static void waitForVisibility(WebElement element, int timeOut) {
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeOut);
+            wait.until(ExpectedConditions.visibilityOf(element));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void sendKeysWithWait(WebElement field, String text, int timeOut){
+        waitClickability(field,timeOut);
+        field.sendKeys(text);
+    }
 }
