@@ -16,16 +16,16 @@ Feature: Create Car Function
       | Sales Manager |
       | Store Manager |
 
-
+  @wip5
   Scenario: Login as a "Sales Manager" - 2
     When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
     Then User goes to Create Car page and creates a car by filling compulsory fields
 
   Scenario:
-    When User logs in as a "Sales Manager" - 3
+    When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
-    Then User goes to Create Car page and enters Compulsory fields without comlying with the conditions
+    Then User goes to Create Car page and enters Compulsory fields without complying with the conditions
 
 
 
