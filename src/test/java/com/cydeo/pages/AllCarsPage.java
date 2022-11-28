@@ -64,6 +64,7 @@ public class AllCarsPage extends BasePage {
         }
         return actualList;
     }
+
     
 @FindBy(xpath = "//a[@title='Create Car']")
     public WebElement createCarLink;
