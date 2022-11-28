@@ -48,6 +48,7 @@ Feature:Vehicle Table Arrangements
       | 50     |
       | 100    |
 
+
   @wipv
   Scenario Outline:User can sort a column in ascending or descending order by clicking the column name
     When user clicks any   "<columName>"

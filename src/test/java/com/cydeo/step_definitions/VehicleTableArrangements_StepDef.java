@@ -83,15 +83,21 @@ public class VehicleTableArrangements_StepDef {
 
     @When("user clicks any   {string}")
     public void userClicksAny(String names) {
-        allCarsPage.lastResults(names, actualList);
-        expectedList = actualList;
+ 
+   allCarsPage.lastResults(names,actualList);
+ Collections.sort(actualList);
+ expectedList=actualList;
+
+      
+
 
     }
 
     @Then("Verify that user sees columnName as sorted in ascending or descending order")
+
     public void verifyThatUserSeesAsSortedInAscendingOrDescendingOrder() {
-        Collections.sort(actualList);
         Assert.assertEquals(expectedList, actualList);
+
 
 
     }
