@@ -1,3 +1,4 @@
+
 Feature:Vehicle Table Arrangements
 
   User Story:
@@ -23,11 +24,11 @@ Feature:Vehicle Table Arrangements
       | 100            | 100          |
 
 
-  Scenario: The value of 'View Per Page' should be '25' by default
+  Scenario:The value of 'View Per Page' should be '25' by default
     Then User should see 25 on the View Per Page dropdown button by default
 
 
-  Scenario: 'View Per Page' defines the number of total rows in a page and it has the options numbers of 10,25,50,100
+  Scenario:'View Per Page' defines the number of total rows in a page and it has the options numbers of 10,25,50,100
     When  user clicks View Per Page button
     Then  Verify that View Per Page dropdown includes below options
       | 10  |
@@ -36,7 +37,7 @@ Feature:Vehicle Table Arrangements
       | 100 |
 
 
-  Scenario Outline: User can remove all sorts and filters on the page by using the reset button
+  Scenario Outline:User can remove all sorts and filters on the page by using the reset button
     When user filters the page by clicking "<Filter>"
     And  user clicks refresh button
     Then Verify that sorts and filters are removed
@@ -48,7 +49,7 @@ Feature:Vehicle Table Arrangements
       | 100    |
 
   @wipv
-  Scenario Outline: User can sort a column in ascending or descending order by clicking the column name
+  Scenario Outline:User can sort a column in ascending or descending order by clicking the column name
     When user clicks any   "<columName>"
     Then Verify that user sees columnName as sorted in ascending or descending order
     Examples:
