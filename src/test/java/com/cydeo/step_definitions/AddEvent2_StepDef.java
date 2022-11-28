@@ -20,14 +20,7 @@ public class AddEvent2_StepDef {
     AllCarsPage allCarsPage = new AllCarsPage();
     AddEvent2Page addEvent2Page = new AddEvent2Page();
     WebDriverWait wait=new WebDriverWait(Driver.getDriver(),60);
-    @Given("User is on the login page")
-    public void userIsOnTheLoginPage() {
-        loginPage.goLoginPage();
-    }
-    @When("User logs in as a {string}")
-    public void user_logs_in_as_a(String userType) {
-        loginPage.loginAsUserType(userType);
-    }
+
     @When("User hover over Fleet menu")
     public void userHoverOverFleetMenu() {
         wait.until(ExpectedConditions.elementToBeClickable(dashBoardPage.fleetDropdownBtn));

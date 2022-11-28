@@ -1,14 +1,15 @@
-@tread906
-Feature:Add Event 2 ( with cucumber - Yasar)
+
+ @tread906
+ Feature:Add Event 2 ( with cucumber - Yasar)
 
   User Story:
   As a Store Manager and Sales Manager, I should be able to add an event
 
-  @yasarBack
+
   Background:User is expected to be on the 'Vehicles' page
     Given User is on the login page
   @yasarLogin
-  Scenario Outline: Login as a <userType>
+  Scenario Outline:Login as a <userType>
     When User logs in as a "<userType>"
     Then Verify that the user is on "<pageSubTitle>" page
 
