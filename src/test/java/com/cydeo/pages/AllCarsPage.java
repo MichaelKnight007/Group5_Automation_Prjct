@@ -65,14 +65,7 @@ public class AllCarsPage extends BasePage {
 @FindBy(xpath = "//a[@title='Create Car']")
     public WebElement createCarLink;
 
-    public List<String> initialResults(String name, List<String> expectedList) {
-        List<WebElement> elements = Driver.getDriver().findElements(By.xpath("//td[starts-with(@data-column-label,'" + name + "')]"));
-        for (WebElement element : elements) {
-            expectedList.add(element.getAttribute("innerText"));
-        }
 
-        return expectedList;
-    }
 
 
     public void clickAnyRow() {

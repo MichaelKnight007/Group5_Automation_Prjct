@@ -83,16 +83,14 @@ List<String> actualList=new ArrayList<>();
 
     @When("user clicks any   {string}")
     public void userClicksAny(String names) {
-        allCarsPage.initialResults(names,expectedList);
-        Collections.sort(expectedList);
-        allCarsPage.lastResults(names,actualList);
+   allCarsPage.lastResults(names,actualList);
+ Collections.sort(actualList);
+ expectedList=actualList;
 
     }
 
     @Then("Verify that user sees columnName as sorted in ascending or descending order")
     public void verifyThatUserSeesAsSortedInAscendingOrDescendingOrder( ) {
-        System.out.println("expectedList = " + expectedList);
-        System.out.println("actualList = " + actualList);
         Assert.assertEquals(expectedList,actualList);
 
     }
