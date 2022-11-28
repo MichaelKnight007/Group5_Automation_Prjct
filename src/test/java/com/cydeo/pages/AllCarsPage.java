@@ -5,6 +5,8 @@ import com.cydeo.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +56,7 @@ public class AllCarsPage extends BasePage {
 
     public List<String> lastResults(String name,List<String> actualList) {
         Driver.getDriver().findElement(By.xpath("//span[.= '" + name + "']")).click();
+             waitUntilLoaderScreenDisappear();
         BrowserUtils.sleep(1);
         List<WebElement> elements= Driver.getDriver().findElements((By.xpath("//td[starts-with(@data-column-label,'" + name + "')]")));
         for (WebElement element : elements) {
@@ -61,18 +64,12 @@ public class AllCarsPage extends BasePage {
         }
         return actualList;
     }
+
     
 @FindBy(xpath = "//a[@title='Create Car']")
     public WebElement createCarLink;
 
-    public List<String> initialResults(String name, List<String> expectedList) {
-        List<WebElement> elements = Driver.getDriver().findElements(By.xpath("//td[starts-with(@data-column-label,'" + name + "')]"));
-        for (WebElement element : elements) {
-            expectedList.add(element.getAttribute("innerText"));
-        }
 
-        return expectedList;
-    }
 
 
     public void clickAnyRow() {

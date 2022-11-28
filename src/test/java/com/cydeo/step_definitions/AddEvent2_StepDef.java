@@ -16,12 +16,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AddEvent2_StepDef {
     Login_Page loginPage = new Login_Page();
+    Dash_Board_Page dashBoardPage = new Dash_Board_Page();
     AllCarsPage allCarsPage = new AllCarsPage();
     AddEvent2Page addEvent2Page = new AddEvent2Page();
     WebDriverWait wait=new WebDriverWait(Driver.getDriver(),60);
 
     @And("User clicks any Vehicle Row under All Cars menu")
     public void userClicksAnyVehicleRowUnderAllCarsMenu() {
+        BrowserUtils.sleep(5);
         allCarsPage.anyRow.click();
     }
     @Then("Verify that the user is on General Information page")
