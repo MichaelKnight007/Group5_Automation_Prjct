@@ -11,7 +11,7 @@ public class AddEvent2Page extends BasePage{
         PageFactory.initElements(Driver.getDriver(),this);
     }
     //AddEvent2Yasar
-    @FindBy(xpath = "//a[@href='#scroll-1-64']")
+    @FindBy(xpath = "//h1[@class='user-name']")
     public WebElement GeneralPage;
     @FindBy(xpath = "//a[@class='btn icons-holder-text no-hash']")
     public WebElement AddEventBtn;
