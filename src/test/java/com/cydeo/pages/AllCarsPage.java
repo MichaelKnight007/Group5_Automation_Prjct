@@ -71,6 +71,7 @@ public class AllCarsPage extends BasePage {
 
 
 
+
     public void clickAnyRow() {
         //click any row with actions class
         BrowserUtils.clickWithMouseHoverAction(anyRow);
