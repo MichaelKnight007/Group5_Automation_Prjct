@@ -1,3 +1,4 @@
+@TRAD-1038
 Feature: As a user, I should be able to use Driver filter under Fleet-Vehicle page
 
   Background:
@@ -9,7 +10,7 @@ Feature: As a user, I should be able to use Driver filter under Fleet-Vehicle pa
     And User clicks Driver All button
     And User clicks Contains dropdown
 
-
+  @TRAD-1039
   Scenario: "Driver" filter has the methods below:
   Contains
   Does Not Contain
@@ -24,6 +25,7 @@ Feature: As a user, I should be able to use Driver filter under Fleet-Vehicle pa
     When User clicks Contains dropdown
     Then User should see all options under Driver Filter Menu
 
+  @TRAD-1050
   Scenario Outline:- When user selects "Contains" method with a keyword,
   the results should contain the specified keyword
     When User selects contains method
@@ -31,11 +33,12 @@ Feature: As a user, I should be able to use Driver filter under Fleet-Vehicle pa
     And User clicks update button
     Then Results should contain "<keyword>"
     Examples:
-      | keyword |
-      | Zack    |
-      #| Lemke   |
-      #| Joseph  |
+      | keyword  |
+      | Zack     |
+      | Blaine   |
+      | Franklyn |
 
+  @TRAD-1051
   Scenario Outline:  When user selects "Does Not Contain" method with a keyword,
   the results should not contain the specified keyword
     When User selects does not contain method
@@ -43,11 +46,12 @@ Feature: As a user, I should be able to use Driver filter under Fleet-Vehicle pa
     And User clicks update button
     Then Results should not contain "<keyword>"
     Examples:
-      | keyword |
-      | Lemke   |
-      | Nona    |
-      | Mrs     |
+      | keyword  |
+      | Zack     |
+      | Blaine   |
+      | Franklyn |
 
+  @TRAD-1052
   Scenario Outline:  When user selects "Starts-with" method with a keyword,
   the results should start with the specified keyword
     When User selects Starts with method
@@ -58,8 +62,9 @@ Feature: As a user, I should be able to use Driver filter under Fleet-Vehicle pa
       | keyword |
       | Mrs     |
       | Ms      |
-      | Ahmad   |
+      | Jacki   |
 
+  @TRAD-1053
   Scenario Outline:   When user selects "Ends With" method with a keyword,
   the results should end with the specified keyword
     When User selectsEnds with method
@@ -68,10 +73,11 @@ Feature: As a user, I should be able to use Driver filter under Fleet-Vehicle pa
     Then Results should end with specified "<keyword>"
     Examples:
       | keyword |
-      | en      |
+      | Price   |
       | an      |
-      | hilll   |
+      | ohns    |
 
+  @TRAD-1054
   Scenario Outline:When user selects "Is Equal to" method with a keyword,
   the results should match the specified keyword exactly
     When User selects Is Equal to method
@@ -84,6 +90,7 @@ Feature: As a user, I should be able to use Driver filter under Fleet-Vehicle pa
       | Bettye Wisozk   |
       | Hollis Thompson |
 
+  @TRAD-1055
   Scenario Outline: Methods ("Contains", "Does Not Contains", "Starts With", "Ends With", "Is Equal to")
   shouldn't accept non-alphabetical characters
     When User selects "<Methodname>"
@@ -96,5 +103,5 @@ Feature: As a user, I should be able to use Driver filter under Fleet-Vehicle pa
       | Contains         | 1       | .       |
       | Does Not Contain | 2       | ,       |
       | Starts With      | 3       | _       |
-      | Ends With        | 4       | _       |
+      | Ends With        | 8       | #       |
       | Is Equal to      | 5       | =       |

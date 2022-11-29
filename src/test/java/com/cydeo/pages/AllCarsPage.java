@@ -37,8 +37,6 @@ public class AllCarsPage extends BasePage {
 
     @FindBy(xpath = "//tbody[@class='grid-body']//tr//td[4]")
     public List <WebElement> Results;
-    @FindBy(xpath = "//tbody[@class='grid-body']//tr//td[4]")
-    public WebElement Result;
 
     @FindBy(xpath = "//tr[@class='grid-row row-click-action'][5]")
     public WebElement anyRow;

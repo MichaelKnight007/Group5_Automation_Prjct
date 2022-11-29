@@ -11,6 +11,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -84,25 +85,21 @@ public class DriverFilter_stepdef {
     }
 
     @Then("Results should contain {string}")
-    public void resultsShouldContain(String keyword) {
+    public void resultsShouldContain(String keyword) throws InterruptedException {
         allCarsPage.waitUntilLoaderScreenDisappear();
         wait.until(ExpectedConditions.visibilityOfAllElements(allCarsPage.Results));
-        String ExpectedResult = keyword;
-        String ActualResult = allCarsPage.Result.getAttribute("innerText");
-        Assert.assertTrue(ActualResult.contains(ExpectedResult));
         List<String> ExpectedResults = new ArrayList<>(List.of(keyword));
         System.out.println("ExpectedResults = " + ExpectedResults);
         List<String> ActualResults = new ArrayList<>();
+        Thread.sleep(3000);
         for (WebElement result : allCarsPage.Results) {
             ActualResults.add(result.getAttribute("innerText"));
-            for (int i = 0; i < allCarsPage.Results.size(); i++) {
-                ActualResults.add(allCarsPage.Results.get(i).getAttribute("innerText"));
-            }
+        }
+            Thread.sleep(3000);
             for (String actualresult : ActualResults) {
                 System.out.println(actualresult);
                 Assert.assertTrue(actualresult.contains(keyword));
             }
-        }
 
     }
 
@@ -112,20 +109,17 @@ public class DriverFilter_stepdef {
     }
 
     @Then("Results should not contain {string}")
-    public void resultsShouldNotContain(String keyword) {
+    public void resultsShouldNotContain(String keyword) throws InterruptedException {
+        Thread.sleep(3000);
         List<String> ActualResults = new ArrayList<>();
         for (WebElement result : allCarsPage.Results) {
             ActualResults.add(result.getAttribute("innerText"));
         }
-
-        for (String actualresult : ActualResults) {
-            if (actualresult.contains(keyword)) {
-                System.out.println("TEST FAİLED");
-            } else {
-                System.out.println("TEST PASSED");
+        Thread.sleep(3000);
+        for (String actualResult : ActualResults) {
+          Assert.assertFalse(actualResult.contains(keyword));
             }
         }
-    }
 
     @When("User selects Starts with method")
     public void userSelectsStartsWithMethod() {
@@ -133,17 +127,17 @@ public class DriverFilter_stepdef {
     }
 
     @Then("Results should start with specified {string}")
-    public void resultsShouldStartWithSpecified(String keyword) {
+    public void resultsShouldStartWithSpecified(String keyword) throws InterruptedException {
+        Thread.sleep(3000);
         List<String> ActualResults = new ArrayList<>();
         for (WebElement actualresult : allCarsPage.Results) {
             ActualResults.add(actualresult.getAttribute("innerText"));
+            System.out.println(actualresult);
         }
+        Thread.sleep(3000);
         for (String actualResult : ActualResults) {
-            if (actualResult.startsWith(keyword)) {
-                System.out.println("TEST PASSED");
-            } else {
-                System.out.println("TEST FAİLED");
-            }
+            System.out.println(actualResult);
+            Assert.assertTrue(actualResult.startsWith(keyword));
         }
 
 
@@ -156,17 +150,15 @@ public class DriverFilter_stepdef {
     }
 
     @Then("Results should end with specified {string}")
-    public void resultsShouldEndWithSpecified(String keyword) {
+    public void resultsShouldEndWithSpecified(String keyword) throws InterruptedException {
+        Thread.sleep(3000);
         List<String> ActualResults = new ArrayList<>();
         for (WebElement actualresult : allCarsPage.Results) {
             ActualResults.add(actualresult.getAttribute("innerText"));
         }
+        Thread.sleep(3000);
         for (String actualResult : ActualResults) {
-            if (actualResult.endsWith(keyword)) {
-                System.out.println("TEST PASSED");
-            } else {
-                System.out.println("TEST FAİLED");
-            }
+            Assert.assertTrue(actualResult.endsWith(keyword));
         }
     }
 
@@ -178,17 +170,15 @@ public class DriverFilter_stepdef {
 
 
     @Then("Results should match specified {string}")
-    public void resultsShouldMatchSpecified(String keyword) {
+    public void resultsShouldMatchSpecified(String keyword) throws InterruptedException {
+        Thread.sleep(3000);
         List<String> ActualResults = new ArrayList<>();
         for (WebElement actualresult : allCarsPage.Results) {
             ActualResults.add(actualresult.getAttribute("innerText"));
         }
+        Thread.sleep(3000);
         for (String actualResult : ActualResults) {
-            if (actualResult.equals(keyword)) {
-                System.out.println("TEST PASSED");
-            } else {
-                System.out.println("TEST FAİLED");
-            }
+           Assert.assertEquals(actualResult,keyword);
         }
     }
 
@@ -200,9 +190,10 @@ public class DriverFilter_stepdef {
     }
 
     @Then("Message should be {string}")
-    public void messageShouldBe(String warningmessage) {
+    public void messageShouldBe(String warningmessage) throws InterruptedException {
         allCarsPage.waitUntilLoaderScreenDisappear();
         String ExpectedMessage = warningmessage;
+        Thread.sleep(5000);
         String ActualMessage = allCarsPage.warningMessage.getText();
         Assert.assertEquals(ExpectedMessage, ActualMessage);
 
