@@ -53,6 +53,9 @@ public class AllCarsPage extends BasePage {
     @FindBy(xpath = "//a[@title=\"Reset\"]/i")
     public WebElement refreshButton;
 
+    @FindBy(xpath = "//a[@title='Create Car']")
+    public WebElement createCarLink;
+
 
     public List<String> lastResults(String name,List<String> actualList) {
         Driver.getDriver().findElement(By.xpath("//span[.= '" + name + "']")).click();
@@ -65,12 +68,16 @@ public class AllCarsPage extends BasePage {
         return actualList;
     }
 
-    
-@FindBy(xpath = "//a[@title='Create Car']")
-    public WebElement createCarLink;
+    /*
+    public List<String> initialResults(String name, List<String> expectedList) {
+        List<WebElement> elements = Driver.getDriver().findElements(By.xpath("//td[starts-with(@data-column-label,'" + name + "')]"));
+        for (WebElement element : elements) {
+            expectedList.add(element.getAttribute("innerText"));
+        }
 
-
-
+        return expectedList;
+    }
+     */
 
     public void clickAnyRow() {
         //click any row with actions class
@@ -87,6 +94,7 @@ public class AllCarsPage extends BasePage {
         //			}
         //		}
     }
+
     public void clickFirstCar(){
         BrowserUtils.sleep(5);
         countOfRow.get(0).click();
