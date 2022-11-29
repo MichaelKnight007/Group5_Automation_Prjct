@@ -2,6 +2,7 @@ package com.cydeo.pages;
 
 import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.Driver;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -37,6 +38,26 @@ public class AllCarsPage extends BasePage {
 
     @FindBy(xpath = "//tbody[@class='grid-body']//tr//td[4]")
     public List<WebElement> DriverNames;
+
+
+    @FindBy(xpath = "//div[@class='dropdown']//*[text()='...']")
+    public WebElement threeDot;
+
+    @FindBy(css = "li.launcher-item a[title='Delete']")
+    public WebElement deleteButton;
+
+    @FindBy(xpath = "//h3[text()='Delete Confirmation']")
+    public WebElement deleteConfirmationText;
+
+    @FindBy(css = "div.message")
+    public WebElement message;
+
+    @FindBy(xpath = "//a[.='Yes, Delete']")
+    private WebElement yesDeleteBtn;
+
+    @FindBy(xpath = "//a[@title='Delete Car']")
+    public WebElement deleteCarButton;
+
 
     @FindBy(xpath = "//tr[@class='grid-row row-click-action'][5]")
     public WebElement anyRow;
@@ -94,6 +115,50 @@ public class AllCarsPage extends BasePage {
     }
 
 
+    public void hoveroverthreedots() {
+        BrowserUtils.hoverOverThreeDots(threeDot);
+    }
+
+    public boolean verifyDeleteButton() {
+        BrowserUtils.waitForVisibility(deleteButton, 5);
+        return deleteButton.isDisplayed();
+    }
+
+    public void clickDeleteButton() {
+        BrowserUtils.waitClickability(deleteButton, 5);
+        deleteButton.click();
+    }
+
+    public void verifyDeleteConfirmationPopUp() {
+        Assert.assertTrue(deleteConfirmationText.isDisplayed());
+    }
+
+
+    public void clickYesDelete() {
+        BrowserUtils.waitForVisibility(yesDeleteBtn, 3);
+        yesDeleteBtn.click();
+    }
+
+    public void verifyWarningMessageDriver(String userType, String messageText) {
+        if (userType.equalsIgnoreCase("driver")) {
+            String text = this.message.getText();
+            Assert.assertTrue(message.isDisplayed());
+            Assert.assertEquals(message.getText(), messageText);
+        } else if (userType.equalsIgnoreCase("sales manager") || userType.equalsIgnoreCase("store manager")) {
+            Assert.assertTrue(message.isDisplayed());
+            Assert.assertEquals(message.getText(), messageText);
+        }
+    }
+
+    public String getDriverName() {
+        return countOfRow.get(0).getText();
+
+    }
+
+    public void clickDeleteInfo() {
+        BrowserUtils.waitForVisibility(deleteCarButton, 5);
+        deleteCarButton.click();
+    }
 
 }
 
