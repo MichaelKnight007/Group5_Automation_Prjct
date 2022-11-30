@@ -43,7 +43,7 @@ Feature: Create Car Function
     And User goes to Create Car page
     Then User cannot create a car without filling compulsory fields
 
-  # @wip5
+   @wip5
   Scenario:
     When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module

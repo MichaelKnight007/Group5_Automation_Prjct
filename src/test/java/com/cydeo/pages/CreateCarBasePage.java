@@ -158,7 +158,7 @@ public class CreateCarBasePage {
         createCarBasePage.saveAndCloseBtn.click();
     }
 
-    public static List<String> licencePlateFieldCheck() {
+    public List<String> licencePlateFieldCheck() {
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
 
         List<String> licencePlateFieldList = new ArrayList<>();
