@@ -41,10 +41,17 @@ public class BrowserUtils {
         try {
             Driver.getDriver().findElement(locator).click();
         } catch (Exception e) {
-            e.printStackTrace();
-            BrowserUtils.sleep(1);
-            Driver.getDriver().findElement(locator).click();
+            try {
+                e.printStackTrace();
+                BrowserUtils.sleep(1);
+                Driver.getDriver().findElement(locator).click();
+            } catch (Exception exception) {
+                e.printStackTrace();
+                BrowserUtils.sleep(1);
+                Driver.getDriver().findElement(locator).click();
+            }
         }
+
     }
 
     public static void clickWithTryCatch(WebElement element){
