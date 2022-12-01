@@ -43,12 +43,19 @@ Feature: Create Car Function
     And User goes to Create Car page
     Then User cannot create a car without filling compulsory fields
 
-  @wip5
+ # @wip5
   Scenario: User enters unvalid data to the compulsory fields
     When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
     And User goes to Create Car page
     Then User enters Compulsory fields without complying with the conditions
+
+  @wip5
+  Scenario: User enters unvalid data to the Optinal fields
+    When User logs in as a "Sales Manager"
+    And User goes to "Fleet" module and "Vehicles" sub-module
+    And User goes to Create Car page
+    Then User enters Optional fields without complying with the conditions
 
  # @wip5
   Scenario: User selects ‘Vehicle Model’ and ‘Vehicle Make’ from the list

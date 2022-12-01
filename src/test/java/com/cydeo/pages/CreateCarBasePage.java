@@ -161,6 +161,37 @@ public class CreateCarBasePage {
     @FindBy(xpath = "(//div[@class='controls']/div)[7]")
     public WebElement controlsLastOdometer;
 
+    @FindBy(xpath = "(//div[@class='controls']/div)[4]")
+    public WebElement controlsLocation;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[10]")
+    public WebElement controlsCatalogValue;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[11]")
+    public WebElement controlsSeatNumber;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[12]")
+    public WebElement controlsDoorNumber;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[13]")
+    public WebElement controlsColor;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[16]")
+    public WebElement controlsCO_2_Emisson;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[17]")
+    public WebElement controlsHorsePower;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[18]")
+    public WebElement controlsHorsePowerTaxation;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[19]")
+    public WebElement controlsPower;
+
+
+
+
+
 
     public void clickCreateCarBtn() {
 
@@ -210,10 +241,10 @@ public class CreateCarBasePage {
         createCarBasePage.saveAndCloseBtn.click();
     }
 
-    public List<String> licencePlateFieldCheck() {
+    public List<String> compulsoryFieldsCheck() {
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
 
-        List<String> licencePlateFieldList = new ArrayList<>();
+        List<String> compulsoryFieldCheckList = new ArrayList<>();
 
         String textLicensePlateField = "!!45/*DR 805";
         String textDriverField = "Ahmet!'!4646";
@@ -238,26 +269,39 @@ public class CreateCarBasePage {
         String actualTextOfLastOdometerField = createCarBasePage.controlsLastOdometer.getText();
 
 
-        licencePlateFieldList.add(textLicensePlateField);//expected index 0
-        licencePlateFieldList.add(actualTextOfLicencePlateField);//Actual index 1
+        compulsoryFieldCheckList.add(textLicensePlateField);//expected index 0
+        compulsoryFieldCheckList.add(actualTextOfLicencePlateField);//Actual index 1
 
-        licencePlateFieldList.add(textDriverField);//expected index 2
-        licencePlateFieldList.add(actualTextOfDrivetField);//Actual index 3
+        compulsoryFieldCheckList.add(textDriverField);//expected index 2
+        compulsoryFieldCheckList.add(actualTextOfDrivetField);//Actual index 3
 
-        licencePlateFieldList.add(textChassisNumberField);//expected index 4
-        licencePlateFieldList.add(actualTextOfChasisNumberField);//Actual index 5
+        compulsoryFieldCheckList.add(textChassisNumberField);//expected index 4
+        compulsoryFieldCheckList.add(actualTextOfChasisNumberField);//Actual index 5
 
-        licencePlateFieldList.add(textModelYearField);//expected index 6
-        licencePlateFieldList.add(actualTextOfModelYearField);//Actual index 7
+        compulsoryFieldCheckList.add(textModelYearField);//expected index 6
+        compulsoryFieldCheckList.add(actualTextOfModelYearField);//Actual index 7
 
-        licencePlateFieldList.add(textLastOdometerField);//expected index 8
-        licencePlateFieldList.add(actualTextOfLastOdometerField);//Actual index 9
+        compulsoryFieldCheckList.add(textLastOdometerField);//expected index 8
+        compulsoryFieldCheckList.add(actualTextOfLastOdometerField);//Actual index 9
 
-
-
-        return licencePlateFieldList;
+        return compulsoryFieldCheckList;
     }
 
+
+    public List<String> optionalFieldsCheck() {
+        CreateCarBasePage createCarBasePage = new CreateCarBasePage();
+
+        List<String> optionlaFieldCheckList = new ArrayList<>();
+
+        String textLocationField = "!!05/*DR/*-785";
+        String textCatalogValue = "Mehmet!'!7896";
+        String textSeatNumber = "446ASDFG!'^+";
+        String textModelYearField = "145265!'^+%asdf";
+        String textLastOdometerField = "646fghj/&%";
+
+
+        return optionlaFieldCheckList;
+    }
     public static List<String> driverFieldCheck() {
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
 

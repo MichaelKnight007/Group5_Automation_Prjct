@@ -66,7 +66,7 @@ public class CreateCar_StepDef {
     public void userEntersCompulsoryFieldsWithoutComplyingWithTheConditions() {
 
         // LicencePlateField Assertion
-        List<String> textOfLicencePlateFieldList = createCarBasePage.licencePlateFieldCheck();
+        List<String> textOfLicencePlateFieldList = createCarBasePage.compulsoryFieldsCheck();
         Assert.assertEquals(textOfLicencePlateFieldList.get(0), textOfLicencePlateFieldList.get(1));
 
         // DriverField Assertion
