@@ -1,6 +1,7 @@
 package com.cydeo.step_definitions;
 
 import com.cydeo.pages.AllCarsPage;
+import com.cydeo.pages.BasePage;
 import com.cydeo.pages.Dash_Board_Page;
 import com.cydeo.pages.Login_Page;
 import com.cydeo.utilities.BrowserUtils;
@@ -14,9 +15,9 @@ import java.util.List;
 
 public class LastOdometerFilter_StepDef {
 
-    Login_Page loginPage = new Login_Page();
-    Dash_Board_Page dashboardPage = new Dash_Board_Page();
-    AllCarsPage allCarsPage = new AllCarsPage();
+    public Login_Page loginPage = new Login_Page();
+    public Dash_Board_Page dashboardPage = new Dash_Board_Page();
+    public AllCarsPage allCarsPage = new AllCarsPage();
 
 
     // Background:
@@ -33,6 +34,7 @@ public class LastOdometerFilter_StepDef {
 
     @Given("user is on the D- {string} page")
     public void user_is_on_the_dashboard_page(String page) {
+        BrowserUtils.waitforInvisibilityOf(dashboardPage.progressBar);
         Assert.assertEquals(page, Driver.getDriver().getTitle());
     }
 
@@ -55,7 +57,7 @@ public class LastOdometerFilter_StepDef {
 
     @Given("user click on the Manage Filters button")
     public void user_click_on_the_manage_filters_button() {
-        allCarsPage.manageFilterDropdown.click();
+        allCarsPage.ManageFilterButton.click();
     }
 
     @Given("user enter {string} in the input")
@@ -73,8 +75,9 @@ public class LastOdometerFilter_StepDef {
         allCarsPage.lastOdometerDropdownButton.click();
     }
 
-    @Given("user click the dropdown")
-    public void user_click_the_dropdown() {
+    @Given("user click the methods dropdown")
+    public void user_click_the_methods_dropdown() {
+        BrowserUtils.waitforInvisibilityOf(dashboardPage.loaderMask);
         allCarsPage.lastOdometerFilterDropdownButton.click();
     }
 
@@ -83,8 +86,7 @@ public class LastOdometerFilter_StepDef {
 
     @Then("Last Odometer filter should have methods below")
     public void filter_should_have_methods_below(List<String> expectedMethods) {
-        List<String> actualMethods = BrowserUtils.dropdownOptionsAsString(allCarsPage.lastOdometerFilterDropdownButton);
-        Assert.assertEquals(expectedMethods, actualMethods);
+        Assert.assertEquals(expectedMethods, allCarsPage.actualDropdownMethods());
     }
 
 

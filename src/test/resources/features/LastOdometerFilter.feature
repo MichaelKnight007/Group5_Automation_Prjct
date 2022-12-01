@@ -1,6 +1,6 @@
 #TRAD-986 - Test Execution ID
 
-@odo
+
 Feature: TRAD-901
 
   US: Last Odometer Filter (Aybars)
@@ -16,11 +16,11 @@ Feature: TRAD-901
     And user enter "last odometer" in the input
     And user click last odometer checkbox
     And user click on the last odometer dropbox
-    And user click the dropdown
+    And user click the methods dropdown
 
 
   #AC-1:
-
+  @odo
   Scenario: Last Odometer filter has the methods below
     Then Last Odometer filter should have methods below
       | Between             |

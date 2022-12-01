@@ -69,12 +69,11 @@ public class AllCarsPage extends BasePage {
     public WebElement lastOdometerCheckbox;
     @FindBy(xpath = "//span[@class='filter-items']")
     public WebElement lastOdometerDropdownButton;
-    @FindBy(xpath = "//div[@class='btn-group btn-block open']//button")
+    @FindBy(xpath = "//div[@class='btn-group btn-block']//button")
     public WebElement lastOdometerFilterDropdownButton;
-    @FindBy(xpath = "//div[@class='btn-group btn-block open']//ul")
+
+    @FindBy(xpath = "//div[@class='choice-filter number-range-filter']//ul[@class='dropdown-menu']")
     public WebElement lastOdometerFilterDropdownItems;
-
-
 
     public List<String> lastResults(String name,List<String> actualList) {
         Driver.getDriver().findElement(By.xpath("//span[.= '" + name + "']")).click();
@@ -120,7 +119,6 @@ public class AllCarsPage extends BasePage {
         BrowserUtils.sleep(3);
     }
 
-
     public void hoveroverthreedots() {
         BrowserUtils.hoverOverThreeDots(threeDot);
     }
@@ -138,7 +136,6 @@ public class AllCarsPage extends BasePage {
     public void verifyDeleteConfirmationPopUp() {
         Assert.assertTrue(deleteConfirmationText.isDisplayed());
     }
-
 
     public void clickYesDelete() {
         BrowserUtils.waitForVisibility(yesDeleteBtn, 3);
@@ -158,13 +155,26 @@ public class AllCarsPage extends BasePage {
 
     public String getDriverName() {
         return countOfRow.get(0).getText();
-
     }
 
     public void clickDeleteInfo() {
         BrowserUtils.waitForVisibility(deleteCarButton, 5);
         deleteCarButton.click();
     }
+
+    public List<String> actualDropdownMethods(){
+
+        List<String> dropdownMethods = new ArrayList<>();
+
+        for (int i = 1; i < 11; i++) {
+            WebElement dropdownItem = Driver.getDriver().findElement(By.xpath("(//a[@class='dropdown-item choice-value'])["+i+"]"));
+            dropdownMethods.add(dropdownItem.getText());
+        }
+
+        return dropdownMethods;
+
+    }
+
 
 
 

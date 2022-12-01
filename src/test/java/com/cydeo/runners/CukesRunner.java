@@ -16,9 +16,21 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "com/cydeo/step_definitions",
         dryRun = false,
-        tags = "@wip"
+        tags = "@odo"
         //mvn test -Dcucumber.filter.tags="@smoke" to run from "run anything" option
 )
 
 
 public class CukesRunner { }
+
+
+
+
+
+
+
+
+
+
+
+
