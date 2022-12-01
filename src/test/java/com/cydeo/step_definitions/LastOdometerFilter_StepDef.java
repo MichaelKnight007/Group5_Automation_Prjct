@@ -1,66 +1,80 @@
 package com.cydeo.step_definitions;
 
+import com.cydeo.pages.AllCarsPage;
+import com.cydeo.pages.Dash_Board_Page;
+import com.cydeo.pages.Login_Page;
+import com.cydeo.utilities.Driver;
+import com.sun.jna.win32.DLLCallback;
+import io.cucumber.java.bs.A;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 
 public class LastOdometerFilter_StepDef {
 
-
+    Login_Page loginPage = new Login_Page();
+    Dash_Board_Page dashboardPage = new Dash_Board_Page();
+    AllCarsPage allCarsPage = new AllCarsPage();
 
 
     // Background:
 
-    @Given("user logged in as {string}")
-    public void user_logged_in_as_a_salesmanager101(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
-    @Given("user is on the dashboard page")
-    public void user_is_on_the_dashboard_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
-    @Given("user select vehicles under the fleet menu")
-    public void user_select_vehicles_under_the_fleet_menu() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Given("user is on the login page")
+    public void user_is_on_the_login_page() {
+        loginPage.goLoginPage();
     }
 
-    @Given("user is on the vehicles page")
-    public void user_is_on_the_vehicle_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Given("user logged in as {string}")
+    public void user_logged_in_as_a_salesmanager101(String userType) {
+        loginPage.loginAsUserType(userType);
     }
+
+    @Given("user is on the D- {string} page")
+    public void user_is_on_the_dashboard_page(String page) {
+        Assert.assertEquals(page, Driver.getDriver().getTitle());
+    }
+
+    @Given("user select vehicles under the fleet menu")
+    public void user_select_vehicles_under_the_fleet_menu() {
+        dashboardPage.fleetDropdownBtn.click();
+        dashboardPage.vehiclesLink.click();
+    }
+
+    @Given("user is on the {string} page")
+    public void user_is_on_the_vehicle_page(String page) {
+//      Assert.assertEquals(page, allCarsPage.allCarsTitle.getText());
+    }
+
     @Given("user click on the filter button")
     public void user_click_on_the_filter_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        allCarsPage.FiltersButton.click();
     }
+
     @Given("user click on the Manage Filters button")
     public void user_click_on_the_manage_filters_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        allCarsPage.manageFilterDropdown.click();
     }
-    @Given("user type {string} in the input")
+
+    @Given("user enter {string} in the input")
     public void user_type_in_the_input(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+//      allCarsPage.manageFiltersSearchInputBox.sendKeys(string);
     }
+
     @Given("user click last odometer checkbox")
     public void user_click_last_odometer_checkbox() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+//     allCarsPage.lastOdometerCheckbox.click();
     }
+
     @Given("user click on the last odometer dropbox")
     public void user_click_on_the_last_odometer_dropbox() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+//     allCarsPage.lastOdometerDropdownButton.click();
     }
+
     @Given("user click the dropdown")
     public void user_click_the_dropdown() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+//     allCarsPage.lastOdometerFilterDropdownItems.click();
     }
 
 
@@ -68,8 +82,8 @@ public class LastOdometerFilter_StepDef {
 
     @Then("filter should have methods below")
     public void filter_should_have_methods_below() {
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+
+
     }
 
 
