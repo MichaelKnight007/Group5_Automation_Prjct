@@ -2,8 +2,10 @@ package com.cydeo.pages;
 
 import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.Driver;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -139,6 +141,7 @@ public class AllCarsPage extends BasePage {
             e.printStackTrace();
         }
 
+    }
 
     public void hoveroverthreedots() {
         BrowserUtils.hoverOverThreeDots(threeDot);
@@ -185,11 +188,6 @@ public class AllCarsPage extends BasePage {
         deleteCarButton.click();
     }
 
-}
-
-    public void hoveroverthreedots() {
-        BrowserUtils.hoverOverThreeDots(threeDot);
-    }
 
     public void clickonviewicon() {
         viewButton.click();

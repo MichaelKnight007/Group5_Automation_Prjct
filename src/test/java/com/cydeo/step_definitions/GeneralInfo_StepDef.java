@@ -29,10 +29,6 @@ public class GeneralInfo_StepDef {
         Assert.assertEquals("General Information", generalInfoPage.GeneralInfoTitle.getText());
 
     }
-    @Then("User hover over the three dots at the end of each row")
-    public void user_hover_over_the_three_dots_at_the_end_of_each_row() {
-        allCarsPage.hoveroverthreedots();
-    }
 
     @And("user clicks on Eye \\(View) icon")
     public void userClicksOnEyeViewIcon() {
