@@ -5,7 +5,10 @@ import com.cydeo.utilities.Driver;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,26 @@ public class AllCarsPage extends BasePage {
     @FindBy(xpath = "//tbody[@class='grid-body']//tr//td[4]")
     public List<WebElement> DriverNames;
 
+
+    @FindBy(xpath = "//div[@class='dropdown']//*[text()='...']")
+    public WebElement threeDot;
+
+    @FindBy(css = "li.launcher-item a[title='Delete']")
+    public WebElement deleteButton;
+
+    @FindBy(xpath = "//h3[text()='Delete Confirmation']")
+    public WebElement deleteConfirmationText;
+
+    @FindBy(css = "div.message")
+    public WebElement message;
+
+    @FindBy(xpath = "//a[.='Yes, Delete']")
+    private WebElement yesDeleteBtn;
+
+    @FindBy(xpath = "//a[@title='Delete Car']")
+    public WebElement deleteCarButton;
+
+
     @FindBy(xpath = "//tr[@class='grid-row row-click-action'][5]")
     public WebElement anyRow;
 
@@ -52,14 +75,26 @@ public class AllCarsPage extends BasePage {
     @FindBy(xpath = "//a[@title=\"Reset\"]/i")
     public WebElement refreshButton;
 
+
     @FindBy(xpath = "//a[@title='Grid Settings']")
     public WebElement gridSettings;
 
     @FindBy(xpath = "//div[.='Grid Settings']")
     public WebElement gridSettingsTitle;
 
+    @FindBy(css = "li.launcher-item a[title='View']")
+    public WebElement viewButton;
+
+
+    @FindBy(xpath = "//a[@title='Create Car']")
+    public WebElement createCarLink;
+
+
+
+
     public List<String> lastResults(String name,List<String> actualList) {
         Driver.getDriver().findElement(By.xpath("//span[.= '" + name + "']")).click();
+             waitUntilLoaderScreenDisappear();
         BrowserUtils.sleep(1);
         List<WebElement> elements= Driver.getDriver().findElements((By.xpath("//td[starts-with(@data-column-label,'" + name + "')]")));
         for (WebElement element : elements) {
@@ -67,19 +102,18 @@ public class AllCarsPage extends BasePage {
         }
         return actualList;
     }
-    
-@FindBy(xpath = "//a[@title='Create Car']")
-    public WebElement createCarLink;
 
+    /*
     public List<String> initialResults(String name, List<String> expectedList) {
         List<WebElement> elements = Driver.getDriver().findElements(By.xpath("//td[starts-with(@data-column-label,'" + name + "')]"));
         for (WebElement element : elements) {
             expectedList.add(element.getAttribute("innerText"));
         }
 
+
         return expectedList;
     }
-
+     */
 
     public void clickAnyRow() {
         //click any row with actions class
@@ -96,17 +130,20 @@ public class AllCarsPage extends BasePage {
         //			}
         //		}
     }
-    public void clickFirstCar(){
-        BrowserUtils.sleep(5);
-        countOfRow.get(0).click();
-        BrowserUtils.sleep(3);
+
+    public void clickFirstCar() {
+        waitUntilLoaderScreenDisappear();
+        countOfRow.get(4).click();
     }
 
+    public static void hoverOverThreeDots(WebElement threeDots) {
+        Actions actions = new Actions(Driver.getDriver());
 
     public void clickGridSettings() {
         BrowserUtils.waitClickability(gridSettings, 5);
         gridSettings.click();
     }
+
 
     public void verifyGridSettingsMenuDisplayed() {
         BrowserUtils.waitClickability(gridSettingsTitle, 5);
@@ -114,3 +151,67 @@ public class AllCarsPage extends BasePage {
     }
 }
 
+        try {
+            for (int i = 0; i < 2; i++) {
+                actions.moveToElement(threeDots).pause(1000).build().perform();
+                BrowserUtils.sleep(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void hoveroverthreedots() {
+        BrowserUtils.hoverOverThreeDots(threeDot);
+    }
+
+    public boolean verifyDeleteButton() {
+        BrowserUtils.waitForVisibility(deleteButton, 5);
+        return deleteButton.isDisplayed();
+    }
+
+    public void clickDeleteButton() {
+        BrowserUtils.waitClickability(deleteButton, 5);
+        deleteButton.click();
+    }
+
+    public void verifyDeleteConfirmationPopUp() {
+        Assert.assertTrue(deleteConfirmationText.isDisplayed());
+    }
+
+
+    public void clickYesDelete() {
+        BrowserUtils.waitForVisibility(yesDeleteBtn, 3);
+        yesDeleteBtn.click();
+    }
+
+
+    public void verifyWarningMessageDriver(String userType, String messageText) {
+        if (userType.equalsIgnoreCase("driver")) {
+            String text = this.message.getText();
+            Assert.assertTrue(message.isDisplayed());
+            Assert.assertEquals(message.getText(), messageText);
+        } else if (userType.equalsIgnoreCase("sales manager") || userType.equalsIgnoreCase("store manager")) {
+            Assert.assertTrue(message.isDisplayed());
+            Assert.assertEquals(message.getText(), messageText);
+        }
+    }
+
+    public String getDriverName() {
+        return countOfRow.get(0).getText();
+
+    }
+
+    public void clickDeleteInfo() {
+        BrowserUtils.waitForVisibility(deleteCarButton, 5);
+        deleteCarButton.click();
+    }
+
+
+    public void clickonviewicon() {
+        viewButton.click();
+    }
+
+
+}

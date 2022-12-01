@@ -41,10 +41,17 @@ public class BrowserUtils {
         try {
             Driver.getDriver().findElement(locator).click();
         } catch (Exception e) {
-            e.printStackTrace();
-            BrowserUtils.sleep(1);
-            Driver.getDriver().findElement(locator).click();
+            try {
+                e.printStackTrace();
+                BrowserUtils.sleep(1);
+                Driver.getDriver().findElement(locator).click();
+            } catch (Exception exception) {
+                e.printStackTrace();
+                BrowserUtils.sleep(1);
+                Driver.getDriver().findElement(locator).click();
+            }
         }
+
     }
 
     public static void clickWithTryCatch(WebElement element){
@@ -242,6 +249,21 @@ Method info:
         ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
     }
 
+
+    public static void hoverOverThreeDots(WebElement threeDots) {
+        Actions actions = new Actions(Driver.getDriver());
+
+
+        try {
+            for (int i = 0; i < 2; i++) {
+                actions.moveToElement(threeDots).pause(1000).build().perform();
+                BrowserUtils.sleep(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void waitForVisibility(WebElement element, int timeOut) {
         try {
             WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeOut);
@@ -251,8 +273,25 @@ Method info:
         }
     }
 
+
     public static void sendKeysWithWait(WebElement field, String text, int timeOut){
         waitClickability(field,timeOut);
         field.sendKeys(text);
     }
+
+    /**
+     * return a list of string from a list of elements
+     *
+     * @param list of webelements
+     * @return list of string
+     */
+    public static List<String> getElementsText(List<WebElement> list) {
+        List<String> elemTexts = new ArrayList<>();
+        for (WebElement el : list) {
+            elemTexts.add(el.getText());
+        }
+        return elemTexts;
+    }
+
+
 }

@@ -21,8 +21,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class VehicleTableArrangements_StepDef {
-List<String> expectedList=new ArrayList<>();
-List<String> actualList=new ArrayList<>();
+    List<String> expectedList = new ArrayList<>();
+    List<String> actualList = new ArrayList<>();
 
     AllCarsPage allCarsPage = new AllCarsPage();
 
@@ -41,7 +41,7 @@ List<String> actualList=new ArrayList<>();
 
     @Then("Verify that {int} on the page is same with the number user clicks")
     public void verifyThatActualNumberOnThePageIsSameWithTheNumberUserClicks(int actual) {
-        Assert.assertEquals( allCarsPage.countOfRow.size(), actual);
+        Assert.assertEquals(allCarsPage.countOfRow.size(), actual);
     }
 
     @Then("User should see {int} on the View Per Page dropdown button by default")
@@ -77,23 +77,28 @@ List<String> actualList=new ArrayList<>();
 
     @Then("Verify that sorts and filters are removed")
     public void verifyThatSortsAndFiltersAreRemoved() {
-        Assert.assertEquals(25,allCarsPage.countOfRow.size());
+        Assert.assertEquals(25, allCarsPage.countOfRow.size());
     }
 
 
     @When("user clicks any   {string}")
     public void userClicksAny(String names) {
-        allCarsPage.initialResults(names,expectedList);
-        Collections.sort(expectedList);
-        allCarsPage.lastResults(names,actualList);
+ 
+   allCarsPage.lastResults(names,actualList);
+ Collections.sort(actualList);
+ expectedList=actualList;
+
+      
+
 
     }
 
     @Then("Verify that user sees columnName as sorted in ascending or descending order")
-    public void verifyThatUserSeesAsSortedInAscendingOrDescendingOrder( ) {
-        System.out.println("expectedList = " + expectedList);
-        System.out.println("actualList = " + actualList);
-        Assert.assertEquals(expectedList,actualList);
+
+    public void verifyThatUserSeesAsSortedInAscendingOrDescendingOrder() {
+        Assert.assertEquals(expectedList, actualList);
+
+
 
     }
 }

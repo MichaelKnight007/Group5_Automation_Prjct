@@ -4,25 +4,16 @@ Feature:Add Event 2 ( with cucumber - Yasar)
   User Story:
   As a Store Manager and Sales Manager, I should be able to add an event
 
-  @yasarBack
-  Background:User is expected to be on the 'Vehicles' page
+  Background: For the scenarios in the feature file, user is expected to be on the 'Vehicles' page.
     Given User is on the login page
-  @yasarLogin
-  Scenario Outline: Login as a <userType>
-    When User logs in as a "<userType>"
-    Then Verify that the user is on "<pageSubTitle>" page
-
-    Examples:
-      | userType      | pageSubTitle    |
-      | Store Manager | Dashboard       |
-      | Sales Manager | Dashboard       |
+    When User logs in as a "Store Manager"
+    And User goes to "Fleet" module and "Vehicles" sub-module
+    Then Verify that the user is on "All Cars" module
 
   @yasarAC1
   Scenario:User can access the "Add Event" page from the "General Information" page
   (by clicking on any vehicle/row under Fleet-Vehicle module)
-    When User hover over Fleet menu
-    And User clicks Vehicles under Fleet menu
-    And User clicks any Vehicle Row under All Cars menu
+    When User clicks any Vehicle Row under All Cars menu
     Then Verify that the user is on General Information page
 
   @yasarAC2
