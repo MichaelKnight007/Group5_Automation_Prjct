@@ -5,6 +5,7 @@ import com.cydeo.utilities.Driver;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -74,8 +75,13 @@ public class AllCarsPage extends BasePage {
     @FindBy(xpath = "//a[@title=\"Reset\"]/i")
     public WebElement refreshButton;
 
+    @FindBy(css = "li.launcher-item a[title='View']")
+    public WebElement viewButton;
+
+
     @FindBy(xpath = "//a[@title='Create Car']")
     public WebElement createCarLink;
+
 
 
     public List<String> lastResults(String name,List<String> actualList) {
@@ -95,6 +101,7 @@ public class AllCarsPage extends BasePage {
         for (WebElement element : elements) {
             expectedList.add(element.getAttribute("innerText"));
         }
+
 
         return expectedList;
     }
@@ -116,12 +123,25 @@ public class AllCarsPage extends BasePage {
         //		}
     }
 
-    public void clickFirstCar(){
-        BrowserUtils.sleep(5);
-        countOfRow.get(0).click();
-        BrowserUtils.sleep(3);
+    public void clickFirstCar() {
+        waitUntilLoaderScreenDisappear();
+        countOfRow.get(4).click();
     }
 
+    public static void hoverOverThreeDots(WebElement threeDots) {
+        Actions actions = new Actions(Driver.getDriver());
+
+
+        try {
+            for (int i = 0; i < 2; i++) {
+                actions.moveToElement(threeDots).pause(1000).build().perform();
+                BrowserUtils.sleep(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public void hoveroverthreedots() {
         BrowserUtils.hoverOverThreeDots(threeDot);
@@ -168,5 +188,10 @@ public class AllCarsPage extends BasePage {
         deleteCarButton.click();
     }
 
-}
 
+    public void clickonviewicon() {
+        viewButton.click();
+    }
+
+
+}
