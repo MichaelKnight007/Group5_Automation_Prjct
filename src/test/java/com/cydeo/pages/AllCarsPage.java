@@ -139,6 +139,7 @@ public class AllCarsPage extends BasePage {
     public static void hoverOverThreeDots(WebElement threeDots) {
         Actions actions = new Actions(Driver.getDriver());
 
+    }
     public void clickGridSettings() {
         BrowserUtils.waitClickability(gridSettings, 5);
         gridSettings.click();
@@ -149,18 +150,7 @@ public class AllCarsPage extends BasePage {
         BrowserUtils.waitClickability(gridSettingsTitle, 5);
         Assert.assertTrue(gridSettingsTitle.isDisplayed());
     }
-}
 
-        try {
-            for (int i = 0; i < 2; i++) {
-                actions.moveToElement(threeDots).pause(1000).build().perform();
-                BrowserUtils.sleep(1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public void hoveroverthreedots() {
         BrowserUtils.hoverOverThreeDots(threeDot);
