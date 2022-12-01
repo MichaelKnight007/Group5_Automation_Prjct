@@ -10,6 +10,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
+import java.util.List;
+
 public class LastOdometerFilter_StepDef {
 
     Login_Page loginPage = new Login_Page();
@@ -73,16 +75,16 @@ public class LastOdometerFilter_StepDef {
 
     @Given("user click the dropdown")
     public void user_click_the_dropdown() {
-        allCarsPage.lastOdometerFilterDropdownItems.click();
+        allCarsPage.lastOdometerFilterDropdownButton.click();
     }
 
 
     // #AC-1:
 
-    @Then("filter should have methods below")
-    public void filter_should_have_methods_below() {
-
-
+    @Then("Last Odometer filter should have methods below")
+    public void filter_should_have_methods_below(List<String> expectedMethods) {
+        List<String> actualMethods = BrowserUtils.dropdownOptionsAsString(allCarsPage.lastOdometerFilterDropdownButton);
+        Assert.assertEquals(expectedMethods, actualMethods);
     }
 
 
@@ -91,8 +93,8 @@ public class LastOdometerFilter_StepDef {
 
     @When("user select between method")
     public void user_select_between_method() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+
     }
     @When("user enter numeric values {string} and {string}")
     public void user_enter_numeric_values_and(String string, String string2) {

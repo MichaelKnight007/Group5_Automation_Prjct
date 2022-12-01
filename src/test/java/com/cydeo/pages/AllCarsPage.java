@@ -70,7 +70,10 @@ public class AllCarsPage extends BasePage {
     @FindBy(xpath = "//span[@class='filter-items']")
     public WebElement lastOdometerDropdownButton;
     @FindBy(xpath = "//div[@class='btn-group btn-block open']//button")
+    public WebElement lastOdometerFilterDropdownButton;
+    @FindBy(xpath = "//div[@class='btn-group btn-block open']//ul")
     public WebElement lastOdometerFilterDropdownItems;
+
 
 
     public List<String> lastResults(String name,List<String> actualList) {
@@ -162,6 +165,10 @@ public class AllCarsPage extends BasePage {
         BrowserUtils.waitForVisibility(deleteCarButton, 5);
         deleteCarButton.click();
     }
+
+
+
+
 
 }
 

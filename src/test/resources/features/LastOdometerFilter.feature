@@ -21,8 +21,8 @@ Feature: TRAD-901
 
   #AC-1:
 
-  Scenario: "Last Odometer" filter has the methods below
-    Then filter should have methods below
+  Scenario: Last Odometer filter has the methods below
+    Then Last Odometer filter should have methods below
       | Between             |
       | Not Between         |
       | Equals              |
