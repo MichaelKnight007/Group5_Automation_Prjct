@@ -6,9 +6,8 @@ Feature:Add Event 2 ( with cucumber - Yasar)
 
   Background: For the scenarios in the feature file, user is expected to be on the 'Vehicles' page.
     Given User is on the login page
-    When User logs in as a "Store Manager"
+    When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
-    Then Verify that the user is on "All Cars" module
 
   @yasarAC1
   Scenario:User can access the "Add Event" page from the "General Information" page

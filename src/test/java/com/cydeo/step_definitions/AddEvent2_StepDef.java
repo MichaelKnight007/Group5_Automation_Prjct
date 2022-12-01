@@ -23,8 +23,8 @@ public class AddEvent2_StepDef {
 
     @And("User clicks any Vehicle Row under All Cars menu")
     public void userClicksAnyVehicleRowUnderAllCarsMenu() {
-        BrowserUtils.sleep(5);
-        allCarsPage.anyRow.click();
+        allCarsPage.waitUntilLoaderScreenDisappear();
+        allCarsPage.clickFirstCar();
     }
     @Then("Verify that the user is on General Information page")
     public void verifyThatTheUserIsOnGeneralInformationPage() {
