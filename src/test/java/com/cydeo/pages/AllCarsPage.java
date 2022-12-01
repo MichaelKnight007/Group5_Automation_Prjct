@@ -75,12 +75,20 @@ public class AllCarsPage extends BasePage {
     @FindBy(xpath = "//a[@title=\"Reset\"]/i")
     public WebElement refreshButton;
 
+
+    @FindBy(xpath = "//a[@title='Grid Settings']")
+    public WebElement gridSettings;
+
+    @FindBy(xpath = "//div[.='Grid Settings']")
+    public WebElement gridSettingsTitle;
+
     @FindBy(css = "li.launcher-item a[title='View']")
     public WebElement viewButton;
 
 
     @FindBy(xpath = "//a[@title='Create Car']")
     public WebElement createCarLink;
+
 
 
 
@@ -131,6 +139,17 @@ public class AllCarsPage extends BasePage {
     public static void hoverOverThreeDots(WebElement threeDots) {
         Actions actions = new Actions(Driver.getDriver());
 
+    public void clickGridSettings() {
+        BrowserUtils.waitClickability(gridSettings, 5);
+        gridSettings.click();
+    }
+
+
+    public void verifyGridSettingsMenuDisplayed() {
+        BrowserUtils.waitClickability(gridSettingsTitle, 5);
+        Assert.assertTrue(gridSettingsTitle.isDisplayed());
+    }
+}
 
         try {
             for (int i = 0; i < 2; i++) {
@@ -166,6 +185,7 @@ public class AllCarsPage extends BasePage {
         BrowserUtils.waitForVisibility(yesDeleteBtn, 3);
         yesDeleteBtn.click();
     }
+
 
     public void verifyWarningMessageDriver(String userType, String messageText) {
         if (userType.equalsIgnoreCase("driver")) {

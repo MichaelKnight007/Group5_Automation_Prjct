@@ -249,6 +249,7 @@ Method info:
         ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
     }
 
+
     public static void hoverOverThreeDots(WebElement threeDots) {
         Actions actions = new Actions(Driver.getDriver());
 
@@ -262,6 +263,7 @@ Method info:
             e.printStackTrace();
         }
     }
+
     public static void waitForVisibility(WebElement element, int timeOut) {
         try {
             WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeOut);
@@ -270,6 +272,13 @@ Method info:
             e.printStackTrace();
         }
     }
+
+
+    public static void sendKeysWithWait(WebElement field, String text, int timeOut){
+        waitClickability(field,timeOut);
+        field.sendKeys(text);
+    }
+
     /**
      * return a list of string from a list of elements
      *
@@ -283,5 +292,6 @@ Method info:
         }
         return elemTexts;
     }
+
 
 }
