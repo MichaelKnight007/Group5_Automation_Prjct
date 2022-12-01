@@ -3,6 +3,7 @@ package com.cydeo.step_definitions;
 import com.cydeo.pages.AllCarsPage;
 import com.cydeo.pages.Dash_Board_Page;
 import com.cydeo.pages.Login_Page;
+import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -41,7 +42,7 @@ public class LastOdometerFilter_StepDef {
 
     @Given("user is on the {string} page")
     public void user_is_on_the_vehicle_page(String page) {
-
+        BrowserUtils.waitforInvisibilityOf(dashboardPage.loaderMask);
         Assert.assertEquals(page, allCarsPage.allCarsTitle.getText());
     }
 

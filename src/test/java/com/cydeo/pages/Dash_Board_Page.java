@@ -24,6 +24,9 @@ public class Dash_Board_Page extends BasePage{
     @FindBy (xpath = "//span[.='Vehicles']")
     public WebElement vehiclesLink;
 
+    @FindBy(xpath = "//body/div[4]")
+    public WebElement loaderMask;
+
 
 }
 
