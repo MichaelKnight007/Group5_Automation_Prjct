@@ -44,7 +44,8 @@ public class LastOdometerFilter_StepDef {
 
     @Given("user is on the {string} page")
     public void user_is_on_the_vehicle_page(String page) {
-//      Assert.assertEquals(page, allCarsPage.allCarsTitle.getText());
+
+        Assert.assertEquals(page, allCarsPage.allCarsTitle.getText());
     }
 
     @Given("user click on the filter button")
@@ -59,22 +60,22 @@ public class LastOdometerFilter_StepDef {
 
     @Given("user enter {string} in the input")
     public void user_type_in_the_input(String string) {
-//      allCarsPage.manageFiltersSearchInputBox.sendKeys(string);
+        allCarsPage.manageFiltersSearchInputBox.sendKeys(string);
     }
 
     @Given("user click last odometer checkbox")
     public void user_click_last_odometer_checkbox() {
-//     allCarsPage.lastOdometerCheckbox.click();
+        allCarsPage.lastOdometerCheckbox.click();
     }
 
     @Given("user click on the last odometer dropbox")
     public void user_click_on_the_last_odometer_dropbox() {
-//     allCarsPage.lastOdometerDropdownButton.click();
+        allCarsPage.lastOdometerDropdownButton.click();
     }
 
     @Given("user click the dropdown")
     public void user_click_the_dropdown() {
-//     allCarsPage.lastOdometerFilterDropdownItems.click();
+        allCarsPage.lastOdometerFilterDropdownItems.click();
     }
 
 

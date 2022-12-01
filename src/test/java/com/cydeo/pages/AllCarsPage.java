@@ -35,47 +35,42 @@ public class AllCarsPage extends BasePage {
     public WebElement searchBox;
     @FindBy(xpath = "//button[@class='btn btn-primary filter-update']")
     public WebElement updateButton;
-
     @FindBy(xpath = "//tbody[@class='grid-body']//tr//td[4]")
     public List<WebElement> DriverNames;
-
-
     @FindBy(xpath = "//div[@class='dropdown']//*[text()='...']")
     public WebElement threeDot;
-
     @FindBy(css = "li.launcher-item a[title='Delete']")
     public WebElement deleteButton;
-
     @FindBy(xpath = "//h3[text()='Delete Confirmation']")
     public WebElement deleteConfirmationText;
-
     @FindBy(css = "div.message")
     public WebElement message;
-
     @FindBy(xpath = "//a[.='Yes, Delete']")
     private WebElement yesDeleteBtn;
-
     @FindBy(xpath = "//a[@title='Delete Car']")
     public WebElement deleteCarButton;
-
-
     @FindBy(xpath = "//tr[@class='grid-row row-click-action'][5]")
     public WebElement anyRow;
-
     @FindBy(xpath = "//a[contains(@class,\"dropdown-item\")]")
     public List<WebElement> numbersForFilter;
-
     @FindBy(css = "tr.grid-row")
     public List<WebElement> countOfRow;
-
     @FindBy(xpath = "//a[@title='Create Car']")
     public List<WebElement> createCarBtn;
-
     @FindBy(xpath = "//a[@title=\"Reset\"]/i")
     public WebElement refreshButton;
-
     @FindBy(xpath = "//a[@title='Create Car']")
     public WebElement createCarLink;
+    @FindBy(xpath = "//h1[@class='oro-subtitle']")
+    public WebElement allCarsTitle;
+    @FindBy(xpath = "//input[@type='search']")
+    public WebElement manageFiltersSearchInputBox;
+    @FindBy(id = "ui-multiselect-0-0-option-6")
+    public WebElement lastOdometerCheckbox;
+    @FindBy(xpath = "//span[@class='filter-items']")
+    public WebElement lastOdometerDropdownButton;
+    @FindBy(xpath = "//div[@class='btn-group btn-block open']//button")
+    public WebElement lastOdometerFilterDropdownItems;
 
 
     public List<String> lastResults(String name,List<String> actualList) {

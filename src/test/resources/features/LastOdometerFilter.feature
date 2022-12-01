@@ -1,6 +1,6 @@
 #TRAD-986 - Test Execution ID
 
-@wip
+@odo
 Feature: TRAD-901
 
   US: Last Odometer Filter (Aybars)
