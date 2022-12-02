@@ -5,6 +5,7 @@ import com.cydeo.utilities.Driver;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -35,30 +36,56 @@ public class AllCarsPage extends BasePage {
     public WebElement searchBox;
     @FindBy(xpath = "//button[@class='btn btn-primary filter-update']")
     public WebElement updateButton;
+
     @FindBy(xpath = "//tbody[@class='grid-body']//tr//td[4]")
     public List<WebElement> DriverNames;
+
+
     @FindBy(xpath = "//div[@class='dropdown']//*[text()='...']")
     public WebElement threeDot;
+
     @FindBy(css = "li.launcher-item a[title='Delete']")
     public WebElement deleteButton;
+
     @FindBy(xpath = "//h3[text()='Delete Confirmation']")
     public WebElement deleteConfirmationText;
+
     @FindBy(css = "div.message")
     public WebElement message;
+
     @FindBy(xpath = "//a[.='Yes, Delete']")
     private WebElement yesDeleteBtn;
+
     @FindBy(xpath = "//a[@title='Delete Car']")
     public WebElement deleteCarButton;
+
+
     @FindBy(xpath = "//tr[@class='grid-row row-click-action'][5]")
     public WebElement anyRow;
+
     @FindBy(xpath = "//a[contains(@class,\"dropdown-item\")]")
     public List<WebElement> numbersForFilter;
+
     @FindBy(css = "tr.grid-row")
     public List<WebElement> countOfRow;
+
     @FindBy(xpath = "//a[@title='Create Car']")
     public List<WebElement> createCarBtn;
+
     @FindBy(xpath = "//a[@title=\"Reset\"]/i")
     public WebElement refreshButton;
+
+
+    @FindBy(xpath = "//a[@title='Grid Settings']")
+    public WebElement gridSettings;
+
+    @FindBy(xpath = "//div[.='Grid Settings']")
+    public WebElement gridSettingsTitle;
+
+    @FindBy(css = "li.launcher-item a[title='View']")
+    public WebElement viewButton;
+
+
     @FindBy(xpath = "//a[@title='Create Car']")
     public WebElement createCarLink;
     @FindBy(xpath = "//h1[@class='oro-subtitle']")
@@ -113,11 +140,22 @@ public class AllCarsPage extends BasePage {
         //		}
     }
 
-    public void clickFirstCar(){
-        BrowserUtils.sleep(5);
-        countOfRow.get(0).click();
-        BrowserUtils.sleep(3);
+    public void clickFirstCar() {
+        waitUntilLoaderScreenDisappear();
+        countOfRow.get(4).click();
     }
+
+    public void clickGridSettings() {
+        BrowserUtils.waitClickability(gridSettings, 5);
+        gridSettings.click();
+    }
+
+
+    public void verifyGridSettingsMenuDisplayed() {
+        BrowserUtils.waitClickability(gridSettingsTitle, 5);
+        Assert.assertTrue(gridSettingsTitle.isDisplayed());
+    }
+
 
     public void hoveroverthreedots() {
         BrowserUtils.hoverOverThreeDots(threeDot);
@@ -137,10 +175,12 @@ public class AllCarsPage extends BasePage {
         Assert.assertTrue(deleteConfirmationText.isDisplayed());
     }
 
+
     public void clickYesDelete() {
         BrowserUtils.waitForVisibility(yesDeleteBtn, 3);
         yesDeleteBtn.click();
     }
+
 
     public void verifyWarningMessageDriver(String userType, String messageText) {
         if (userType.equalsIgnoreCase("driver")) {
@@ -155,6 +195,7 @@ public class AllCarsPage extends BasePage {
 
     public String getDriverName() {
         return countOfRow.get(0).getText();
+
     }
 
     public void clickDeleteInfo() {
@@ -162,6 +203,10 @@ public class AllCarsPage extends BasePage {
         deleteCarButton.click();
     }
 
+
+    public void clickonviewicon() {
+        viewButton.click();
+    }
     public List<String> actualDropdownMethods(){
 
         List<String> dropdownMethods = new ArrayList<>();
@@ -175,10 +220,4 @@ public class AllCarsPage extends BasePage {
 
     }
 
-
-
-
-
-
 }
-
