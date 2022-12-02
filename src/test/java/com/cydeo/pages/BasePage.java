@@ -18,7 +18,7 @@ public abstract class BasePage {
 
     // Locators
     @FindBy(xpath = "(//div[@class='loader-frame'])[last()]")
-    protected WebElement loaderMask;
+    public WebElement loaderMask;
 
     //Methods
 

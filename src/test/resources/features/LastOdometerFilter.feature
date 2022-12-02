@@ -1,27 +1,28 @@
 #TRAD-986 - Test Execution ID
 
-@wip
+
 Feature: TRAD-901
 
   US: Last Odometer Filter (Aybars)
 
   Background:
-    Given user logged in as "salesmanager101"
-    And user is on the dashboard page
+    Given user is on the login page
+    And user logged in as "sales manager"
+    And user is on the D- "Dashboard" page
     And user select vehicles under the fleet menu
-    And user is on the vehicles page
+    And user is on the "All Cars" page
     And user click on the filter button
     And user click on the Manage Filters button
-    And user type "last odometer" in the input
+    And user enter "last odometer" in the input
     And user click last odometer checkbox
     And user click on the last odometer dropbox
-    And user click the dropdown
+    And user click the methods dropdown
 
 
   #AC-1:
-
-  Scenario: "Last Odometer" filter has the methods below
-    Then filter should have methods below
+  @odo
+  Scenario: Last Odometer filter has the methods below
+    Then Last Odometer filter should have methods below
       | Between             |
       | Not Between         |
       | Equals              |
