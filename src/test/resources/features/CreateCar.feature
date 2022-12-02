@@ -1,4 +1,4 @@
-Feature: Create Car Function
+Feature: "Create Car" Function Test
 
   Background: User on the login page
     Given User is on the login page
@@ -30,28 +30,29 @@ Feature: Create Car Function
 
 
   # @wip5
-  Scenario: Login as a "Store Manager" - 2
+  Scenario: User creates a car by filling compulsory fields
     When User logs in as a "Store Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
     And User goes to Create Car page
     Then User creates a car by filling compulsory fields
 
   # @wip5
-  Scenario: Login as a "Sales Manager" - 2
+  Scenario: User tries to create a car by not filling compulsory fields
     When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
     And User goes to Create Car page
     Then User cannot create a car without filling compulsory fields
 
- # @wip5
-  Scenario: User enters unvalid data to the compulsory fields
+   @wip5
+  Scenario: User enters invalid data to the compulsory fields
     When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
     And User goes to Create Car page
     Then User enters Compulsory fields without complying with the conditions
 
-  @wip5
-  Scenario: User enters unvalid data to the Optinal fields
+
+ # @wip5
+  Scenario: User enters invalid data to the Optional fields
     When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
     And User goes to Create Car page
@@ -65,7 +66,7 @@ Feature: Create Car Function
     Then User can select ‘Vehicle Model’ and ‘Vehicle Make’ from the list
 
  # @wip5
-  Scenario: Login as a "Sales Manager" - 2
+  Scenario: User sees newly created car in ’Fleet-Vehicle’ table
     When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
     And User goes to Create Car page

@@ -19,6 +19,4 @@ import org.junit.runner.RunWith;
         tags = "@tread906"
         //mvn test -Dcucumber.filter.tags="@smoke" to run from "run anything" option
 )
-
-
 public class CukesRunner { }
