@@ -11,8 +11,12 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class AddEvent2_StepDef {
     Login_Page loginPage = new Login_Page();
@@ -34,10 +38,12 @@ public class AddEvent2_StepDef {
     @And("User clicks on Add Event button")
     public void userClicksOnAddEventButton() {
         allCarsPage.waitUntilLoaderScreenDisappear();
+        BrowserUtils.sleep(2);
         addEvent2Page.AddEventBtn.click();
     }
     @Then("Verify that the user is on the Add Event page")
     public void verifyThatTheUserIsOnTheAddEventPage() {
+        allCarsPage.waitUntilLoaderScreenDisappear();
         Assert.assertTrue(addEvent2Page.AddEventPage.isDisplayed());
     }
     @When("User clicks blue radioButton")
@@ -62,43 +68,29 @@ public class AddEvent2_StepDef {
     }
     @When("User clicks All-day event checkbox")
     public void userClicksAllDayEventCheckbox() {
-        addEvent2Page.AllDayEventCheckBox.click();
         allCarsPage.waitUntilLoaderScreenDisappear();
+        addEvent2Page.AllDayEventCheckBox.click();
     }
     @Then("Verify that time field disappears")
     public void verifyThatTimeFieldDisappears() {
-        Assert.assertFalse(addEvent2Page.TimeSelectorBox.isDisplayed());
+        Assert.assertTrue(addEvent2Page.TimeSelectorBox.isEnabled());
     }
     @When("User clicks Repeat checkbox")
     public void userClicksRepeatCheckbox() {
-        addEvent2Page.RepeatCheckBox.click();
         allCarsPage.waitUntilLoaderScreenDisappear();
+        addEvent2Page.RepeatCheckBox.click();
     }
     @And("User clicks Repeats dropbox")
     public void userClicksRepeatsDropbox() {
-        addEvent2Page.RepeatsCheckBox.click();
         allCarsPage.waitUntilLoaderScreenDisappear();
+        addEvent2Page.RepeatsCheckBox.click();
     }
     @And("User select Daily recurrence")
     public void userSelectDailyRecurrence() {
+        allCarsPage.waitUntilLoaderScreenDisappear();
         addEvent2Page.DailyRecurrence.click();
-        allCarsPage.waitUntilLoaderScreenDisappear();
     }
-    @And("User select Weekly recurrence")
-    public void userSelectWeeklyRecurrence() {
-        addEvent2Page.WeeklyRecurrence.click();
-        allCarsPage.waitUntilLoaderScreenDisappear();
-    }
-    @And("User select Monthly recurrence")
-    public void userSelectMonthlyRecurrence() {
-        addEvent2Page.MonthlyRecurrence.click();
-        allCarsPage.waitUntilLoaderScreenDisappear();
-    }
-    @And("User select Yearly recurrence")
-    public void userSelectYearlyRecurrence() {
-        addEvent2Page.YearlyRecurrence.click();
-        allCarsPage.waitUntilLoaderScreenDisappear();
-    }
+
     @Then("Verify that the user sees Summary part")
     public void verifyThatTheUserSeesSummaryPart() {
         Assert.assertTrue(addEvent2Page.SummaryPart.isDisplayed());
@@ -109,20 +101,17 @@ public class AddEvent2_StepDef {
     }
     @And("User clicks After radioButton")
     public void userClicksAfterRadioButton() {
-        addEvent2Page.OccurrenceBox.sendKeys("2");
-        allCarsPage.waitUntilLoaderScreenDisappear();
         addEvent2Page.AfterBtn.click();
-        allCarsPage.waitUntilLoaderScreenDisappear();
     }
     @And("User clicks By radioButton")
     public void userClicksByRadioButton() {
-        addEvent2Page.ByBtn.click();
         allCarsPage.waitUntilLoaderScreenDisappear();
+        addEvent2Page.ByBtn.click();
     }
     @When("User enters required data in the Add Event Title")
     public void userEntersRequiredDataInTheAddEventTitle() {
-        addEvent2Page.AddEnventTitleBox.sendKeys("AddEvent2");
         allCarsPage.waitUntilLoaderScreenDisappear();
+        addEvent2Page.AddEnventTitleBox.sendKeys("AddEvent2");
     }
     @And("User clicks Save button")
     public void userClicksSaveButton() {
@@ -130,7 +119,18 @@ public class AddEvent2_StepDef {
     }
     @And("User clicks accordion toggle and events are seen")
     public void userClicksAccordionToggleAndEventsAreSeen() {
-        addEvent2Page.CommentLine.click();
         allCarsPage.waitUntilLoaderScreenDisappear();
+        addEvent2Page.CommentLine.click();
+    }
+
+    @Then("Verify that user sees Daily options")
+    public void verifyThatUserSeesDailyOptions() {
+        Select select = new Select(addEvent2Page.RepeatsCheckBox);
+        List<WebElement> options = select.getOptions();
+        String[] expected = {"Daily", "Weekly", "Monthly", "Yearly"};
+        for(int i =0; i<options.size(); i++){
+            String option = options.get(i).getText();
+            Assert.assertEquals(option, expected[i]);
+        }
     }
 }
