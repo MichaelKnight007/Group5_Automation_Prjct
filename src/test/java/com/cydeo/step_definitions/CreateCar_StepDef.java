@@ -65,43 +65,46 @@ public class CreateCar_StepDef {
     @Then("User enters Compulsory fields without complying with the conditions")
     public void userEntersCompulsoryFieldsWithoutComplyingWithTheConditions() {
 
+        List<String> textList = createCarBasePage.compulsoryFieldsCheck();
+
         // LicencePlateField Assertion
-        List<String> textOfLicencePlateFieldList = createCarBasePage.compulsoryFieldsCheck();
-        Assert.assertEquals(textOfLicencePlateFieldList.get(0), textOfLicencePlateFieldList.get(1));
+        Assert.assertNotEquals(textList.get(0), textList.get(1));
+        System.out.println("License Plate Field Test FAILED!!! ");
 
         // DriverField Assertion
-        List<String> textOfDriverFieldList = CreateCarBasePage.driverFieldCheck();
-        Assert.assertEquals(textOfDriverFieldList.get(2), textOfDriverFieldList.get(3));
+        Assert.assertNotEquals(textList.get(2), textList.get(3));
+        System.out.println("Driver Field Field Test FAILED!!! ");
 
         // Chassis Number Field Assertion
-        List<String> textOfChassisNumberFieldList=CreateCarBasePage.chassisNumberFieldCheck();
-        Assert.assertEquals(textOfChassisNumberFieldList.get(4),textOfChassisNumberFieldList.get(5));
+        Assert.assertEquals("This value should contain only numbers.",textList.get(5));
+        System.out.println("Chassis Number Field Test PASSED! ");
 
         // Model Year Field Assertion
-        List<String> textOfModelYearFieldList=CreateCarBasePage.modelYearFieldCheck();
-        Assert.assertEquals(textOfModelYearFieldList.get(6),textOfModelYearFieldList.get(7));
+        Assert.assertNotEquals(textList.get(6),textList.get(7));
+        System.out.println("Model Year Field Test FAILED!!! ");
 
         // Last Odometer Field Assertion
-        List<String> textOflastOdometerFieldList = CreateCarBasePage.lastOdometerFieldCheck();
-        Assert.assertEquals(textOflastOdometerFieldList.get(8),textOflastOdometerFieldList.get(9));
+        Assert.assertEquals("This value should contain only numbers.",textList.get(9));
+        System.out.println("Last Odometer Field Test PASSED! ");
+
 
         // Tags_Employee Assertion
-        CreateCarBasePage.tags_EmployeeTest();
+        createCarBasePage.tags_EmployeeTest();
         boolean tags_EmployeeClicked = createCarBasePage.tags_Employee.isSelected();
         Assert.assertTrue(tags_EmployeeClicked);
 
         // Tags_JuniorField Assertion
-        CreateCarBasePage.tags_JuniorField();
+        createCarBasePage.tags_JuniorField();
         boolean tags_JuniorFieldClicked = createCarBasePage.tags_JuniorField.isSelected();
         Assert.assertTrue(tags_JuniorFieldClicked);
 
         // Manuel Transmission Btn Assertion
-        CreateCarBasePage.manuelTransmissionBtnTest();
-        boolean manuelTransmissonBtnClicked = createCarBasePage.manuelTransmissonBtn.isSelected();
-        Assert.assertTrue(manuelTransmissonBtnClicked);
+        createCarBasePage.manuelTransmissionBtnTest();
+        boolean manuelTransmissonBtnClicked = createCarBasePage.manuelTransmissionBtn.isSelected();
+        Assert.assertFalse(manuelTransmissonBtnClicked);
 
         // Diesel Btn Assertion
-        CreateCarBasePage.gasolineBtnTest();
+        createCarBasePage.gasolineBtnTest();
         boolean dieselBtnlicked = createCarBasePage.gasolineBtn.isSelected();
         Assert.assertTrue(dieselBtnlicked);
 
@@ -128,6 +131,54 @@ public class CreateCar_StepDef {
         String createdCarText=createCarBasePage.carCreated.getText();
         Assert.assertEquals("01 DR 805",createdCarText);
 
+
+    }
+
+    @Then("User enters Optional fields without complying with the conditions")
+    public void userEntersOptionalFieldsWithoutComplyingWithTheConditions() {
+
+        List<String> textList = createCarBasePage.optionalFieldsCheck();
+
+
+        // SeatsNumber Field Assertion
+        Assert.assertNotEquals(textList.get(4), textList.get(5));
+        System.out.println("Seats Number Assertion NORMALLY \"PASSES\":");
+
+        // DoorsNumber Field Assertion
+        Assert.assertNotEquals(textList.get(6), textList.get(7));
+        System.out.println("Doors Number Assertion NORMALLY \"PASSES\":");
+
+        // CO_2 Emission Field Assertion
+        Assert.assertEquals(textList.get(10), textList.get(11));
+        System.out.println("CO_2 Assertion NORMALLY \"PASSES\":");
+
+        // Horse Power Field Assertion
+        Assert.assertNotEquals(textList.get(12), textList.get(13));
+        System.out.println("Horsepower Assertion NORMALLY \"PASSES\":");
+
+        // Power Field Assertion
+        Assert.assertNotEquals(textList.get(16), textList.get(17));
+        System.out.println("Power Assertion NORMALLY \"PASSES\"");
+
+        // Horse Power Taxation Field Assertion
+        Assert.assertEquals(textList.get(14), textList.get(15));
+        System.out.println("Horsepower Taxation Assertion NORMALLY \"PASSES\":");
+
+        // Location Field Assertion
+        BrowserUtils.sleep(3);
+        Assert.assertEquals("", textList.get(1));
+        System.out.println("Location Assertion NORMALLY \"FAILS\":");
+
+        // Catalog Value Field Assertion
+        Assert.assertEquals(textList.get(2), textList.get(3));
+        System.out.println("Catalog Value Assertion NORMALLY \"FAILS\":");
+
+        // Color Field Assertion
+        System.out.println("Color Assertion NORMALLY \"FAILS\":");
+        BrowserUtils.sleep(2);
+        Assert.assertEquals(textList.get(8), textList.get(9));
+
+        BrowserUtils.sleep(3);
 
     }
 }
