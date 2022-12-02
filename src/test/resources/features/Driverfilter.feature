@@ -85,14 +85,15 @@ Feature: As a user, I should be able to use Driver filter under Fleet-Vehicle pa
       | Bettye Wisozk   |
       | Hollis Thompson |
 
-  Scenario Outline: Methods ("Contains", "Does Not Contains", "Starts With", "Ends With", "Is Equal to")
-  shouldn't accept non-alphabetical characters
     When User selects "<Methodname>"
-    And User enters "<Non Alphabetical Characters>"
+    And User enters "<Numbers>"
+    And User enters "<Symbols>"
     And User clicks update button
     Then Message should be "No entities were found to match your search. Try modifying your search criteria..."
     Examples:
-      | Methodname | Non Alphabetical Characters |
-      |            |                             |
-      |            |                             |
-      |            |                             |
+      | Methodname       | Numbers | Symbols |
+      | Contains         | 1       | .       |
+      | Does Not Contain | 2       | ,       |
+      | Starts With      | 3       | _       |
+      | Ends With        | 4       | _       |
+      | Is Equal to      | 5       | =       |

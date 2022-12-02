@@ -37,8 +37,7 @@ AllCarsPage allCarsPage=new AllCarsPage();
     }
     @Given("User hover over fleet menu")
     public void user_clicks_fleet_menu() throws InterruptedException {
-       // Thread.sleep(3000);
-       // WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
+
         wait.until(ExpectedConditions.elementToBeClickable(dashBoardPage.fleetDropdownBtn));
        BrowserUtils.hover(dashBoardPage.fleetDropdownBtn);
 
@@ -164,5 +163,14 @@ AllCarsPage allCarsPage=new AllCarsPage();
 
     @Then("Results should match specified {string}")
     public void resultsShouldMatchSpecified(String keyword) {
+    }
+
+    @When("User selects {string}")
+    public void userSelects(String arg0) {
+    }
+
+    @Then("Message should be {string}")
+    public void messageShouldBe(String arg0) {
+
     }
 }

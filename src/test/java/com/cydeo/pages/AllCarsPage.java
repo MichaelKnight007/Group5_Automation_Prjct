@@ -202,6 +202,22 @@ public class AllCarsPage extends BasePage {
     public void clickonviewicon() {
         viewButton.click();
     }
+    public void selectMethodname(String Methodname){
 
+        if(Methodname.equalsIgnoreCase("Contains")){
+            AllMethods.get(0).click();
+
+        } else if (Methodname.equalsIgnoreCase("Does Not Contain")) {
+            AllMethods.get(1).click();
+        } else if (Methodname.equalsIgnoreCase("Starts With")) {
+            AllMethods.get(3).click();
+        }else if (Methodname.equalsIgnoreCase("Ends With")) {
+            AllMethods.get(4).click();
+        }else if (Methodname.equalsIgnoreCase("is equal to")) {
+            AllMethods.get(2).click();
+        }else {
+            System.out.println("İnvalid Methodname");
+        }
+    }
 
 }
