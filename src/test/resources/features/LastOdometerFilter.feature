@@ -20,7 +20,7 @@ Feature: TRAD-901
 
 
   #AC-1:
-  @odo
+
   Scenario: Last Odometer filter has the methods below
     Then Last Odometer filter should have methods below
       | Between             |
@@ -36,7 +36,7 @@ Feature: TRAD-901
 
 
     #AC-2:
-
+  @odo
   Scenario: if user selects "Between" method with numeric values, the results should be between the specified values
     And user select between method
     And user enter numeric values "1000" and "10000"

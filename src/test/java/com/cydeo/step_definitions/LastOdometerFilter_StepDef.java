@@ -40,6 +40,7 @@ public class LastOdometerFilter_StepDef {
 
     @Given("user select vehicles under the fleet menu")
     public void user_select_vehicles_under_the_fleet_menu() {
+        BrowserUtils.waitforInvisibilityOf(dashboardPage.loaderMask);
         dashboardPage.fleetDropdownBtn.click();
         dashboardPage.vehiclesLink.click();
     }
@@ -95,23 +96,22 @@ public class LastOdometerFilter_StepDef {
 
     @When("user select between method")
     public void user_select_between_method() {
-
-
+        allCarsPage.betweenMethod.click();
     }
+
     @When("user enter numeric values {string} and {string}")
-    public void user_enter_numeric_values_and(String string, String string2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void user_enter_numeric_values_and(String num1, String num2) {
+        allCarsPage.betweenMethodWithNumValue(num1, num2);
     }
+
     @When("user click the update button")
     public void user_click_the_update_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        allCarsPage.lastOdoMFilterUpdateButton.click();
     }
+
     @Then("results should be between the specified values")
     public void results_should_be_between_the_specified_values() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Assert.assertTrue(allCarsPage.isBetweenValues());
     }
 
     //-----------------
