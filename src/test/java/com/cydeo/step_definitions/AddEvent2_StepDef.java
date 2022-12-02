@@ -33,12 +33,15 @@ public class AddEvent2_StepDef {
     @Then("Verify that the user is on General Information page")
     public void verifyThatTheUserIsOnGeneralInformationPage() {
         allCarsPage.waitUntilLoaderScreenDisappear();
+        BrowserUtils.waitForVisibility(addEvent2Page.GeneralPage, 5);
         Assert.assertTrue(addEvent2Page.GeneralPage.isDisplayed());
     }
     @And("User clicks on Add Event button")
     public void userClicksOnAddEventButton() {
         allCarsPage.waitUntilLoaderScreenDisappear();
-        BrowserUtils.sleep(2);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        wait.until(ExpectedConditions.elementToBeClickable(addEvent2Page.AddEventBtn));
+        allCarsPage.waitUntilLoaderScreenDisappear();
         addEvent2Page.AddEventBtn.click();
     }
     @Then("Verify that the user is on the Add Event page")
