@@ -88,9 +88,19 @@ public class AllCarsPage extends BasePage {
 
     @FindBy(xpath = "//a[@title='Create Car']")
     public WebElement createCarLink;
+    @FindBy(xpath = "//h1[@class='oro-subtitle']")
+    public WebElement allCarsTitle;
+    @FindBy(xpath = "//input[@type='search']")
+    public WebElement manageFiltersSearchInputBox;
+    @FindBy(id = "ui-multiselect-0-0-option-6")
+    public WebElement lastOdometerCheckbox;
+    @FindBy(xpath = "//span[@class='filter-items']")
+    public WebElement lastOdometerDropdownButton;
+    @FindBy(xpath = "//div[@class='btn-group btn-block']//button")
+    public WebElement lastOdometerFilterDropdownButton;
 
-
-
+    @FindBy(xpath = "//div[@class='choice-filter number-range-filter']//ul[@class='dropdown-menu']")
+    public WebElement lastOdometerFilterDropdownItems;
 
     public List<String> lastResults(String name,List<String> actualList) {
         Driver.getDriver().findElement(By.xpath("//span[.= '" + name + "']")).click();
@@ -109,7 +119,6 @@ public class AllCarsPage extends BasePage {
         for (WebElement element : elements) {
             expectedList.add(element.getAttribute("innerText"));
         }
-
 
         return expectedList;
     }
@@ -136,10 +145,6 @@ public class AllCarsPage extends BasePage {
         countOfRow.get(4).click();
     }
 
-    public static void hoverOverThreeDots(WebElement threeDots) {
-        Actions actions = new Actions(Driver.getDriver());
-
-    }
     public void clickGridSettings() {
         BrowserUtils.waitClickability(gridSettings, 5);
         gridSettings.click();
@@ -202,6 +207,17 @@ public class AllCarsPage extends BasePage {
     public void clickonviewicon() {
         viewButton.click();
     }
+    public List<String> actualDropdownMethods(){
 
+        List<String> dropdownMethods = new ArrayList<>();
+
+        for (int i = 1; i < 11; i++) {
+            WebElement dropdownItem = Driver.getDriver().findElement(By.xpath("(//a[@class='dropdown-item choice-value'])["+i+"]"));
+            dropdownMethods.add(dropdownItem.getText());
+        }
+
+        return dropdownMethods;
+
+    }
 
 }
