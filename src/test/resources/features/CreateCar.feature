@@ -3,29 +3,71 @@ Feature: Create Car Function
   Background: User on the login page
     Given User is on the login page
 
-  @wip5
+
+ # @wip5
   Scenario Outline: Login as a <userType> - 1
     When User logs in as a "<userType>"
     And User goes to "Fleet" module and "Vehicles" sub-module
     Then Verify driver cannot see the button
-    But that the sale manager and store manager can click Create Car button
+
+
+    Examples:
+      | userType |
+      | Driver   |
+
+
+
+  # @wip5
+  Scenario Outline: Login as a <userType> - 1
+    When User logs in as a "<userType>"
+    And User goes to "Fleet" module and "Vehicles" sub-module
+    Then that the sale manager and store manager can click Create Car button
 
     Examples:
       | userType      |
-      | Driver        |
       | Sales Manager |
       | Store Manager |
 
-  @wip5
+
+  # @wip5
+  Scenario: Login as a "Store Manager" - 2
+    When User logs in as a "Store Manager"
+    And User goes to "Fleet" module and "Vehicles" sub-module
+    And User goes to Create Car page
+    Then User creates a car by filling compulsory fields
+
+  # @wip5
   Scenario: Login as a "Sales Manager" - 2
     When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
-    Then User goes to Create Car page and creates a car by filling compulsory fields
+    And User goes to Create Car page
+    Then User cannot create a car without filling compulsory fields
 
-  Scenario:
+ # @wip5
+  Scenario: User enters unvalid data to the compulsory fields
     When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
-    Then User goes to Create Car page and enters Compulsory fields without complying with the conditions
+    And User goes to Create Car page
+    Then User enters Compulsory fields without complying with the conditions
 
+  @wip5
+  Scenario: User enters unvalid data to the Optinal fields
+    When User logs in as a "Sales Manager"
+    And User goes to "Fleet" module and "Vehicles" sub-module
+    And User goes to Create Car page
+    Then User enters Optional fields without complying with the conditions
 
+ # @wip5
+  Scenario: User selects ‘Vehicle Model’ and ‘Vehicle Make’ from the list
+    When User logs in as a "Sales Manager"
+    And User goes to "Fleet" module and "Vehicles" sub-module
+    And User goes to Create Car page
+    Then User can select ‘Vehicle Model’ and ‘Vehicle Make’ from the list
 
+ # @wip5
+  Scenario: Login as a "Sales Manager" - 2
+    When User logs in as a "Sales Manager"
+    And User goes to "Fleet" module and "Vehicles" sub-module
+    And User goes to Create Car page
+    And User creates a car by filling compulsory fields
+    Then User can see newly created car in ’Fleet-Vehicle’ table

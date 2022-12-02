@@ -1,6 +1,8 @@
 package com.cydeo.pages;
 
+import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.Driver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -10,6 +12,7 @@ import java.util.List;
 
 public class CreateCarBasePage {
 
+    AllCarsPage allCarsPage = new AllCarsPage();
 
     public CreateCarBasePage() {
 
@@ -17,117 +20,212 @@ public class CreateCarBasePage {
     }
 
 
-    @FindBy(xpath = "//button[@type='submit']")
+    @FindBy(xpath = "//div[@class='btn-group pull-right']/button")
     public WebElement saveAndCloseBtn;
 
-    @FindBy(id = "custom_entity_type_LicensePlate-uid-637f7adfd5efb")
+    @FindBy(name = "custom_entity_type[LicensePlate]")
     public WebElement licencePlateField;
 
-    @FindBy(id = "custom_entity_type_Tags_0-uid-637f7adfd602d")
+    @FindBy(xpath = "(//input[@name=\"custom_entity_type[Tags][]\"])[1]")
     public WebElement tags_JuniorField;
 
-    @FindBy(id = "custom_entity_type_Tags_2-uid-637f7adfd61ec")
+    @FindBy(xpath = "(//input[@name=\"custom_entity_type[Tags][]\"])[3]")
     public WebElement tags_Employee;
 
-    @FindBy(id = "custom_entity_type_Tags_5-uid-637f7adfd6499")
+    @FindBy(xpath = "(//input[@name=\"custom_entity_type[Tags][]\"])[6]")
     public WebElement tags_Sedan;
 
-    @FindBy(id = "custom_entity_type_Driver-uid-637f7adfd6740")
+    @FindBy(name = "custom_entity_type[Driver]")
     public WebElement driverField;
 
-    @FindBy(id = "custom_entity_type_Location-uid-637f7adfd683b")
+    @FindBy(name = "custom_entity_type[Location]")
     public WebElement locationField;
 
-    @FindBy(id = "custom_entity_type_ChassisNumber-uid-637f7adfd68ea")
+    @FindBy(name = "custom_entity_type[ChassisNumber]")
     public WebElement chassisNumberField;
 
-    @FindBy(id = "custom_entity_type_ModelYear-uid-637f7adfd69f4")
+    @FindBy(name = "custom_entity_type[ModelYear]")
     public WebElement modelYearField;
 
-    @FindBy(id = "custom_entity_type_LastOdometer-uid-637f7adfd6ae3")
+    @FindBy(name = "custom_entity_type[LastOdometer]")
     public WebElement lastOdometerField;
 
-    @FindBy(id = "date_selector_custom_entity_type_ImmatriculationDate-uid-637f7adfd6bcc")
+    @FindBy(name = "date_selector_custom_entity_type_ImmatriculationDate-uid-6385e61ab278e")
     public WebElement immatriculationDateField;
 
     @FindBy(xpath = "(//a[@class='ui-state-default'])[24]")
     public WebElement immatriculationDateOption;
 
-    @FindBy(id = "date_selector_custom_entity_type_FirstContractDate-uid-637f7adfd6cbd")
+    @FindBy(name = "date_selector_custom_entity_type_FirstContractDate-uid-6385e61ab28c9")
     public WebElement firstContractDateField;
 
-    @FindBy(xpath = "//button[.='Today']")
+    @FindBy(xpath = "//button[text()='Today']")
     public WebElement firstContractDateToday;
 
-    @FindBy(id = "custom_entity_type_CatalogValue-uid-637f7adfd6f27")
+    @FindBy(name = "custom_entity_type[CatalogValue]")
     public WebElement catalogValueField;
 
-    @FindBy(id = "custom_entity_type_SeatsNumber-uid-637f7adfd7022")
+    @FindBy(name = "custom_entity_type[SeatsNumber]")
     public WebElement seatsNumberField;
 
-    @FindBy(id = "custom_entity_type_DoorsNumber-uid-637f7adfd710c")
+    @FindBy(name = "custom_entity_type[DoorsNumber]")
     public WebElement doorsNumberField;
 
-    @FindBy(id = "custom_entity_type_Color-uid-637f7adfd7207")
+    @FindBy(name = "custom_entity_type[Color]")
     public WebElement colorField;
 
-    @FindBy(id = "s2id_custom_entity_type_Transmission-uid-637f7adfd7347")
+    @FindBy(xpath = "(//span[text()='Choose a value...'])[1]")
     public WebElement transmissionDropdown;
 
-    @FindBy(xpath = "//div[@id='s2id_custom_entity_type_Transmission-uid-637f8a7496901']/a/span[1]")
+    @FindBy(xpath = "//div[text()='Manual']")
     public WebElement manuelTransmissonBtn;
 
-    @FindBy(id = "s2id_custom_entity_type_FuelType-uid-637f8a7496a29")
+    @FindBy(xpath = "(//a[@href='javascript:void(0)'])[2]")
     public WebElement fuelTypeBtn;
 
-    @FindBy(xpath = "//div[@id='s2id_custom_entity_type_FuelType-uid-637f8a7496a29']/a/span[1]")
-    public WebElement dieselBtn;
+    @FindBy(xpath = "//div[text()='Gasoline']")
+    public WebElement gasolineBtn;
 
-    @FindBy(id = "custom_entity_type_CO2Emissions-uid-637f8a7496b14")
+    @FindBy(name = "custom_entity_type[CO2Emissions]")
     public WebElement cO2EmissionsField;
 
-    @FindBy(id = "custom_entity_type_Horsepower-uid-637f8a7496c10")
+    @FindBy(name = "custom_entity_type[Horsepower]")
     public WebElement horsepowerField;
 
-    @FindBy(id = "id=\"custom_entity_type_HorsepowerTaxation-uid-637f8a7496d07\"")
+    @FindBy(name = "custom_entity_type[HorsepowerTaxation]")
     public WebElement horsepowerTaxationField;
 
-    @FindBy(id = "custom_entity_type_Power-uid-637f8a7496df2")
+    @FindBy(name = "custom_entity_type[Power]")
     public WebElement powerField;
 
-    @FindBy(xpath = "(//button[@type='button'])[3]")
+    @FindBy(xpath = "(//button[@type='button'])[2]")
     public WebElement vehicleModelAddBtn;
 
-    @FindBy(xpath = "(//button[@type='button'])[4]")
+    @FindBy(xpath = "//td[text()='BMW']")
+    public WebElement vehicleModelBMWAddBtn;
+
+    @FindBy(xpath = "//button[text()='Select']")
+    public WebElement selectBtn;
+
+    @FindBy(xpath = "//a[text()='BMW ']")
+    public WebElement vehicleModelBMWText;
+
+    @FindBy(xpath = "(//input[@class='default-selector'])[1]")
+    public WebElement BMWSelectBtn;
+
+    @FindBy(xpath = "(//input[@class='default-selector'])[2]")
+    public WebElement MercedesSelectBtn;
+
+    @FindBy(xpath = "//td[text()='Mercedes']")
+    public WebElement vehicleModelMercedesAddBtn;
+
+    @FindBy(xpath = "(//button[@type='button'])[3]")
     public WebElement vehicleMakeAddBtn;
 
-    @FindBy(xpath = "//div[.='Entity saved']")
+    @FindBy(xpath = "//td[text()='Tesla']")
+    public WebElement vehicleMakeTeslaAddBtn;
+
+    @FindBy(xpath = "//a[text()='Tesla ']")
+    public WebElement vehicleMakeTeslaTex;
+
+    @FindBy(xpath = "//td[text()='Opel']")
+    public WebElement vehicleMakeTOpelAddBtn;
+
+    @FindBy(xpath = "(//input[@class='default-selector'])[3]")
+    public WebElement teslaSelectBtn;
+
+    @FindBy(xpath = "(//input[@class='default-selector'])[4]")
+    public WebElement opelSelectBtn;
+
+    @FindBy(xpath = "//div[text()='Entity saved']")
     public WebElement entitySavedMessage;
 
+    @FindBy(xpath = "//span[text()='License Plate']")
+    public WebElement licencePlateHeader;
 
-    public static void clickCreateCarBtn(){
+    @FindBy(xpath = "(//td[@data-column-label='License Plate'])[3]")
+    public WebElement carCreated;
 
-      AllCarsPage allCarsPage=new AllCarsPage();
-      allCarsPage.createCarLink.click();
+    @FindBy(xpath = "(//div[@class='controls']/div)[1]")
+    public WebElement controlsLicensePlate;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[3]")
+    public WebElement controlsDriver;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[5]")
+    public WebElement controlsChasisNumber;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[6]")
+    public WebElement controlsModelYear;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[7]")
+    public WebElement controlsLastOdometer;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[4]")
+    public WebElement controlsLocation;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[10]")
+    public WebElement controlsCatalogValue;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[11]")
+    public WebElement controlsSeatNumber;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[12]")
+    public WebElement controlsDoorNumber;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[13]")
+    public WebElement controlsColor;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[16]")
+    public WebElement controlsCO_2_Emisson;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[17]")
+    public WebElement controlsHorsePower;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[18]")
+    public WebElement controlsHorsePowerTaxation;
+
+    @FindBy(xpath = "(//div[@class='controls']/div)[19]")
+    public WebElement controlsPower;
+
+
+
+
+
+
+    public void clickCreateCarBtn() {
+
+        AllCarsPage allCarsPage = new AllCarsPage();
+
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+
+        allCarsPage.waitUntilLoaderScreenDisappear();
+
+        js.executeScript("arguments[0].click();", allCarsPage.createCarLink);
+
 
     }
 
-    public static void createCar() {
+    public void createCar() {
 
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
 
-        createCarBasePage.licencePlateField.sendKeys("45 DR 805");
+        allCarsPage.waitUntilLoaderScreenDisappear();
+
+
+        createCarBasePage.licencePlateField.sendKeys("01 DR 805");
         createCarBasePage.tags_Employee.click();
         createCarBasePage.tags_JuniorField.click();
         createCarBasePage.tags_Sedan.click();
-        createCarBasePage.driverField.sendKeys("Ahmet");
+        createCarBasePage.driverField.sendKeys("Hasan Ali");
         createCarBasePage.chassisNumberField.sendKeys("1234565897");
         createCarBasePage.modelYearField.sendKeys("2005");
-        createCarBasePage.lastOdometerField.sendKeys("20565");
+        createCarBasePage.lastOdometerField.sendKeys("15500");
         createCarBasePage.transmissionDropdown.click();
         createCarBasePage.manuelTransmissonBtn.click();
         createCarBasePage.fuelTypeBtn.click();
-        createCarBasePage.driverField.click();
+        createCarBasePage.gasolineBtn.click();
+
         createCarBasePage.saveAndCloseBtn.click();
 
     }
@@ -136,35 +234,81 @@ public class CreateCarBasePage {
 
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
 
-        createCarBasePage.licencePlateField.sendKeys("45 DR 805");
-        createCarBasePage.driverField.sendKeys("Ahmet");
+        createCarBasePage.licencePlateField.sendKeys("38 DR 805");
+        createCarBasePage.driverField.sendKeys("Mehmet");
         createCarBasePage.transmissionDropdown.click();
         createCarBasePage.manuelTransmissonBtn.click();
         createCarBasePage.saveAndCloseBtn.click();
     }
 
-    public  static List<String> licencePlateFieldCheck(){
+    public List<String> compulsoryFieldsCheck() {
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
 
-        List<String> licencePlateFieldList=new ArrayList<>();
+        List<String> compulsoryFieldCheckList = new ArrayList<>();
 
-        String text="!!45/*DR 805";
-        createCarBasePage.licencePlateField.sendKeys(text);//(letters and digits)
-        String actualTextOfLicencePlateField = createCarBasePage.licencePlateField.getText();
+        String textLicensePlateField = "!!45/*DR 805";
+        String textDriverField = "Ahmet!'!4646";
+        String textChassisNumberField = "446ASDFG!'^+";
+        String textModelYearField = "145265!'^+%asdf";
+        String textLastOdometerField = "646fghj/&%";
 
-        licencePlateFieldList.add(text);//expected index 0
-        licencePlateFieldList.add(actualTextOfLicencePlateField);//actual index 1
 
-        return licencePlateFieldList;
+        createCarBasePage.licencePlateField.sendKeys(textLicensePlateField);//(letters and digits)
+        createCarBasePage.driverField.sendKeys(textDriverField); //(letters only)
+        createCarBasePage.modelYearField.sendKeys(textModelYearField);
+        createCarBasePage.lastOdometerField.sendKeys(textLastOdometerField);
+        createCarBasePage.chassisNumberField.sendKeys(textChassisNumberField);//digits only)
+
+        createCarBasePage.saveAndCloseBtn.click();
+        allCarsPage.waitUntilLoaderScreenDisappear();
+
+        String actualTextOfLicencePlateField = createCarBasePage.controlsLicensePlate.getText();
+        String actualTextOfDrivetField = createCarBasePage.controlsDriver.getText();
+        String actualTextOfChasisNumberField = createCarBasePage.controlsChasisNumber.getText();
+        String actualTextOfModelYearField = createCarBasePage.controlsModelYear.getText();
+        String actualTextOfLastOdometerField = createCarBasePage.controlsLastOdometer.getText();
+
+
+        compulsoryFieldCheckList.add(textLicensePlateField);//expected index 0
+        compulsoryFieldCheckList.add(actualTextOfLicencePlateField);//Actual index 1
+
+        compulsoryFieldCheckList.add(textDriverField);//expected index 2
+        compulsoryFieldCheckList.add(actualTextOfDrivetField);//Actual index 3
+
+        compulsoryFieldCheckList.add(textChassisNumberField);//expected index 4
+        compulsoryFieldCheckList.add(actualTextOfChasisNumberField);//Actual index 5
+
+        compulsoryFieldCheckList.add(textModelYearField);//expected index 6
+        compulsoryFieldCheckList.add(actualTextOfModelYearField);//Actual index 7
+
+        compulsoryFieldCheckList.add(textLastOdometerField);//expected index 8
+        compulsoryFieldCheckList.add(actualTextOfLastOdometerField);//Actual index 9
+
+        return compulsoryFieldCheckList;
     }
 
-    public  static List<String> driverFieldCheck(){
+
+    public List<String> optionalFieldsCheck() {
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
 
-        List<String> driverFieldList=new ArrayList<>();
+        List<String> optionlaFieldCheckList = new ArrayList<>();
 
-        String text="Ahmet5684646";
-        createCarBasePage.driverField.sendKeys(text);//(letters and digits)
+        String textLocationField = "!!05/*DR/*-785";
+        String textCatalogValue = "Mehmet!'!7896";
+        String textSeatNumber = "446ASDFG!'^+";
+        String textModelYearField = "145265!'^+%asdf";
+        String textLastOdometerField = "646fghj/&%";
+
+
+        return optionlaFieldCheckList;
+    }
+    public static List<String> driverFieldCheck() {
+        CreateCarBasePage createCarBasePage = new CreateCarBasePage();
+
+        List<String> driverFieldList = new ArrayList<>();
+
+        String text = "Ahmet5684646";
+        createCarBasePage.driverField.sendKeys(text);//(letters only)
         String actualTextOfDriverField = createCarBasePage.driverField.getText();
 
         driverFieldList.add(text);//expected index 0
@@ -174,30 +318,30 @@ public class CreateCarBasePage {
     }
 
 
-    public static List<String> chassisNumberFieldCheck(){
+    public static List<String> chassisNumberFieldCheck() {
 
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
-        List<String> chassisNumberFieldList =new ArrayList<>();
+        List<String> chassisNumberFieldList = new ArrayList<>();
 
 
-        String expectedchassisNumberFieldText="12345AADDa!'^+%&";
-        createCarBasePage.chassisNumberField.sendKeys(expectedchassisNumberFieldText); //only digits
+        String expectedChassisNumberFieldText = "12345AADDa!'^+%&";
+        createCarBasePage.chassisNumberField.sendKeys(expectedChassisNumberFieldText); //only digits
         String actualTextOfChassisNumberField = createCarBasePage.chassisNumberField.getText();
 
-        chassisNumberFieldList.add(expectedchassisNumberFieldText);//expected index 0
+        chassisNumberFieldList.add(expectedChassisNumberFieldText);//expected index 0
         chassisNumberFieldList.add(actualTextOfChassisNumberField);//actual index 1
 
         return chassisNumberFieldList;
     }
 
 
-    public static List<String> modelYearFieldCheck(){
+    public static List<String> modelYearFieldCheck() {
 
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
-        List<String> modelYearFieldList =new ArrayList<>();
+        List<String> modelYearFieldList = new ArrayList<>();
 
 
-        String expectedModelYearFieldText="12345AADDa!'^+%&";
+        String expectedModelYearFieldText = "12345AADDa!'^+%&";
         createCarBasePage.modelYearField.sendKeys(expectedModelYearFieldText); //only digits, only year
         String actualTextOfModelYearField = createCarBasePage.modelYearField.getText();
 
@@ -208,14 +352,13 @@ public class CreateCarBasePage {
     }
 
 
-
-    public static List<String> lastOdometerFieldCheck(){
+    public static List<String> lastOdometerFieldCheck() {
 
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
-        List<String> lastOdometerFieldList =new ArrayList<>();
+        List<String> lastOdometerFieldList = new ArrayList<>();
 
 
-        String expectedLastOdometerFieldText="12345AADDa!'^+%&";
+        String expectedLastOdometerFieldText = "12345AADDa!'^+%&";
         createCarBasePage.lastOdometerField.sendKeys(expectedLastOdometerFieldText); //only digits
         String actualTextOfLastOdometerField = createCarBasePage.lastOdometerField.getText();
 
@@ -226,7 +369,7 @@ public class CreateCarBasePage {
     }
 
 
-    public static boolean tags_EmployeeTest(){
+    public static boolean tags_EmployeeTest() {
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
 
         createCarBasePage.tags_Employee.click();//Clickable_multiple choices allowed
@@ -236,8 +379,7 @@ public class CreateCarBasePage {
     }
 
 
-
-    public static boolean tags_JuniorField(){
+    public static boolean tags_JuniorField() {
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
 
         createCarBasePage.tags_JuniorField.click();//Clickable_multiple choices allowed
@@ -247,7 +389,7 @@ public class CreateCarBasePage {
     }
 
 
-    public static boolean manuelTransmissionBtnTest(){
+    public static boolean manuelTransmissionBtnTest() {
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
 
         createCarBasePage.transmissionDropdown.click();//select from dropdown
@@ -258,56 +400,90 @@ public class CreateCarBasePage {
     }
 
 
-
-    public static boolean dieselBtnTest(){
+    public static boolean gasolineBtnTest() {
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
 
         createCarBasePage.fuelTypeBtn.click();//select from dropdown
-        createCarBasePage.dieselBtn.click();//select from dropdown
-        boolean dieselBtnlicked = createCarBasePage.dieselBtn.isSelected();
+        createCarBasePage.gasolineBtn.click();//select from dropdown
+        boolean gasolineBtnlicked = createCarBasePage.gasolineBtn.isSelected();
 
 
-        return dieselBtnlicked;
+        return gasolineBtnlicked;
+    }
+
+    public List<Boolean> vehicleModel_MakeClickableTest() {
+
+        List<Boolean> vehicleModel_MakeClickableList = new ArrayList<>();
+        CreateCarBasePage createCarBasePage = new CreateCarBasePage();
+
+        allCarsPage.waitUntilLoaderScreenDisappear();
+
+        createCarBasePage.vehicleModelAddBtn.click();
+        createCarBasePage.vehicleModelBMWAddBtn.click();
+
+        BrowserUtils.sleep(2);
+        createCarBasePage.selectBtn.click();
+
+        createCarBasePage.vehicleModelAddBtn.click();
+        createCarBasePage.vehicleModelMercedesAddBtn.click();
+        BrowserUtils.sleep(2);
+        createCarBasePage.selectBtn.click();
+
+
+        createCarBasePage.vehicleMakeAddBtn.click();
+        createCarBasePage.vehicleMakeTeslaAddBtn.click();
+        BrowserUtils.sleep(2);
+        createCarBasePage.selectBtn.click();
+
+        createCarBasePage.vehicleMakeAddBtn.click();
+        createCarBasePage.vehicleMakeTOpelAddBtn.click();
+        BrowserUtils.sleep(2);
+        createCarBasePage.selectBtn.click();
+
+
+        createCarBasePage.BMWSelectBtn.click();
+        createCarBasePage.MercedesSelectBtn.click();
+
+        boolean isBMWSelected = createCarBasePage.BMWSelectBtn.isSelected();
+
+        createCarBasePage.teslaSelectBtn.click();
+        createCarBasePage.opelSelectBtn.click();
+
+        boolean isTeslaSelected = createCarBasePage.teslaSelectBtn.isSelected();
+
+
+        vehicleModel_MakeClickableList.add(isBMWSelected);
+        vehicleModel_MakeClickableList.add(isTeslaSelected);
+
+        return vehicleModel_MakeClickableList;
+
+    }
+
+    public String see_Newly_Created_Car_In_Fleet_Vehicle_Table() {
+        Dash_Board_Page dash_board_page = new Dash_Board_Page();
+        CreateCarBasePage createCarBasePage = new CreateCarBasePage();
+
+        dash_board_page.fleetDropdownBtn.click();
+        dash_board_page.vehiclesLink.click();
+
+        String createdCarText = createCarBasePage.carCreated.getText();
+
+
+        return createdCarText;
     }
 
 
-
-    public static void checkingCompulsoryFieldsConditions() {
-
+    public static void locationFieldTest() {
         CreateCarBasePage createCarBasePage = new CreateCarBasePage();
 
-        /*List<String> deneme=new ArrayList<>();
+        List<String> locationFieldList = new ArrayList<>();
+        String expectedlocationFieldText = "!'^+%&&&ASAS15616";
+        createCarBasePage.locationField.sendKeys(expectedlocationFieldText);//letters and digits
+        String locationFieldActualText = createCarBasePage.locationField.getText();
 
-        String text="!!45/*DR 805";
-        createCarBasePage.licencePlateField.sendKeys(text);//(letters and digits)
-        String actualTextOflicencePlateField = createCarBasePage.licencePlateField.getText();
-        deneme.add(actualTextOflicencePlateField);*/
+        locationFieldList.add(expectedlocationFieldText);
+        locationFieldList.add(locationFieldActualText);
 
-       /* createCarBasePage.tags_Employee.click();//Clickable_multiple choices allowed
-        boolean tags_EmployeeClicked = createCarBasePage.tags_Employee.isSelected();*/
-
-        /*createCarBasePage.tags_JuniorField.click();//Clickable_multiple choices allowed
-        boolean tags_JuniorFieldClicked = createCarBasePage.tags_JuniorField.isSelected();*/
-
-       /* createCarBasePage.driverField.sendKeys("Ahmet5684646");//only letters
-        String actualTextOfDriverField = createCarBasePage.driverField.getText();*/
-
-        /*createCarBasePage.chassisNumberField.sendKeys("12345AADDa!'^+%&"); //only digits
-        String actualTextOfChassisNumberField = createCarBasePage.chassisNumberField.getText();*/
-
-        /*createCarBasePage.modelYearField.sendKeys("Hey 123549964"); //only digits, only year
-        String actualTextOfModelYearField = createCarBasePage.modelYearField.getText();*/
-
-       /* createCarBasePage.lastOdometerField.sendKeys("20565gfsgfd!'^+'^%&"); //only digits
-        String actualTextOfLastOdometerField = createCarBasePage.lastOdometerField.getText();*/
-
-        /*createCarBasePage.transmissionDropdown.click();//select from dropdown
-        createCarBasePage.manuelTransmissonBtn.click();//select from dropdown
-        boolean manuelTransmissonBtnClicked = createCarBasePage.manuelTransmissonBtn.isSelected();*/
-
-        /*createCarBasePage.fuelTypeBtn.click();//select from dropdown
-        createCarBasePage.dieselBtn.click();//select from dropdown
-        boolean dieselBtnlicked = createCarBasePage.dieselBtn.isSelected();*/
 
     }
 
@@ -345,7 +521,7 @@ public class CreateCarBasePage {
         String horsepowerFieldActualText = createCarBasePage.horsepowerField.getText();
 
         createCarBasePage.horsepowerTaxationField.sendKeys();//only digits
-        String horsepowerTaxationFieldActualText=createCarBasePage.horsepowerTaxationField.getText();
+        String horsepowerTaxationFieldActualText = createCarBasePage.horsepowerTaxationField.getText();
 
         createCarBasePage.powerField.sendKeys("ASDFGHJ!'^+%&/146462");//only digits
         String powerFieldActualText = createCarBasePage.powerField.getText();

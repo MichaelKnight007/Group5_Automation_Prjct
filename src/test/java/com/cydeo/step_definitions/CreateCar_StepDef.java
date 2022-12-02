@@ -2,12 +2,15 @@ package com.cydeo.step_definitions;
 
 import com.cydeo.pages.AllCarsPage;
 import com.cydeo.pages.CreateCarBasePage;
+import com.cydeo.utilities.BrowserUtils;
+import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.But;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.interactions.Actions;
 
-import java.util.ArrayList;
+import javax.swing.*;
 import java.util.List;
 
 public class CreateCar_StepDef {
@@ -20,53 +23,12 @@ public class CreateCar_StepDef {
 
         int sizeOfBtn = allCarsPage.createCarBtn.size();
 
-        Assert.assertEquals(1, sizeOfBtn);
-
-
-        /*boolean createCarIsEmpty=Driver.getDriver().findElements(By.xpath("//a[@title='Create Car']")).isEmpty();
-
-       // Assert.assertTrue(createCarIsEmpty);
-        if(createCarIsEmpty){
-            System.out.println("Test Passed");
-        }
-        else{
-            System.out.println("Test Failed!!!");
-        }*/
-
-       /* WebDriverWait waiter = new WebDriverWait(Driver.getDriver(), 10);
-        waiter.ignoring(NoSuchElementException.class);
-        waiter.until( ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title='Create Car']")));
-        Driver.getDriver().findElement(By.xpath("//a[@title='Create Car']"));
-*/
-
-        /*try {
-            if (allCarsPage.createCarBtn.isDisplayed()) {
-                Assert.assertTrue(true);
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Test passed!!!");
-        }*/
-           /* try {
-                System.out.println("Merhaba");
-                Assert.assertFalse(allCarsPage.createCarBtn.presenceOfElement());
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Driver Cannot Create Car Test is Passed!");
-            } finally {*/
-
-
-
-        /*finally {
-            System.out.println("Forcefully Driver Cannot Create Car Test is Passed!");
-        }*/
-        System.out.println("Geçti mi?");
+        Assert.assertEquals(0, sizeOfBtn);
 
     }
 
 
-    @But("that the sale manager and store manager can click Create Car button")
+    @Then("that the sale manager and store manager can click Create Car button")
     public void verifyThatTheSaleManagerAndStoreManagerSeeButton() {
 
         Assert.assertTrue(allCarsPage.createCarBtn.get(0).isEnabled());
@@ -74,37 +36,54 @@ public class CreateCar_StepDef {
     }
 
 
-    @And("User goes to Create Car page and creates a car by filling compulsory fields")
-    public void userGoesToCreateCarPageAndCreatesACarByFillingCompulsoryFields() {
+    @And("User goes to Create Car page")
+    public void userGoesToCreateCarPage()  {
 
-        CreateCarBasePage.createCar();
+        createCarBasePage.clickCreateCarBtn();
+
+    }
+
+
+    @Then("User creates a car by filling compulsory fields")
+    public void userCreatesACarByFillingCompulsoryFields() {
+
+        createCarBasePage.createCar();
         String entitySavedMessageText = createCarBasePage.entitySavedMessage.getText();
         Assert.assertEquals("Entity saved",entitySavedMessageText);
 
     }
 
-    @Then("User goes to Create Car page and enters Compulsory fields without complying with the conditions")
-    public void userGoesToCreateCarPageAndEntersCompulsoryFieldsWithoutComplyingWithTheConditions() {
+
+    @Then("User cannot create a car without filling compulsory fields")
+    public void userCannotCreateACarWithoutFillingCompulsoryFields() {
+        CreateCarBasePage.createCarNegativeTest();
+        String entitySavedMessageText = createCarBasePage.entitySavedMessage.getText();
+        Assert.assertNotEquals("Entity saved",entitySavedMessageText);
+    }
+
+
+    @Then("User enters Compulsory fields without complying with the conditions")
+    public void userEntersCompulsoryFieldsWithoutComplyingWithTheConditions() {
 
         // LicencePlateField Assertion
-        List<String> textOfLicencePlateFieldList = CreateCarBasePage.licencePlateFieldCheck();
+        List<String> textOfLicencePlateFieldList = createCarBasePage.compulsoryFieldsCheck();
         Assert.assertEquals(textOfLicencePlateFieldList.get(0), textOfLicencePlateFieldList.get(1));
 
         // DriverField Assertion
         List<String> textOfDriverFieldList = CreateCarBasePage.driverFieldCheck();
-        Assert.assertEquals(textOfDriverFieldList.get(0), textOfDriverFieldList.get(1));
+        Assert.assertEquals(textOfDriverFieldList.get(2), textOfDriverFieldList.get(3));
 
         // Chassis Number Field Assertion
         List<String> textOfChassisNumberFieldList=CreateCarBasePage.chassisNumberFieldCheck();
-        Assert.assertEquals(textOfChassisNumberFieldList.get(0),textOfChassisNumberFieldList.get(1));
+        Assert.assertEquals(textOfChassisNumberFieldList.get(4),textOfChassisNumberFieldList.get(5));
 
         // Model Year Field Assertion
         List<String> textOfModelYearFieldList=CreateCarBasePage.modelYearFieldCheck();
-        Assert.assertEquals(textOfModelYearFieldList.get(0),textOfModelYearFieldList.get(1));
+        Assert.assertEquals(textOfModelYearFieldList.get(6),textOfModelYearFieldList.get(7));
 
         // Last Odometer Field Assertion
         List<String> textOflastOdometerFieldList = CreateCarBasePage.lastOdometerFieldCheck();
-        Assert.assertEquals(textOflastOdometerFieldList.get(0),textOflastOdometerFieldList.get(1));
+        Assert.assertEquals(textOflastOdometerFieldList.get(8),textOflastOdometerFieldList.get(9));
 
         // Tags_Employee Assertion
         CreateCarBasePage.tags_EmployeeTest();
@@ -122,11 +101,32 @@ public class CreateCar_StepDef {
         Assert.assertTrue(manuelTransmissonBtnClicked);
 
         // Diesel Btn Assertion
-        CreateCarBasePage.dieselBtnTest();
-        boolean dieselBtnlicked = createCarBasePage.dieselBtn.isSelected();
+        CreateCarBasePage.gasolineBtnTest();
+        boolean dieselBtnlicked = createCarBasePage.gasolineBtn.isSelected();
         Assert.assertTrue(dieselBtnlicked);
 
+    }
 
+
+    @Then("User can select ‘Vehicle Model’ and ‘Vehicle Make’ from the list")
+    public void userCanSelectVehicleModelAndVehicleMakeFromTheList() {
+
+        List<Boolean> areVehicle_Model_Make_DoubleSelected=createCarBasePage.vehicleModel_MakeClickableTest();
+
+       Assert.assertFalse(areVehicle_Model_Make_DoubleSelected.get(0));
+       Assert.assertFalse(areVehicle_Model_Make_DoubleSelected.get(1));
+
+
+    }
+
+    @Then("User can see newly created car in ’Fleet-Vehicle’ table")
+    public void userCanSeeNewlyCreatedCarInFleetVehicleTable() {
+
+        createCarBasePage.see_Newly_Created_Car_In_Fleet_Vehicle_Table();
+        createCarBasePage.licencePlateHeader.click();
+        BrowserUtils.sleep(2);
+        String createdCarText=createCarBasePage.carCreated.getText();
+        Assert.assertEquals("01 DR 805",createdCarText);
 
 
     }
