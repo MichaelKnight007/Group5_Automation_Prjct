@@ -76,7 +76,7 @@ public class AddEvent2Page extends BasePage{
     public WebElement AddEnventTitleBox;
     @FindBy(xpath = "//button[@class='btn btn-primary']")
     public WebElement SaveButton;
-    @FindBy(xpath = "//div[.='AddEvent2']")
+    @FindBy(xpath = "//strong[.='AddEvent2']")
     public WebElement CommentLine;
 
 }

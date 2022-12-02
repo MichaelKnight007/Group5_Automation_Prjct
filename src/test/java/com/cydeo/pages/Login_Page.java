@@ -63,7 +63,7 @@ public class Login_Page extends BasePage {
         waitUntilLoaderScreenDisappear();
         // temporary solution to close the add event pop up
         try {
-            Driver.getDriver().manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+            Driver.getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
             addEventCloseBtn.click();
             Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
