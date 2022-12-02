@@ -1,4 +1,4 @@
-@tread906
+@trad906
 Feature:Add Event 2 ( with cucumber - Yasar)
 
   User Story:

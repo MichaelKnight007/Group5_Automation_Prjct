@@ -47,6 +47,7 @@ public class AddEvent2_StepDef {
     @Then("Verify that the user is on the Add Event page")
     public void verifyThatTheUserIsOnTheAddEventPage() {
         allCarsPage.waitUntilLoaderScreenDisappear();
+        BrowserUtils.sleep(2);
         Assert.assertTrue(addEvent2Page.AddEventPage.isDisplayed());
     }
     @When("User clicks blue radioButton")
@@ -119,11 +120,12 @@ public class AddEvent2_StepDef {
     @And("User clicks Save button")
     public void userClicksSaveButton() {
         addEvent2Page.SaveButton.click();
+        allCarsPage.waitUntilLoaderScreenDisappear();
     }
     @And("User clicks accordion toggle and events are seen")
     public void userClicksAccordionToggleAndEventsAreSeen() {
         allCarsPage.waitUntilLoaderScreenDisappear();
-        addEvent2Page.CommentLine.click();
+        Assert.assertTrue(addEvent2Page.CommentLine.isDisplayed());
     }
 
     @Then("Verify that user sees Daily options")
