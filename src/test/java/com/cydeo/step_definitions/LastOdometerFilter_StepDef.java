@@ -189,19 +189,21 @@ public class LastOdometerFilter_StepDef {
     @When("user enter {string} into input")
     public void user_enter_into_input(String string) {
         allCarsPage.lastOdoMFilterFirstInput.sendKeys(string);
+        allCarsPage.enterSecondValueForBetweenMethod(string);
         //Assert.assertTrue(allCarsPage.hasNonNumericValues());
-
     }
 
+    /*
     @When("user enter {string} into second input")
     public void user_enter_second_input(String string) {
         allCarsPage.lastOdoMFilterSecondInput.sendKeys(string);
         //allCarsPage.hasNonNumericValues();
     }
+     */
 
-    @Then("method should not accept non-numeric values {string} {string}")
-    public void method_should_not_accept_non_numeric_values(String str1, String str2) {
-        Assert.assertTrue(allCarsPage.doesNotAcceptNonNumerics(str1, str2));
+    @Then("method should not accept non-numeric values {string}")
+    public void method_should_not_accept_non_numeric_values(String str1) {
+        Assert.assertTrue(allCarsPage.doesNotAcceptNonNumerics(str1));
     }
 
 

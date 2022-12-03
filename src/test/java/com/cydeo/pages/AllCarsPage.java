@@ -99,6 +99,7 @@ public class AllCarsPage extends BasePage {
     public WebElement lastOdometerDropdownButton;
     @FindBy(xpath = "//div[@class='btn-group btn-block']//button")
     public WebElement lastOdometerFilterDropdownButton;
+
     @FindBy(xpath = "//div[@class='choice-filter number-range-filter']//ul[@class='dropdown-menu']")
     public WebElement lastOdometerFilterDropdownItems;
 
@@ -244,6 +245,7 @@ public class AllCarsPage extends BasePage {
 
 
 
+
     public List<String> actualDropdownMethods(){
 
         List<String> dropdownMethods = new ArrayList<>();
@@ -274,7 +276,7 @@ public class AllCarsPage extends BasePage {
         try{
             while( Driver.getDriver().findElement(By.xpath("(//tbody/tr)["+i+"]")).isDisplayed()  ){
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -343,7 +345,8 @@ public class AllCarsPage extends BasePage {
     }
 
     public void ifNoEntity(){
-        if (!(isValuesEquals() == number1) && noEntitiesWereFoundMessage.isDisplayed()){
+            //!(isValuesEquals() == number1) &&
+        if (    noEntitiesWereFoundMessage.isDisplayed()){
             System.out.println("Notification Message Displayed: \n"+"No entities were found to match your search. Try modifying your search criteria...");
         }
     }
@@ -425,15 +428,15 @@ public class AllCarsPage extends BasePage {
         }
     }
 
-    public boolean doesNotAcceptNonNumerics(String str1, String str2){
+    public boolean doesNotAcceptNonNumerics(String str1){
 
         boolean notAcceptsNonNumeric = true;
-        lastOdometerDropdownButton.click();
-        lastOdometerFilterDropdownButton.click();
-        String text1 = lastOdoMFilterFirstInput.getText();
-        String text2 = lastOdoMFilterSecondInput.getText();
 
-        if (str1.equals(text1) || str2.equals(text2)){
+        BrowserUtils.sleep(1);
+        lastOdometerDropdownButton.click();
+        String text1 = lastOdoMFilterFirstInput.getText();
+
+        if (str1.equals(text1)){
             notAcceptsNonNumeric = false;
         }
         return notAcceptsNonNumeric;
@@ -461,6 +464,12 @@ public class AllCarsPage extends BasePage {
         return hasNonDigit;
     }
      */
+
+    public void enterSecondValueForBetweenMethod(String string){
+        if (lastOdometerFilterDropdownButton.getText().equalsIgnoreCase("between")){
+            lastOdoMFilterSecondInput.sendKeys(string);
+        }
+    }
 
 
 }

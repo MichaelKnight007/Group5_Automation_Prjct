@@ -1,6 +1,6 @@
 #TRAD-986 - Test Execution ID
 
-@odo
+@TRAD-986
 Feature: TRAD-901
 
   US: Last Odometer Filter (Aybars)
@@ -20,7 +20,7 @@ Feature: TRAD-901
 
 
   #AC-1:
-
+  @TRAD-979
   Scenario: Last Odometer filter has the methods below
     Then Last Odometer filter should have methods below
       | Between             |
@@ -36,7 +36,7 @@ Feature: TRAD-901
 
 
     #AC-2:
-
+  @TRAD-980
   Scenario: if user selects "Between" method with numeric values, the results should be between the specified values
     And user select between method
     And user enter numeric values "1000" and "10000"
@@ -45,7 +45,7 @@ Feature: TRAD-901
 
 
     #AC-3:
-
+  @TRAD-981
   Scenario: if user selects "Equals" method with numeric values, the results should match the specified value exactly
     And user select equals method
     And user enter numeric value "10000"
@@ -54,7 +54,7 @@ Feature: TRAD-901
 
 
     #AC-4:
-
+  @TRAD-982
   Scenario: if user selects "More than" method with numeric values, the results should be more than the specified value
     And user select more than method
     And user enter numeric value "10000"
@@ -63,7 +63,7 @@ Feature: TRAD-901
 
 
     #AC-5:
-
+  @TRAD-983
   Scenario: if user selects "Less than" method with numeric values, the results should be be less than the specified value
     And user select less than method
     And user enter numeric value "10000"
@@ -72,7 +72,7 @@ Feature: TRAD-901
 
 
     #AC-6:
-
+  @TRAD-984
   Scenario: if user selects "Is Empty" method, only empty values should be displayed
     And user select is empty method
     And user click the update button
@@ -80,13 +80,12 @@ Feature: TRAD-901
 
 
     #AC-7:
-
+  @TRAD-985
   Scenario Outline:  Methods below should NOT accept non-numeric values
     When user select "<method>" method
-    And user enter "asd>£$½" into input
-    And user enter "12%zxc" into second input
+    And user enter "as24d>£$½" into input
     And user click the update button
-    Then method should not accept non-numeric values "asd>£$½" "12%zxc"
+    Then method should not accept non-numeric values "as24d>£$½"
 
     Examples:
       | method    |
