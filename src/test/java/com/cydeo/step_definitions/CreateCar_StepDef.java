@@ -98,11 +98,11 @@ public class CreateCar_StepDef {
         boolean tags_JuniorFieldClicked = createCarBasePage.tags_JuniorField.isSelected();
         Assert.assertTrue(tags_JuniorFieldClicked);
 
-        // Manuel Transmission Btn Assertion
+       /* // Manuel Transmission Btn Assertion
         createCarBasePage.manuelTransmissionBtnTest();
-        boolean manuelTransmissonBtnClicked = createCarBasePage.manuelTransmissionBtn.isSelected();
-        Assert.assertFalse(manuelTransmissonBtnClicked);
-
+        boolean manuelTransmissionBtnClicked = createCarBasePage.manuelTransmissionBtn.isSelected();
+        Assert.assertFalse(manuelTransmissionBtnClicked);
+*/
         // Diesel Btn Assertion
         createCarBasePage.gasolineBtnTest();
         boolean dieselBtnlicked = createCarBasePage.gasolineBtn.isSelected();
