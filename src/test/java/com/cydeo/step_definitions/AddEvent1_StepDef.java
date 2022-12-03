@@ -31,4 +31,9 @@ public class AddEvent1_StepDef {
     public void verifyThatMessageIsDisplayed(String message) {
         Assert.assertEquals(message, addEvent2Page.errorMessage.getText());
     }
+
+    @Then("Verify that Driver can NOT see Add Event button")
+    public void verifyThatDriverCanNOTSeeAddEventButton() {
+        Assert.assertFalse(addEvent2Page.AddEventBtn.isDisplayed());
+    }
 }

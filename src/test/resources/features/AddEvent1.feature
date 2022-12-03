@@ -18,7 +18,7 @@ Feature: User Story :
     When User is on the login page
 
   Scenario Outline: User should be able to add an event
-    #AC : 1-2-3-4
+    #AC : 1-3-4
     And User logs in as a "<userType>"
     And User goes to "Fleet" module and "Vehicles" sub-module
     When User clicks any Vehicle Row under All Cars menu
@@ -39,6 +39,14 @@ Feature: User Story :
       | userType      |
       | Sales Manager |
       | Store Manager |
+
+  @addEvent
+  Scenario: Driver should NOT be able to add an event
+    #AC : 2
+    And User logs in as a "Driver"
+    And User goes to "Fleet" module and "Vehicles" sub-module
+    When User clicks any Vehicle Row under All Cars menu
+    Then Verify that Driver can NOT see Add Event button
 
   Scenario Outline: User shouldn't be able to add an event without filling the compulsory fields
     #AC : 5
