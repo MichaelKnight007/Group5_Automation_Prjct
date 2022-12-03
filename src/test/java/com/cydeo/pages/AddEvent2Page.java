@@ -1,9 +1,15 @@
 package com.cydeo.pages;
 
+import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.Driver;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AddEvent2Page extends BasePage{
 
@@ -79,4 +85,22 @@ public class AddEvent2Page extends BasePage{
     @FindBy(xpath = "//strong[.='AddEvent2']")
     public WebElement CommentLine;
 
+
+    // Enes AddEvent
+    @FindBy(xpath = "//*[@class='required']/em[.=\"*\"]/..")
+    public List<WebElement> compulsoryFields;
+
+    @FindBy(xpath = "//span[.=\"This value should not be blank.\"]")
+    public WebElement errorMessage;
+    public List<String> getCompulsoryFields(){
+        return compulsoryFields.stream().map(item -> item.getText().substring(0, item.getText().length()-1)).collect(Collectors.toList());
+    }
+
+    public void fillField(String fieldName){
+        waitUntilLoaderScreenDisappear();
+        Driver.getDriver().findElement(By.xpath("//input[@data-name=\"field__"+fieldName+"\"]")).sendKeys("Test");
+        SaveButton.click();
+    }
+
+    //Enes AddEvent
 }
