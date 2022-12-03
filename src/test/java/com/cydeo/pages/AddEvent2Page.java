@@ -1,9 +1,15 @@
 package com.cydeo.pages;
 
+import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.Driver;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AddEvent2Page extends BasePage{
 
@@ -13,23 +19,23 @@ public class AddEvent2Page extends BasePage{
     //AddEvent2Yasar
     @FindBy(xpath = "//h1[@class='user-name']")
     public WebElement GeneralPage;
-    @FindBy(xpath = "//a[@class='btn icons-holder-text no-hash']")
+    @FindBy(xpath = "//a[@title=\"Add an event to this record\"]")
     public WebElement AddEventBtn;
-    @FindBy(xpath = "//*[@id='ui-id-2']")
+    @FindBy(xpath = "//span[.='Add Event']")
     public WebElement AddEventPage;
 
     //AddEvent2Yasar
-    @FindBy(xpath = "//*[@id='oro_calendar_event_form_allDay-uid-637dceec50c06']")
+    @FindBy(xpath = "(//*[@type='checkbox'])[2]")
     public WebElement AllDayEventCheckBox;
-    @FindBy(xpath = "//*[@id='time_selector_oro_calendar_event_form_start-uid-6380cc441156c']")
+    @FindBy(xpath = "//*[@placeholder='time']")
     public WebElement TimeSelectorBox;
 
     //AddEvent2Yasar
-    @FindBy(xpath = "//*[@id='recurrence-repeat-view399']")
+    @FindBy(xpath = "(//*[@type='checkbox'])[3]")
     public WebElement RepeatCheckBox;
 
     //AddEvent2Yasar
-    @FindBy(xpath = "//*[@id='recurrence-repeats-view399']")
+    @FindBy(xpath = " //select[@data-name='recurrence-repeats']")
     public WebElement RepeatsCheckBox;
 
     //AddEvent2Yasar
@@ -62,21 +68,39 @@ public class AddEvent2Page extends BasePage{
     //AddEvent2Yasar
     @FindBy(xpath = "//div[@data-name='recurrence-yearly']")
     public WebElement YearlyRecurrence;
-    @FindBy(xpath = "//*[@id=\"oro_calendar_event_form-uid-6380cc4413474\"]/fieldset/div[2]/div[2]/div[2]/div[7]/div[1]/label")
+    @FindBy(xpath = "//div[@data-name='recurrence-summary']")
     public WebElement SummaryPart;
     @FindBy(xpath = "(//input[@type='radio'][1])[3]")
     public WebElement NeverBtn;
-    @FindBy(xpath = "(//input[@class='recurrence-subview-control__number'][1])[2]")
+    @FindBy(xpath = "//input[@data-related-field='occurrences']")
     public WebElement OccurrenceBox;
-    @FindBy(xpath = "(//input[@type='radio'][1])[4]")
+    @FindBy(xpath = "(//input[@type='radio'])[4]")
     public WebElement AfterBtn;
-    @FindBy(xpath = "(//input[@type='radio'][1])[5]")
+    @FindBy(xpath = "(//input[@type='radio'])[5]")
     public WebElement ByBtn;
-    @FindBy(xpath = "//*[@id='oro_calendar_event_form_title-uid-638050dbc6ac2']")
+    @FindBy(xpath = "//input[@data-name=\"field__title\"]")
     public WebElement AddEnventTitleBox;
     @FindBy(xpath = "//button[@class='btn btn-primary']")
     public WebElement SaveButton;
-    @FindBy(xpath = "//div[.='AddEvent2']")
+    @FindBy(xpath = "//strong[.='AddEvent2']")
     public WebElement CommentLine;
 
+
+    // Enes AddEvent
+    @FindBy(xpath = "//*[@class='required']/em[.=\"*\"]/..")
+    public List<WebElement> compulsoryFields;
+
+    @FindBy(xpath = "//span[.=\"This value should not be blank.\"]")
+    public WebElement errorMessage;
+    public List<String> getCompulsoryFields(){
+        return compulsoryFields.stream().map(item -> item.getText().substring(0, item.getText().length()-1)).collect(Collectors.toList());
+    }
+
+    public void fillField(String fieldName){
+        waitUntilLoaderScreenDisappear();
+        Driver.getDriver().findElement(By.xpath("//input[@data-name=\"field__"+fieldName+"\"]")).sendKeys("Test");
+        SaveButton.click();
+    }
+
+    //Enes AddEvent
 }

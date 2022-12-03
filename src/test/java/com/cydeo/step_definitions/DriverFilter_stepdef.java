@@ -12,6 +12,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -20,48 +21,26 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DriverFilter_stepdef {
-Login_Page loginPage=new Login_Page();
-Dash_Board_Page dashBoardPage=new Dash_Board_Page();
-AllCarsPage allCarsPage=new AllCarsPage();
-    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),60);
+    Login_Page loginPage = new Login_Page();
+    Dash_Board_Page dashBoardPage = new Dash_Board_Page();
+    AllCarsPage allCarsPage = new AllCarsPage();
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 60);
 
-    @Given("User logs in as a Salesmanager")
-    public void user_logs_i_as_a_salesmanager() {
-        loginPage.goLoginPage();
-        loginPage.loginAsSalesManager();
-    }
-    @Given("User should go to dashboard page")
-    public void user_shoul_go_to_dashboard_page() {
 
-        wait.until(ExpectedConditions.titleIs("Dashboard"));
-    }
-    @Given("User hover over fleet menu")
-    public void user_clicks_fleet_menu() throws InterruptedException {
-       // Thread.sleep(3000);
-       // WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
-        wait.until(ExpectedConditions.elementToBeClickable(dashBoardPage.fleetDropdownBtn));
-       BrowserUtils.hover(dashBoardPage.fleetDropdownBtn);
-
-    }
-    @Given("User clicks vehicles page under fleet menu")
-    public void user_clicks_vehicles_page_under_fleet_menu() {
-
-        wait.until(ExpectedConditions.elementToBeClickable(dashBoardPage.vehiclesLink));
-        dashBoardPage.vehiclesLink.click();
-
-    }
     @And("User clicks Filter Button")
     public void userClicksFilterButton() {
         wait.until(ExpectedConditions.elementToBeClickable(allCarsPage.FiltersButton));
         allCarsPage.FiltersButton.click();
 
     }
+
     @Given("User select Driver option under ManageFilter dropdown")
     public void user_select_driver_option() {
         wait.until(ExpectedConditions.visibilityOf(allCarsPage.ManageFilterButton));
         allCarsPage.ManageFilterButton.click();
         allCarsPage.Drivercheckbox.click();
     }
+
     @Given("User clicks Driver All button")
     public void user_clicks_driver_all_button() {
         allCarsPage.DriverAllBtn.click();
@@ -72,28 +51,29 @@ AllCarsPage allCarsPage=new AllCarsPage();
         allCarsPage.ContainsBtn.click();
 
     }
+
     @Then("User should see all options under Driver Filter Menu")
     public void user_should_see_all_options_under_driver_filter_menu() {
-         List<String> ExpectedMethodnames=new ArrayList<>();
-        ExpectedMethodnames.addAll(Arrays.asList("contains","does not contain", "is equal to","starts with",
-                      "ends with","is any of","is not any of","is empty","is not empty"));
-        List<String>ActualMethotnames=new ArrayList<>();
+        List<String> ExpectedMethodnames = new ArrayList<>();
+        ExpectedMethodnames.addAll(Arrays.asList("contains", "does not contain", "is equal to", "starts with",
+                "ends with", "is any of", "is not any of", "is empty", "is not empty"));
+        List<String> ActualMethotnames = new ArrayList<>();
         for (WebElement method : allCarsPage.AllMethods) {
             ActualMethotnames.add(method.getAttribute("innerText"));
 
         }
-        Assert.assertEquals(ExpectedMethodnames,ActualMethotnames);
+        Assert.assertEquals(ExpectedMethodnames, ActualMethotnames);
     }
 
     @And("User enters {string}")
     public void userEnters(String keyword) throws InterruptedException {
         Thread.sleep(2000);
-    allCarsPage.searchBox.sendKeys(keyword);
+        allCarsPage.searchBox.sendKeys(keyword);
 
     }
 
     @When("User selects contains method")
-    public void userSelectsContainsMethod() throws InterruptedException {
+    public void userSelectsContainsMethod() {
 
         BrowserUtils.clickWithJS(allCarsPage.AllMethods.get(0));
         //  allCarsPage.AllMethods.get(0).click();
@@ -103,20 +83,25 @@ AllCarsPage allCarsPage=new AllCarsPage();
     public void userClicksUpdateButton() {
         allCarsPage.updateButton.click();
     }
+
     @Then("Results should contain {string}")
     public void resultsShouldContain(String keyword) throws InterruptedException {
-        List<String> ExpectedDrivernames = new ArrayList<>(List.of(keyword));
-        System.out.println("ExpectedDrivernames = " + ExpectedDrivernames);
-        List<String>ActualDrivernames=new ArrayList<>();
-        for (WebElement drivername : allCarsPage.DriverNames) {
-           ActualDrivernames.add(drivername.getAttribute("innerText"));
+        allCarsPage.waitUntilLoaderScreenDisappear();
+        wait.until(ExpectedConditions.visibilityOfAllElements(allCarsPage.Results));
+        List<String> ExpectedResults = new ArrayList<>(List.of(keyword));
+        System.out.println("ExpectedResults = " + ExpectedResults);
+        List<String> ActualResults = new ArrayList<>();
+        Thread.sleep(3000);
+        for (WebElement result : allCarsPage.Results) {
+            ActualResults.add(result.getAttribute("innerText"));
         }
-        for (String actualDrivername : ActualDrivernames) {
+        Thread.sleep(3000);
+        for (String actualresult : ActualResults) {
+            System.out.println(actualresult);
+            Assert.assertTrue(actualresult.contains(keyword));
+        }
 
-        Assert.assertTrue(actualDrivername.contains(keyword));
-        }
     }
-
 
     @When("User selects does not contain method")
     public void userSelectsDoesNotContainMethod() {
@@ -124,26 +109,38 @@ AllCarsPage allCarsPage=new AllCarsPage();
     }
 
     @Then("Results should not contain {string}")
-    public void resultsShouldNotContain(String keyword) {
-        List<String> ActualDrivernames = new ArrayList<>();
-        for (WebElement drivername : allCarsPage.DriverNames) {
-            ActualDrivernames.add(drivername.getAttribute("innerText"));
+    public void resultsShouldNotContain(String keyword) throws InterruptedException {
+        Thread.sleep(3000);
+        List<String> ActualResults = new ArrayList<>();
+        for (WebElement result : allCarsPage.Results) {
+            ActualResults.add(result.getAttribute("innerText"));
         }
-
-        for (String actualDrivername : ActualDrivernames) {
-            if (actualDrivername.contains(keyword)) {
-                System.out.println("TEST FAİLED");
-            } else {
-                System.out.println("TEST PASSED");
-            }
+        Thread.sleep(3000);
+        for (String actualResult : ActualResults) {
+            Assert.assertFalse(actualResult.contains(keyword));
         }
     }
+
     @When("User selects Starts with method")
     public void userSelectsStartsWithMethod() {
         allCarsPage.AllMethods.get(3).click();
     }
+
     @Then("Results should start with specified {string}")
-    public void resultsShouldStartWithSpecified(String keyword) {
+    public void resultsShouldStartWithSpecified(String keyword) throws InterruptedException {
+        Thread.sleep(3000);
+        List<String> ActualResults = new ArrayList<>();
+        for (WebElement actualresult : allCarsPage.Results) {
+            ActualResults.add(actualresult.getAttribute("innerText"));
+            System.out.println(actualresult);
+        }
+        Thread.sleep(3000);
+        for (String actualResult : ActualResults) {
+            System.out.println(actualResult);
+            Assert.assertTrue(actualResult.startsWith(keyword));
+        }
+
+
     }
 
 
@@ -151,8 +148,18 @@ AllCarsPage allCarsPage=new AllCarsPage();
     public void userSelectsEndsWithMethod() {
         allCarsPage.AllMethods.get(4).click();
     }
+
     @Then("Results should end with specified {string}")
-    public void resultsShouldEndWithSpecified(String keyword) {
+    public void resultsShouldEndWithSpecified(String keyword) throws InterruptedException {
+        Thread.sleep(3000);
+        List<String> ActualResults = new ArrayList<>();
+        for (WebElement actualresult : allCarsPage.Results) {
+            ActualResults.add(actualresult.getAttribute("innerText"));
+        }
+        Thread.sleep(3000);
+        for (String actualResult : ActualResults) {
+            Assert.assertTrue(actualResult.endsWith(keyword));
+        }
     }
 
 
@@ -163,6 +170,35 @@ AllCarsPage allCarsPage=new AllCarsPage();
 
 
     @Then("Results should match specified {string}")
-    public void resultsShouldMatchSpecified(String keyword) {
+    public void resultsShouldMatchSpecified(String keyword) throws InterruptedException {
+        Thread.sleep(3000);
+        List<String> ActualResults = new ArrayList<>();
+        for (WebElement actualresult : allCarsPage.Results) {
+            ActualResults.add(actualresult.getAttribute("innerText"));
+        }
+        Thread.sleep(3000);
+        for (String actualResult : ActualResults) {
+            Assert.assertEquals(actualResult, keyword);
+        }
     }
+
+
+    @When("User selects {string}")
+    public void userSelects(String Methodname) {
+        allCarsPage.waitUntilLoaderScreenDisappear();
+        allCarsPage.selectMethodname(Methodname);
+    }
+
+    @Then("Message should be {string}")
+    public void messageShouldBe(String warningmessage) throws InterruptedException {
+        allCarsPage.waitUntilLoaderScreenDisappear();
+        String ExpectedMessage = warningmessage;
+        Thread.sleep(5000);
+        String ActualMessage = allCarsPage.warningMessage.getText();
+        Assert.assertEquals(ExpectedMessage, ActualMessage);
+
+    }
+
+
+
 }

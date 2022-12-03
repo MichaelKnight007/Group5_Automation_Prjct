@@ -24,6 +24,10 @@ public class Dash_Board_Page extends BasePage{
     @FindBy (xpath = "//span[.='Vehicles']")
     public WebElement vehiclesLink;
 
+    @FindBy(id = "progressbar")
+    public WebElement progressBar;
+
+
 
 }
 
