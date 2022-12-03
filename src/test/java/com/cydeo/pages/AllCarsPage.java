@@ -475,6 +475,28 @@ public class AllCarsPage extends BasePage {
             lastOdoMFilterSecondInput.sendKeys(string);
         }
     }
+    @FindBy(xpath = "//tbody[@class='grid-body']//tr//td[4]")
+    public List <WebElement> Results;
+    @FindBy(xpath = "//span[.='No entities were found to match your search. Try modifying your search criteria...']")
+    public WebElement warningMessage;
 
+    public void selectMethodname(String Methodname) {
 
-}
+        if (Methodname.equalsIgnoreCase("Contains")) {
+            AllMethods.get(0).click();
+
+        } else if (Methodname.equalsIgnoreCase("Does Not Contain")) {
+            AllMethods.get(1).click();
+        } else if (Methodname.equalsIgnoreCase("Starts With")) {
+            AllMethods.get(3).click();
+        } else if (Methodname.equalsIgnoreCase("Ends With")) {
+            AllMethods.get(4).click();
+        } else if (Methodname.equalsIgnoreCase("is equal to")) {
+            AllMethods.get(2).click();
+        } else {
+            System.out.println("İnvalid Methodname");
+        }
+
+    }
+
+    }
