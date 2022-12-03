@@ -1,11 +1,11 @@
+@TRAD-1078
 Feature: "Create Car" Function Test
 
   Background: User on the login page
     Given User is on the login page
 
-
- # @wip5
-  Scenario Outline: Login as a <userType> - 1
+  @TRAD-1070
+   Scenario Outline: Login as a <userType> - 1
     When User logs in as a "<userType>"
     And User goes to "Fleet" module and "Vehicles" sub-module
     Then Verify driver cannot see the button
@@ -16,8 +16,7 @@ Feature: "Create Car" Function Test
       | Driver   |
 
 
-
-  # @wip5
+  @TRAD-1071
   Scenario Outline: Login as a <userType> - 1
     When User logs in as a "<userType>"
     And User goes to "Fleet" module and "Vehicles" sub-module
@@ -29,21 +28,23 @@ Feature: "Create Car" Function Test
       | Store Manager |
 
 
-  # @wip5
+  @TRAD-1072
   Scenario: User creates a car by filling compulsory fields
     When User logs in as a "Store Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
     And User goes to Create Car page
     Then User creates a car by filling compulsory fields
 
-  # @wip5
+
+  @TRAD-1073
   Scenario: User tries to create a car by not filling compulsory fields
     When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
     And User goes to Create Car page
     Then User cannot create a car without filling compulsory fields
 
-   @wip5
+
+  @TRAD-1074
   Scenario: User enters invalid data to the compulsory fields
     When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
@@ -51,21 +52,23 @@ Feature: "Create Car" Function Test
     Then User enters Compulsory fields without complying with the conditions
 
 
- # @wip5
+  @TRAD-1075
   Scenario: User enters invalid data to the Optional fields
     When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
     And User goes to Create Car page
     Then User enters Optional fields without complying with the conditions
 
- # @wip5
+
+  @TRAD-1076
   Scenario: User selects ‘Vehicle Model’ and ‘Vehicle Make’ from the list
     When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module
     And User goes to Create Car page
     Then User can select ‘Vehicle Model’ and ‘Vehicle Make’ from the list
 
- # @wip5
+
+  @TRAD-1077
   Scenario: User sees newly created car in ’Fleet-Vehicle’ table
     When User logs in as a "Sales Manager"
     And User goes to "Fleet" module and "Vehicles" sub-module

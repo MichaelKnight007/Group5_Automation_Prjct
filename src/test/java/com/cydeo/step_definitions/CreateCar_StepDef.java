@@ -8,6 +8,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.But;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
 import javax.swing.*;
@@ -98,10 +99,12 @@ public class CreateCar_StepDef {
         boolean tags_JuniorFieldClicked = createCarBasePage.tags_JuniorField.isSelected();
         Assert.assertTrue(tags_JuniorFieldClicked);
 
-        // Manuel Transmission Btn Assertion
+       // Manuel Transmission Btn Assertion
         createCarBasePage.manuelTransmissionBtnTest();
-        boolean manuelTransmissonBtnClicked = createCarBasePage.manuelTransmissionBtn.isSelected();
-        Assert.assertFalse(manuelTransmissonBtnClicked);
+        By element=By.xpath("//div[text()='Manual']");
+       Assert.assertTrue( Driver.getDriver().findElement(element).isSelected());
+        /*boolean manuelTransmissionBtnClicked = createCarBasePage.manuelTransmissionBtn.isSelected();
+        Assert.assertFalse(manuelTransmissionBtnClicked);*/
 
         // Diesel Btn Assertion
         createCarBasePage.gasolineBtnTest();

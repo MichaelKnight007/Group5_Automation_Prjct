@@ -2,6 +2,7 @@ package com.cydeo.pages;
 
 import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -389,17 +390,16 @@ public class CreateCarBasePage {
 
     public boolean manuelTransmissionBtnTest() {
 
-        // JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
-        // js.executeScript("arguments[0].click();", createCarBasePage.transmissionDropdown);
+       By element =By.xpath("(//span[text()='Choose a value...'])[1]");
+       Driver.getDriver().findElement(element).click();
         transmissionDropdown.click();//select from dropdown
 
-        BrowserUtils.sleep(1);
-        // JavascriptExecutor js1 = (JavascriptExecutor) Driver.getDriver();
-        //js.executeScript("arguments[1].click();", createCarBasePage.manuelTransmissionBtn);
-        // Actions actions = new Actions(Driver.getDriver());
-        // actions.moveToElement(manuelTransmissionBtn).perform();
 
-        manuelTransmissionBtn.click();//select from dropdown
+        BrowserUtils.sleep(1);
+
+        By element1=By.xpath("//div[text()='Manual']");
+        Driver.getDriver().findElement(element1).click();
+       // manuelTransmissionBtn.click();//select from dropdown
         BrowserUtils.sleep(1);
 
         boolean manuelTransmissonBtnClicked = manuelTransmissionBtn.isSelected();
