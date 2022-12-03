@@ -19,6 +19,7 @@ public class GeneralInfo_StepDef {
     public List<String> allCarInfoFromGeneralInfo;
     @When("The user clicks on any row on the VehicleTable page")
     public void the_user_clicks_on_any_row_on_the_vehicle_table_page() {
+
         allCarsPage.clickFirstCar();
 
     }

@@ -66,7 +66,7 @@ public class AllCarsPage extends BasePage {
     @FindBy(xpath = "//a[contains(@class,\"dropdown-item\")]")
     public List<WebElement> numbersForFilter;
 
-    @FindBy(css = "tr.grid-row")
+    @FindBy(css = "tr.grid-row.row-click-action")
     public List<WebElement> countOfRow;
 
     @FindBy(xpath = "//a[@title='Create Car']")
