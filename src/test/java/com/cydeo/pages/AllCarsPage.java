@@ -130,6 +130,9 @@ public class AllCarsPage extends BasePage {
     @FindBy(xpath = "//button[.='Update']")
     public WebElement lastOdoMFilterUpdateButton;
 
+    @FindBy(xpath = "//span[.='No entities were found to match your search. Try modifying your search criteria...']")
+    public WebElement noEntitiesWereFoundMessage;
+
 
 
 
@@ -238,6 +241,9 @@ public class AllCarsPage extends BasePage {
     public void clickonviewicon() {
         viewButton.click();
     }
+
+
+
     public List<String> actualDropdownMethods(){
 
         List<String> dropdownMethods = new ArrayList<>();
@@ -254,21 +260,21 @@ public class AllCarsPage extends BasePage {
     public int number1;
     public int number2;
 
-    public void betweenMethodWithNumValue(String num1, String num2){
+    public void enterNumValuesToBetweenMethod(String num1, String num2){
         lastOdoMFilterFirstInput.sendKeys(num1);
         lastOdoMFilterSecondInput.sendKeys(num2);
         number1 = Integer.parseInt(num1);
         number2 = Integer.parseInt(num2);
     }
 
-    public boolean isBetweenValues(){
+    public int rowNumber(){
 
         int counter = 0;
         int i = 1;
         try{
             while( Driver.getDriver().findElement(By.xpath("(//tbody/tr)["+i+"]")).isDisplayed()  ){
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(50);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -276,35 +282,185 @@ public class AllCarsPage extends BasePage {
                 i++;
             }
         }catch(NoSuchElementException e){
-            e.printStackTrace();
         }
+        return counter;
+    }
+
+    public List<Integer> getOdometerValues(){
 
         List<Integer> odometerValues = new ArrayList<>();
 
-        for (int j = 1; j <= counter; j++) {
-            WebElement row = Driver.getDriver().findElement(By.xpath("(//td[@data-column-label='Last Odometer'])[" + j + "]"));
-            String numberAsString = row.getText();
-            Integer valueNum = Integer.parseInt(numberAsString.replaceAll("\\D",""));
-            odometerValues.add(valueNum);
+        try{
+            for (int i = 1; i <= rowNumber(); i++) {
+                WebElement lastOdometerCell = Driver.getDriver().findElement(By.xpath("(//td[@data-column-label='Last Odometer'])[" + i + "]"));
+                String numberAsString = lastOdometerCell.getText();
+                Integer valueNum = Integer.parseInt(numberAsString.replaceAll("\\D",""));
+                odometerValues.add(valueNum);
+            }
+        } catch(NoSuchElementException e){
         }
+        return odometerValues;
+    }
+
+    public boolean isValuesBetween(){
 
         boolean isBetweenProvidedValues = false;
 
-        for (Integer eachOdometerValue : odometerValues) {
+        System.out.println("Results between provided values: ");
+        for (Integer eachOdometerValue : getOdometerValues()) {
             if (eachOdometerValue > number1 && eachOdometerValue <= number2){
+                System.out.println(eachOdometerValue);
                 isBetweenProvidedValues = true;
             }else {
-                System.out.println("Value of Last Odometer: "+eachOdometerValue);
+                System.err.println("Actual Last Odometer value: "+eachOdometerValue);
                 isBetweenProvidedValues = false;
             }
         }
         return isBetweenProvidedValues;
     }
 
+    public void enterNumValueToMethod(String num1) {
+        lastOdoMFilterFirstInput.sendKeys(num1);
+        number1 = Integer.parseInt(num1);
+    }
 
+    public int isValuesEquals(){
 
+        int actualValue = 0;
 
+        System.out.println("Result for provided value: ");
+        for (Integer eachOdometerValue : getOdometerValues()) {
+            if (eachOdometerValue == number1){
+                System.out.println(eachOdometerValue);
+                actualValue = eachOdometerValue;
+            } else {
+                if (noEntitiesWereFoundMessage.isDisplayed()){
+                    break;
+                }
+            }
+        }
+        return actualValue;
+    }
 
+    public void ifNoEntity(){
+        if (!(isValuesEquals() == number1) && noEntitiesWereFoundMessage.isDisplayed()){
+            System.out.println("Notification Message Displayed: \n"+"No entities were found to match your search. Try modifying your search criteria...");
+        }
+    }
+
+    public boolean isValuesMoreThan(){
+
+        boolean isMoreThanProvidedValue = false;
+
+        System.out.println("Results for provided values: ");
+        for (Integer eachOdometerValue : getOdometerValues()) {
+            if (eachOdometerValue > number1){
+                System.out.println(eachOdometerValue);
+                isMoreThanProvidedValue = true;
+            }else {
+                System.err.println("Actual Last Odometer value: "+eachOdometerValue);
+                isMoreThanProvidedValue = false;
+            }
+        }
+        return isMoreThanProvidedValue;
+    }
+
+    public boolean isValuesLessThan(){
+
+        boolean isLessThanProvidedValue = false;
+
+        System.out.println("Results for provided values: ");
+        for (Integer eachOdometerValue : getOdometerValues()) {
+            if (eachOdometerValue < number1){
+                System.out.println(eachOdometerValue);
+                isLessThanProvidedValue = true;
+            }else {
+                System.err.println("Actual Last Odometer value: "+eachOdometerValue);
+                isLessThanProvidedValue = false;
+            }
+        }
+        return isLessThanProvidedValue;
+    }
+
+    public boolean isValuesEmpty(){
+
+        boolean isValuesEmpty = false;
+
+        List<String> lastOdometerValues = new ArrayList<>();
+
+        for (int i = 1; i <= rowNumber(); i++) {
+            WebElement lastOdometerCell = Driver.getDriver().findElement(By.xpath("(//td[@data-column-label='Last Odometer'])[" + i + "]"));
+            String text = lastOdometerCell.getText();
+            lastOdometerValues.add(text);
+        }
+
+        for (String eachOdometerValue : lastOdometerValues) {
+            if (eachOdometerValue.equals("")){
+                isValuesEmpty = true;
+            } else {
+                System.out.println("Expected:"+"\"Empty\"");
+                System.out.println("Actual:"+eachOdometerValue);
+                isValuesEmpty = false;
+                break;
+            }
+        }
+
+        return isValuesEmpty;
+    }
+
+    public void selectMethod(String method){
+        switch (method){
+            case"Between":
+                betweenMethod.click();
+                break;
+            case"Equals":
+                equalsMethod.click();
+                break;
+            case"More Than":
+                moreThanMethod.click();
+                break;
+            case"Less Than":
+                lessThanMethod.click();
+                break;
+        }
+    }
+
+    public boolean doesNotAcceptNonNumerics(String str1, String str2){
+
+        boolean notAcceptsNonNumeric = true;
+        lastOdometerDropdownButton.click();
+        lastOdometerFilterDropdownButton.click();
+        String text1 = lastOdoMFilterFirstInput.getText();
+        String text2 = lastOdoMFilterSecondInput.getText();
+
+        if (str1.equals(text1) || str2.equals(text2)){
+            notAcceptsNonNumeric = false;
+        }
+        return notAcceptsNonNumeric;
+    }
+
+    /*
+
+    public String value1;
+    public String value2;
+
+    public boolean hasNonNumericValues(){
+        boolean hasNonDigit = false;
+        for (int i = 0; i < value1.length(); i++) {
+            if (!Character.isDigit(value1.charAt(i))){
+                hasNonDigit = true;
+                break;
+            }
+        }
+        for (int i = 0; i < value2.length(); i++) {
+            if (!Character.isDigit(value2.charAt(i))){
+                hasNonDigit = true;
+                break;
+            }
+        }
+        return hasNonDigit;
+    }
+     */
 
 
 }

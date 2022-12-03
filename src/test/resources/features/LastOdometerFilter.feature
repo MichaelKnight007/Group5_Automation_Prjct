@@ -1,6 +1,6 @@
 #TRAD-986 - Test Execution ID
 
-
+@odo
 Feature: TRAD-901
 
   US: Last Odometer Filter (Aybars)
@@ -36,7 +36,7 @@ Feature: TRAD-901
 
 
     #AC-2:
-  @odo
+
   Scenario: if user selects "Between" method with numeric values, the results should be between the specified values
     And user select between method
     And user enter numeric values "1000" and "10000"
@@ -48,7 +48,7 @@ Feature: TRAD-901
 
   Scenario: if user selects "Equals" method with numeric values, the results should match the specified value exactly
     And user select equals method
-    And user enter numeric value "1000"
+    And user enter numeric value "10000"
     And user click the update button
     Then results should match specified value
 
@@ -57,7 +57,7 @@ Feature: TRAD-901
 
   Scenario: if user selects "More than" method with numeric values, the results should be more than the specified value
     And user select more than method
-    And user enter numeric value "1000"
+    And user enter numeric value "10000"
     And user click the update button
     Then results should be more than the specified value
 
@@ -66,7 +66,7 @@ Feature: TRAD-901
 
   Scenario: if user selects "Less than" method with numeric values, the results should be be less than the specified value
     And user select less than method
-    And user enter numeric value "1000"
+    And user enter numeric value "10000"
     And user click the update button
     Then results should be less than the specified value
 
@@ -85,7 +85,8 @@ Feature: TRAD-901
     When user select "<method>" method
     And user enter "asd>£$½" into input
     And user enter "12%zxc" into second input
-    Then method should not accept non-numeric values
+    And user click the update button
+    Then method should not accept non-numeric values "asd>£$½" "12%zxc"
 
     Examples:
       | method    |
