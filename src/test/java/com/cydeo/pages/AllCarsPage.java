@@ -295,6 +295,11 @@ public class AllCarsPage extends BasePage {
         try{
             for (int i = 1; i <= rowNumber(); i++) {
                 WebElement lastOdometerCell = Driver.getDriver().findElement(By.xpath("(//td[@data-column-label='Last Odometer'])[" + i + "]"));
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 String numberAsString = lastOdometerCell.getText();
                 Integer valueNum = Integer.parseInt(numberAsString.replaceAll("\\D",""));
                 odometerValues.add(valueNum);
