@@ -388,35 +388,26 @@ public class CreateCarBasePage {
     }
 
 
-    public boolean manuelTransmissionBtnTest() {
+    public WebElement manuelTransmissionBtnTest() {
 
-       By element =By.xpath("(//span[text()='Choose a value...'])[1]");
-       Driver.getDriver().findElement(element).click();
         transmissionDropdown.click();//select from dropdown
-
+        manuelTransmissionBtn.click();
 
         BrowserUtils.sleep(1);
 
-        By element1=By.xpath("//div[text()='Manual']");
-        Driver.getDriver().findElement(element1).click();
-       // manuelTransmissionBtn.click();//select from dropdown
-        BrowserUtils.sleep(1);
-
-        boolean manuelTransmissonBtnClicked = manuelTransmissionBtn.isSelected();
-
-        return manuelTransmissonBtnClicked;
+        By by=By.xpath("(//span[@class='select2-chosen'])[1]");
+        WebElement element = Driver.getDriver().findElement(by);
+        return element;
     }
 
 
-    public boolean gasolineBtnTest() {
-        CreateCarBasePage createCarBasePage = new CreateCarBasePage();
+    public WebElement gasolineBtnTest() {
 
         fuelTypeBtn.click();//select from dropdown
         gasolineBtn.click();//select from dropdown
-        boolean gasolineBtnlicked = gasolineBtn.isSelected();
-
-
-        return gasolineBtnlicked;
+        By by=By.xpath("(//span[@class='select2-chosen'])[2]");
+        WebElement element = Driver.getDriver().findElement(by);
+        return element;
     }
 
     public List<Boolean> vehicleModel_MakeClickableTest() {
