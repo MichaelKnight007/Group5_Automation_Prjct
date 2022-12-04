@@ -95,7 +95,6 @@ public class CreateCar_StepDef {
         boolean tags_JuniorFieldClicked = createCarBasePage.tags_JuniorField.isSelected();
         Assert.assertTrue(tags_JuniorFieldClicked);
 
-
         // Manuel Transmission Btn Assertion
 
         WebElement webElement = createCarBasePage.manuelTransmissionBtnTest();
