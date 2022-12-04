@@ -9,6 +9,7 @@ import io.cucumber.java.en.But;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import javax.swing.*;
@@ -64,7 +65,7 @@ public class CreateCar_StepDef {
 
 
     @Then("User enters Compulsory fields without complying with the conditions")
-    public void userEntersCompulsoryFieldsWithoutComplyingWithTheConditions() {
+    public void userEntersInvalidDataToTheCompulsoryFields() {
 
         List<String> textList = createCarBasePage.compulsoryFieldsCheck();
 
@@ -84,11 +85,6 @@ public class CreateCar_StepDef {
         Assert.assertNotEquals(textList.get(6),textList.get(7));
         System.out.println("Model Year Field Test FAILED!!! ");
 
-        // Last Odometer Field Assertion
-        Assert.assertEquals("This value should contain only numbers.",textList.get(9));
-        System.out.println("Last Odometer Field Test PASSED! ");
-
-
         // Tags_Employee Assertion
         createCarBasePage.tags_EmployeeTest();
         boolean tags_EmployeeClicked = createCarBasePage.tags_Employee.isSelected();
@@ -99,17 +95,19 @@ public class CreateCar_StepDef {
         boolean tags_JuniorFieldClicked = createCarBasePage.tags_JuniorField.isSelected();
         Assert.assertTrue(tags_JuniorFieldClicked);
 
-       // Manuel Transmission Btn Assertion
-        createCarBasePage.manuelTransmissionBtnTest();
-        By element=By.xpath("//div[text()='Manual']");
-       Assert.assertTrue( Driver.getDriver().findElement(element).isSelected());
-        /*boolean manuelTransmissionBtnClicked = createCarBasePage.manuelTransmissionBtn.isSelected();
-        Assert.assertFalse(manuelTransmissionBtnClicked);*/
 
-        // Diesel Btn Assertion
-        createCarBasePage.gasolineBtnTest();
-        boolean dieselBtnlicked = createCarBasePage.gasolineBtn.isSelected();
-        Assert.assertTrue(dieselBtnlicked);
+        // Manuel Transmission Btn Assertion
+
+        WebElement webElement = createCarBasePage.manuelTransmissionBtnTest();
+        Assert.assertEquals(webElement.getAttribute("innerText"),"Manual");
+
+       // Diesel Btn Assertion
+        WebElement webElement1 = createCarBasePage.gasolineBtnTest();
+        Assert.assertEquals(webElement1.getAttribute("innerText"),"Gasoline");
+
+        // Last Odometer Field Assertion
+        Assert.assertNotEquals("This value should contain only numbers.",textList.get(9));
+        System.out.println("Last Odometer Field Test PASSED! ");
 
     }
 
